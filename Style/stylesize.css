@@ -1,0 +1,23 @@
+.title-brand{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 10px   ;
+}
+.title-brand h4{
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 60px;
+    
+}
+.title-brand h5{
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 37.5px;
+}
+.title-brand p{
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 25px;
+}

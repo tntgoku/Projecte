@@ -1,6 +1,63 @@
 @media (max-width: 900px) {
+    .header-top{
+        justify-content: center;
+        padding: 5px 0;
+        display: flex;
+        align-items: center;
+    }
+    .topbar-right{
+        margin-left: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .header-top label{
+        display: none;
+    }
+    .login{
+        display: flex;
+        max-width: 10%;
+        justify-content: center;
+    }
     .menu-slider{
         display: none;
     }
+    nav{
+        display: none;
+    }
+    nav h1{
+        display: block;
+    }
+    .slider{
+        margin: 20px 0;
+    }
+    .slider .mySwiper img{
+        height: auto; /* Chiều cao tự động để phù hợp với tỉ lệ của ảnh */
+        max-height: 400px; /* Bạn có thể điều chỉnh giá trị này theo ý muốn */
+    }
+    .section-item {
+        display: none; /* Ẩn tất cả các item */
+    }
+    .section-item:first-child,.section-item:last-child {
+        display: block; /* Chỉ hiển thị item đầu tiên */
+    }      
+    .more {
+        display: block;
+    }
     
+}
+
+/* slider */
+.slider{
+    width: 1300px;
+    max-width:85vw;
+    height: 700px;
+    margin: 10px auto;
+    position: relative;
+    overflow: hidden;
+}
+.slider .mySwiper img{
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
 }
