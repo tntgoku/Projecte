@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Style/reponse.css">
+    <link rel="stylesheet" href="../css/reponse.css">
     <title>CloSet</title>
     
     </head>
@@ -46,12 +46,12 @@
       <nav class="header-nav container">
       <h1>C L O S E T</h1>
         <ul class="nav-list">
-          <li><a href="">TRANG CHỦ</a></li>
+          <li><a href="index1.php">TRANG CHỦ</a></li>
           <li><a href="change.html">CHÍNH SÁCH ĐỔI TRẢ</a></li>
-          <li><a href="">
+          <li><a href="index1.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
             <li><a href="size.html">BẢNG SIZE</a></li>
-            <li><a href="">HỆ THỐNG CỬA HÀNG</a></li>
+            <li><a href="store.html">HỆ THỐNG CỬA HÀNG</a></li>
         </ul>
         <div class="close-menu ">
           <div class="title d-lg-none d-block">MENU</div>

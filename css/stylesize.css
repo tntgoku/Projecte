@@ -1,0 +1,92 @@
+.title-brand{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 10px   ;
+}
+.title-brand h4{
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 60px;
+    
+}
+.title-brand h5{
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 37.5px;
+}
+.title-brand p{
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 25px;
+}
+.review {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.table1 , .table2{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.review p{
+    text-align: center;
+    font-family: Roboto;
+font-size: 25px;
+font-weight: 900;
+line-height: 37.5px;
+}
+
+.table1 .title p{
+color: #0E6D67D9;
+}
+.review .table2 p{
+    background: #D9D9D9;
+}
+.review .size p{
+    background: #D9D9D9;
+}
+
+
+/*review-all*/
+.product-main{
+    display: flex;
+    flex-direction: column;
+}
+
+.product-main .product-item1{
+        margin-bottom: 15px;
+    display: flex;
+
+}
+.size-name{
+    display: flex;  
+    justify-content: space-between;
+}
+.size-name table tbody{
+}
+.size-name table tr{
+    margin-top: 45px;
+    display: flex;
+    gap: 30px;
+    
+}
+.size-name table td{
+    width: 25%;
+    text-align: center;
+}
+.size-name table td  {
+    font-family: Roboto;
+    font-size: 25px;
+    font-weight: 900;
+    
+    line-height: 37.5px;
+}
+.size-name table .size1{
+    background-color: #D9D9D9;
+}
+.size-name table #size{
+color: #0E6D67D9;
+}

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Style/reponse.css">
-    <link rel="stylesheet" href="../Style/stylesize.css">
+    <link rel="stylesheet" href="../css/reponse.css">
+    <link rel="stylesheet" href="../css/stylesize.css">
     <title>CloSet</title>
     
     </head>
@@ -24,7 +24,7 @@
                 </div>
                 <!-- ---LOGIN--- -->
                 <div class="login">
-                  <a href="#" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
+                  <a href="login.php" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">
@@ -47,37 +47,395 @@
       <nav class="header-nav container">
       <h1>C L O S E T</h1>
         <ul class="nav-list">
-          <li><a href="">TRANG CHỦ</a></li>
-          <li><a href="">CHÍNH SÁCH ĐỔI TRẢ</a></li>
-          <li><a href="">
+          <li><a href="index1.php">TRANG CHỦ</a></li>
+          <li><a href="change.html">CHÍNH SÁCH ĐỔI TRẢ</a></li>
+          <li><a href="index.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
-            <li><a href="">BẢNG SIZE</a></li>
-            <li><a href="">HỆ THỐNG CỬA HÀNG</a></li>
+            <li><a href="size.html">BẢNG SIZE</a></li>
+            <li><a href="store.html">HỆ THỐNG CỬA HÀNG</a></li>
         </ul>
         <div class="close-menu ">
           <div class="title d-lg-none d-block">MENU</div>
           <div class="menu-slider">
               <ul>
-                <li><a href="">Tất cả sản phẩm</a></li>
-                <li><a href="">Áo Thun</a></li>
-                <li><a href="">Baby Tee</a></li>
-                <li><a href="">Áo Polo</a></li>
-                <li><a href="">Áo Sơ Mi</a></li>
-                <li><a href="">Áo Khoác</a></li>
-                <li><a href="">Hoodie</a></li>
+                <li><a href="allproducts.html">Tất cả sản phẩm</a></li>
+                <li><a href="allproducts.html">Áo Thun</a></li>
+                <li><a href="allproducts.html">Baby Tee</a></li>
+                <li><a href="allproducts.html">Áo Polo</a></li>
+                <li><a href="allproducts.html">Áo Sơ Mi</a></li>
+                <li><a href="allproducts.html">Áo Khoác</a></li>
+                <li><a href="allproducts.html">Hoodie</a></li>
                 </ul>
           </div>
         </div>  
       </nav>
 <!-- SIZE -->
-<section class="section_products">
+<section class="section_products container">
     <div class="container">
-        <h2 class="cata-title">Bảng size</h2>
-    <div class="title-brand">
-        <h4>C L O S E T </h4>
-        <h5>Bảng size</h5>
-        <p>Form của C L O S E T là form rộng với người Việt Nam nên không cần thiết phải nhích size</p>
-    </div>
+      <h2 class="cata-title">Bảng size</h2>
+      <div class="title-brand">
+          <h4>C L O S E T </h4>
+          <h5>Bảng size</h5>
+          <p>Form của C L O S E T là form rộng với người Việt Nam nên không cần thiết phải nhích size</p>
+      </div>
+      <div class="review">
+        <div class="col-3 table1">
+          <div class="height-row">
+            <span class="title"><p>cm/kg</p></span>
+            <span class="height"><p> &lt;1m62 </p></span>
+            <span class="height"><p>1m65-1m72</p></span>
+            <span class="height"><p> &gt;1m72 </p></span>
+          </div>
+        </div>  
+        <div class="col-3 table2">
+          <div class="size-row">
+            <span class="title"><p>&lt;58kg</p></span>
+            <span class="size"><p> M </p></span>
+            <span class="size"><p>M</p></span>
+            <span class="size"><p> L </p></span>
+          </div>
+        </div>
+        <div class="col-3 table1">
+          <div class="height-row">
+            <span class="title"><p>59-68kg</p></span>
+            <span class="height"><p> M </p></span>
+            <span class="height"><p>L</p></span>
+            <span class="height"><p> L </p></span>
+          </div>
+        </div>  
+        <div class="col-3 table1">
+          <div class="size-row">
+            <span class="title" ><p style="background: #D9D9D9;">69-85kg</p></span>
+            <span class="size"><p> M/L </p></span>
+            <span class="size"><p>XL</p></span>
+            <span class="size"><p> XL </p></span>
+          </div>
+        </div>
+      </div>
+      <div class="review-all">
+        <div class="title">
+          <h3 class="cate-title">Thông số chi tiết</h3>
+        </div>
+        <div class="product-main " >
+          
+          <div class="product-item1">
+            <div class="single-img col-3">
+            <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+            <div class="img-fluid">
+              <img src="../img/item/a1.jpg" alt="" width="100%">
+            </div>
+            </div>
+            <div class="size-name col-9" >
+              <table style="width: 100%;">
+                <tr >
+                  <td class="size1">SIZE
+                  </td>
+                  <td style="color: #0E6D67D9;">
+                    M
+                  </td>
+                  <td style="background-color: #D9D9D9; color: #0E6D67D9;">
+                    L
+                  </td>
+                  <td style="color: #0E6D67D9;">
+                    XL
+                  </td>
+                </tr>
+                <tr>
+                  <td class="size1">
+                    Ngang ngực
+                  </td>
+                  <td>
+                    53>
+                  </td>
+                  <td style="background-color: #D9D9D9;">
+                    56
+                  </td>
+                  <td>
+                    59
+                  </td>
+                </tr>
+                <tr>
+                  <td class="size1">
+                    Dài áo
+                  </td>
+                  <td>
+                    70
+                  </td>
+                  <td style="background-color: #D9D9D9;"">
+                    73
+                  </td>
+                  <td>76
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="product-item1">
+            <div class="single-img col-3">
+              <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+              <div class="img-fluid">
+                <img src="../img/item/a1.jpg" alt="" width="100%">
+              </div>
+            </div>
+            <div class="size-name col-9" >
+                <table style="width: 100%;">
+                  <tr >
+                    <td class="size1">SIZE
+                    </td>
+                    <td style="color: #0E6D67D9;">
+                      M
+                    </td>
+                    <td style="background-color: #D9D9D9; color: #0E6D67D9;">
+                      L
+                    </td>
+                    <td style="color: #0E6D67D9;">
+                      XL
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="size1">
+                      Ngang ngực
+                    </td>
+                    <td>
+                      53>
+                    </td>
+                    <td style="background-color: #D9D9D9;">
+                      56
+                    </td>
+                    <td>
+                      59
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="size1">
+                      Dài áo
+                    </td>
+                    <td>
+                      70
+                    </td>
+                    <td style="background-color: #D9D9D9;"">
+                      73
+                    </td>
+                    <td>76
+                    </td>
+                  </tr>
+                </table>
+            </div>
+          </div>
+          <div class="product-item1">
+            <div class="single-img col-3">
+            <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+            <div class="img-fluid">
+              <img src="../img/item/a1.jpg" alt="" width="100%">
+            </div>
+            </div>
+            <div class="size-name col-9" >
+              <table style="width: 100%;">
+                <tr >
+                  <td class="size1">SIZE
+                  </td>
+                  <td style="color: #0E6D67D9;">
+                    M
+                  </td>
+                  <td style="background-color: #D9D9D9; color: #0E6D67D9;">
+                    L
+                  </td>
+                  <td style="color: #0E6D67D9;">
+                    XL
+                  </td>
+                </tr>
+                <tr>
+                  <td class="size1">
+                    Ngang ngực
+                  </td>
+                  <td>
+                    54
+                  </td>
+                  <td style="background-color: #D9D9D9;">
+                    56
+                  </td>
+                  <td>
+                    59
+                  </td>
+                </tr>
+                <tr>
+                  <td class="size1">
+                    Dài áo
+                  </td>
+                  <td>
+                    70
+                  </td>
+                  <td style="background-color: #D9D9D9;"">
+                    73
+                  </td>
+                  <td>76
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="product-item1">
+            <div class="single-img col-3">
+              <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+              <div class="img-fluid">
+                <img src="../img/item/a1.jpg" alt="" width="100%">
+              </div>
+            </div>
+            <div class="size-name col-9" >
+                <table style="width: 100%;">
+                  <tr >
+                    <td class="size1">SIZE
+                    </td>
+                    <td style="color: #0E6D67D9;">
+                      M
+                    </td>
+                    <td style="background-color: #D9D9D9; color: #0E6D67D9;">
+                      L
+                    </td>
+                    <td style="color: #0E6D67D9;">
+                      XL
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="size1">
+                      Ngang ngực
+                    </td>
+                    <td>
+                      53
+                    </td>
+                    <td style="background-color: #D9D9D9;">
+                      55
+                    </td>
+                    <td>
+                      58
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="size1">
+                      Dài áo
+                    </td>
+                    <td>
+                      70
+                    </td>
+                    <td style="background-color: #D9D9D9;"">
+                      73
+                    </td>
+                    <td>76
+                    </td>
+                  </tr>
+                </table>
+            </div>
+          </div>
+
+          <div class="product-item1">
+            <div class="single-img col-3">
+            <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+            <div class="img-fluid">
+              <img src="../img/item/a1.jpg" alt="" width="100%">
+            </div>
+            </div>
+            <div class="size-name col-9" >
+              <table style="width: 100%;">
+                <tr >
+                  <td class="size1">SIZE
+                  </td>
+                  <td style="color: #0E6D67D9;">
+                    M
+                  </td>
+                  <td style="background-color: #D9D9D9; color: #0E6D67D9;">
+                    L
+                  </td>
+                  <td style="color: #0E6D67D9;">
+                    XL
+                  </td>
+                </tr>
+                <tr>
+                  <td class="size1">
+                    Ngang ngực
+                  </td>
+                  <td>
+                    63
+                  </td>
+                  <td style="background-color: #D9D9D9;">
+                    65
+                  </td>
+                  <td>
+                    67
+                  </td>
+                </tr>
+                <tr>
+                  <td class="size1">
+                    Dài áo
+                  </td>
+                  <td>
+                    72
+                  </td>
+                  <td style="background-color: #D9D9D9;"">
+                    74
+                  </td>
+                  <td>76
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="product-item1">
+            <div class="single-img col-3">
+              <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+              <div class="img-fluid">
+                <img src="../img/item/a1.jpg" alt="" width="100%">
+              </div>
+            </div>
+            <div class="size-name col-9" >
+                <table style="width: 100%;">
+                  <tr >
+                    <td class="size1">SIZE
+                    </td>
+                    <td style="color: #0E6D67D9;">
+                      M
+                    </td>
+                    <td style="background-color: #D9D9D9; color: #0E6D67D9;">
+                      L
+                    </td>
+                    <td style="color: #0E6D67D9;">
+                      XL
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="size1">
+                      Ngang ngực
+                    </td>
+                    <td>
+                      60>
+                    </td>
+                    <td style="background-color: #D9D9D9;">
+                      63
+                    </td>
+                    <td>
+                      66
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="size1">
+                      Dài áo
+                    </td>
+                    <td>
+                      70
+                    </td>
+                    <td style="background-color: #D9D9D9;"">
+                      73
+                    </td>
+                    <td>76
+                    </td>
+                  </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+        
     </div>
       <!-- FOOTER -->
       <footer>
