@@ -272,7 +272,7 @@ ddd
 
 
 
-.product-lists-item .product-items{
+ .product-items{
     margin-bottom: 40px;
 }
 .box-pro-detail .pro-name a{
@@ -324,7 +324,7 @@ text-align: center;
     font-size: 24px;
     font-weight: 600;
 }
-.section-item .product-lists-item .selectionColor li{
+.section-item  .selectionColor li{
     display: inline-block;
     border-radius: 100%;
     width: 45px !important;
@@ -332,7 +332,7 @@ text-align: center;
     position: relative;
 }
 
-.section-item .product-lists-item .selectionColor li img{
+.section-item  .selectionColor li img{
     width: 45px;
 }
 

@@ -23,7 +23,7 @@
                 </div>
                 <!-- ---LOGIN--- -->
                 <div class="login">
-                  <a href="footer.html" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
+                  <a href="footer.php" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">
@@ -47,23 +47,23 @@
       <h1>C L O S E T</h1>
         <ul class="nav-list">
           <li><a href="index1.php">TRANG CHỦ</a></li>
-          <li><a href="change.html">CHÍNH SÁCH ĐỔI TRẢ</a></li>
+          <li><a href="change.php">CHÍNH SÁCH ĐỔI TRẢ</a></li>
           <li><a href="#">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
-            <li><a href="size.html">BẢNG SIZE</a></li>
-            <li><a href="store.html">HỆ THỐNG CỬA HÀNG</a></li>
+            <li><a href="size.php">BẢNG SIZE</a></li>
+            <li><a href="store.php">HỆ THỐNG CỬA HÀNG</a></li>
         </ul>
         <div class="close-menu ">
           <div class="title d-lg-none d-block">MENU</div>
           <div class="menu-slider">
               <ul>
-                <li><a href="allproducts.html">Tất cả sản phẩm</a></li>
-                <li><a href="">Áo Thun</a></li>
-                <li><a href="">Baby Tee</a></li>
-                <li><a href="">Áo Polo</a></li>
-                <li><a href="">Áo Sơ Mi</a></li>
-                <li><a href="">Áo Khoác</a></li>
-                <li><a href="">Hoodie</a></li>
+                <li><a href="allproducts.php">Tất cả sản phẩm</a></li>
+                <li><a href="allproducts.php">Áo Thun</a></li>
+                <li><a href="allproducts.php">Baby Tee</a></li>
+                <li><a href="allproducts.php">Áo Polo</a></li>
+                <li><a href="allproducts.php">Áo Sơ Mi</a></li>
+                <li><a href="allproducts.php">Áo Khoác</a></li>
+                <li><a href="allproducts.php">Hoodie</a></li>
                 </ul>
           </div>
         </div>  
@@ -80,22 +80,6 @@
         <swiper-slide><img src="../img/slide3.jpg" alt=""></swiper-slide>
       </swiper-container>
       </div>
-                        <!-- <section class="slideshow">
-                          <div class="list-slider">
-                            <div class="item">
-                              <img src="../img/slide1.jpg" alt="">
-                              </div>
-                              <div class="item">
-                                <img src="../img/slide1.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                  <img src="../img/slide1.jpg" alt="">
-                                  </div>
-                                  <div class="item">
-                                    <img src="../img/slide1.jpg" alt="">
-                                    </div>
-                                    </div>
-                                    </section> -->
     <section class="intro1">
                                       <h4>Trendy threads for you!</h4>
                                       <div class="content">
@@ -122,7 +106,7 @@
                         <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
                         </div>
                       </div>
-                      <a href="#">
+                      <a href="allproducts.php">
                         <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
                     </a></div>
                   <div class="product-info">
@@ -131,17 +115,17 @@
                               <div class="selectionColor">
                                 <ul>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
                                       </ul>
                                       </div>
                                       <!-- Tên sản phẩm -->
                                       <div class="box-pro-detail">
                                 <h3 class="pro-name">
-                                  <a href="" class="tp_product_name">
+                                  <a href="allproducts.php" class="tp_product_name">
                                     Áo sơ mi cộc
                                     </a>
                                     </h3>
@@ -153,108 +137,116 @@
                                   </div>
                                   </div>
                   </div>
-                  <div class="product"></div>
+                  <div class="product">
+                    <a href="cartproduct.php">
+                      <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                    </a>
+                  </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- Items-2 -->
             <div class="section-item">
-                                    <div class="product-lists-item">
-                                      <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                                <span class="discount">-45%</span>
-                                <div class="btn-action">
-                                  <div class="action-cart" style="background: #fff;">
-                                        <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                        </div>
-                                        </div>
-                                        <a href="#">
-                                          <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                          </a></div>
-                            <div class="product-info">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
-                                <div class="selectionColor">
-                                  <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
                                       </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                        <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                              </div>
-                              <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Items-3 -->
-            <div class="section-item">
-                      <div class="product-lists-item">
-                        <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                              <span class="discount">-45%</span>
-                              <div class="btn-action">
-                                <div class="action-cart" style="background: #fff;">
-                                  <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                  </div>
-                                  </div>
-                                  <a href="#">
-                                    <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                    </a></div>
-                                    <div class="product-info">
-                                      <div class="product-detail clearfix">
-                                        <!-- Màu áo -->
-                                        <div class="selectionColor">
-                                          <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
-                                      </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                  <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="product"></div>
-                          </div>
+              <div class="section-item">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
                         </div>
                       </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
+                              <div class="product-detail clearfix">
+                                <!-- Màu áo -->
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
+                                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
                     <!-- Xem them -->
                     <div class="section-item">
@@ -266,7 +258,7 @@
       <!-- BAbY Tee -->
       <section class="section_products">
         <div class="container">
-          <h2 class="cata-title">Baby Tee</h2>
+          <h2 class="cata-title">BABY TEE</h2>
           <div class="section-list">
             <!-- Items-1 -->
             <div class="section-item">
@@ -277,30 +269,30 @@
                     <div class="product-img" style="position: relative; text-align: center;">
                       <span class="discount">-45%</span>
                       <div class="btn-action">
-                        <div class="action-cart" style="background: #fff;">
-                          <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                          </div>
-                          </div>
-                          <a href="#">
-                            <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                            </a></div>
-                            <div class="product-info">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
                               <div class="selectionColor">
                                 <ul>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
                                       </ul>
                                       </div>
                                       <!-- Tên sản phẩm -->
                                       <div class="box-pro-detail">
                                 <h3 class="pro-name">
-                                  <a href="" class="tp_product_name">
+                                  <a href="allproducts.php" class="tp_product_name">
                                     Áo sơ mi cộc
                                     </a>
                                     </h3>
@@ -311,111 +303,15 @@
                                   <span>139,000₫</span></p>
                                   </div>
                                   </div>
-                                  </div>
-                                  <div class="product"></div>
-                                  </div>
-                                  </div>
-                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Items-2 -->
-           <div class="section-item">
-                                    <div class="product-lists-item">
-                                      <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                                <span class="discount">-45%</span>
-                                <div class="btn-action">
-                                  <div class="action-cart" style="background: #fff;">
-                                        <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                        </div>
-                                        </div>
-                                        <a href="#">
-                                          <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                          </a></div>
-                            <div class="product-info">
-                              <div class="product-detail clearfix">
-                                <!-- Màu áo -->
-                                <div class="selectionColor">
-                                  <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
-                                      </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                        <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                              </div>
-                              <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
-           </div>
-           <!-- Items-3 -->
-            <div class="section-item">
-                      <div class="product-lists-item">
-                        <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                              <span class="discount">-45%</span>
-                              <div class="btn-action">
-                                <div class="action-cart" style="background: #fff;">
-                                  <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                  </div>
-                                  </div>
-                                  <a href="#">
-                                    <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                    </a></div>
-                                    <div class="product-info">
-                                      <div class="product-detail clearfix">
-                                        <!-- Màu áo -->
-                                        <div class="selectionColor">
-                                          <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
-                                      </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                  <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
-            </div>
-            <!-- Items-1 -->
             <div class="section-item">
               <div class="product-lists-item">
                 <div class="product-items">
@@ -424,30 +320,30 @@
                     <div class="product-img" style="position: relative; text-align: center;">
                       <span class="discount">-45%</span>
                       <div class="btn-action">
-                        <div class="action-cart" style="background: #fff;">
-                          <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                          </div>
-                          </div>
-                          <a href="#">
-                            <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                            </a></div>
-                            <div class="product-info">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
                               <div class="selectionColor">
                                 <ul>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
                                       </ul>
                                       </div>
                                       <!-- Tên sản phẩm -->
                                       <div class="box-pro-detail">
                                 <h3 class="pro-name">
-                                  <a href="" class="tp_product_name">
+                                  <a href="allproducts.php" class="tp_product_name">
                                     Áo sơ mi cộc
                                     </a>
                                     </h3>
@@ -458,119 +354,71 @@
                                   <span>139,000₫</span></p>
                                   </div>
                                   </div>
-                                  </div>
-                                  <div class="product"></div>
-                                  </div>
-                                  </div>
-                                  </div>
-            </div>
-            <!-- Items-2 -->
-           <div class="section-item">
-                                    <div class="product-lists-item">
-                                      <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                                <span class="discount">-45%</span>
-                                <div class="btn-action">
-                                  <div class="action-cart" style="background: #fff;">
-                                        <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                        </div>
-                                        </div>
-                                        <a href="#">
-                                          <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                          </a></div>
-                            <div class="product-info">
-                              <div class="product-detail clearfix">
-                                <!-- Màu áo -->
-                                <div class="selectionColor">
-                                  <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
-                                      </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                        <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                              </div>
-                              <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
-           </div>
-           <!-- Items-3 -->
-            <div class="section-item">
-                      <div class="product-lists-item">
-                        <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                              <span class="discount">-45%</span>
-                              <div class="btn-action">
-                                <div class="action-cart" style="background: #fff;">
-                                  <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                  </div>
-                                  </div>
-                                  <a href="#">
-                                    <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                    </a></div>
-                                    <div class="product-info">
-                                      <div class="product-detail clearfix">
-                                        <!-- Màu áo -->
-                                        <div class="selectionColor">
-                                          <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
-                                      </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                  <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
-            </div>
-            <!-- Xem them -->
-             <div class="section-item">
-              <div class="more">
-                <a href="">Xem thêm</a>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
               </div>
             </div>
-
-          </div>
-        </div>
+            <!-- Items-3 -->
+              <div class="section-item">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
+                              <div class="product-detail clearfix">
+                                <!-- Màu áo -->
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
+                                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+                    <!-- Xem them -->
+                    <div class="section-item">
+                      <div class="more">
+                        <a href="">Xem thêm</a>
+                                    </div>
+                            </div>
       </section>
       <!-- Ao Polo -->
       <section class="section_products">
@@ -586,30 +434,30 @@
                     <div class="product-img" style="position: relative; text-align: center;">
                       <span class="discount">-45%</span>
                       <div class="btn-action">
-                        <div class="action-cart" style="background: #fff;">
-                          <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                          </div>
-                          </div>
-                          <a href="#">
-                            <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                            </a></div>
-                            <div class="product-info">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
                               <div class="selectionColor">
                                 <ul>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
                                       </ul>
                                       </div>
                                       <!-- Tên sản phẩm -->
                                       <div class="box-pro-detail">
                                 <h3 class="pro-name">
-                                  <a href="" class="tp_product_name">
+                                  <a href="allproducts.php" class="tp_product_name">
                                     Áo sơ mi cộc
                                     </a>
                                     </h3>
@@ -620,116 +468,122 @@
                                   <span>139,000₫</span></p>
                                   </div>
                                   </div>
-                                  </div>
-                                  <div class="product"></div>
-                                  </div>
-                                  </div>
-                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Items-2 -->
             <div class="section-item">
-                                    <div class="product-lists-item">
-                                      <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                                <span class="discount">-45%</span>
-                                <div class="btn-action">
-                                  <div class="action-cart" style="background: #fff;">
-                                        <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                        </div>
-                                        </div>
-                                        <a href="#">
-                                          <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                          </a></div>
-                            <div class="product-info">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
-                                <div class="selectionColor">
-                                  <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
                                       </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                        <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                              </div>
-                              <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Items-3 -->
-            <div class="section-item">
-                      <div class="product-lists-item">
-                        <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                              <span class="discount">-45%</span>
-                              <div class="btn-action">
-                                <div class="action-cart" style="background: #fff;">
-                                  <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                  </div>
-                                  </div>
-                                  <a href="#">
-                                    <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                    </a></div>
-                                    <div class="product-info">
-                                      <div class="product-detail clearfix">
-                                        <!-- Màu áo -->
-                                        <div class="selectionColor">
-                                          <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
-                                      </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                  <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="product"></div>
-                          </div>
+              <div class="section-item">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
                         </div>
                       </div>
-            </div>
-            <!-- Xem them -->
-            <div class="section-item">
-              <div class="more">
-                <a href="">Xem thêm</a>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
+                              <div class="product-detail clearfix">
+                                <!-- Màu áo -->
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
+                                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
                 </div>
-        </div>
+              </div>
+            </div>
+                    <!-- Xem them -->
+                    <div class="section-item">
+                      <div class="more">
+                        <a href="">Xem thêm</a>
+                                    </div>
+                            </div>
       </section>
       <!-- Ao So mi -->
       <section class="section_products">
@@ -745,30 +599,30 @@
                     <div class="product-img" style="position: relative; text-align: center;">
                       <span class="discount">-45%</span>
                       <div class="btn-action">
-                        <div class="action-cart" style="background: #fff;">
-                          <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                          </div>
-                          </div>
-                          <a href="#">
-                            <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                            </a></div>
-                            <div class="product-info">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
                               <div class="selectionColor">
                                 <ul>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
                                       </ul>
                                       </div>
                                       <!-- Tên sản phẩm -->
                                       <div class="box-pro-detail">
                                 <h3 class="pro-name">
-                                  <a href="" class="tp_product_name">
+                                  <a href="allproducts.php" class="tp_product_name">
                                     Áo sơ mi cộc
                                     </a>
                                     </h3>
@@ -779,112 +633,122 @@
                                   <span>139,000₫</span></p>
                                   </div>
                                   </div>
-                                  </div>
-                                  <div class="product"></div>
-                                  </div>
-                                  </div>
-                                  </div>
-                                  </div>
-                                  <!-- Items-2 -->
-                                  <div class="section-item">
-                                    <div class="product-lists-item">
-                                      <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                                <span class="discount">-45%</span>
-                                <div class="btn-action">
-                                  <div class="action-cart" style="background: #fff;">
-                                        <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                        </div>
-                                        </div>
-                                        <a href="#">
-                                          <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                          </a></div>
-                            <div class="product-info">
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Items-2 -->
+            <div class="section-item">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
-                                <div class="selectionColor">
-                                  <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
                                       </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                        <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                              </div>
-                              <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Items-3 -->
-                    <div class="section-item">
-                      <div class="product-lists-item">
-                        <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                              <span class="discount">-45%</span>
-                              <div class="btn-action">
-                                <div class="action-cart" style="background: #fff;">
-                                  <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
                                   </div>
                                   </div>
-                                  <a href="#">
-                                    <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                    </a></div>
-                                    <div class="product-info">
-                                      <div class="product-detail clearfix">
-                                        <!-- Màu áo -->
-                                        <div class="selectionColor">
-                                          <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
-                                      </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                  <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
-                      </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
                 </div>
-        </div>
+              </div>
+            </div>
+            <!-- Items-3 -->
+              <div class="section-item">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
+                              <div class="product-detail clearfix">
+                                <!-- Màu áo -->
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
+                                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+                    <!-- Xem them -->
+                    <div class="section-item">
+                      <div class="more">
+                        <a href="">Xem thêm</a>
+                                    </div>
+                            </div>
       </section>
       <!-- Ao khoac -->
       <section class="section_products">
@@ -900,30 +764,30 @@
                     <div class="product-img" style="position: relative; text-align: center;">
                       <span class="discount">-45%</span>
                       <div class="btn-action">
-                        <div class="action-cart" style="background: #fff;">
-                          <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                          </div>
-                          </div>
-                          <a href="#">
-                            <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                            </a></div>
-                            <div class="product-info">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
                               <div class="selectionColor">
                                 <ul>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
                                       </ul>
                                       </div>
                                       <!-- Tên sản phẩm -->
                                       <div class="box-pro-detail">
                                 <h3 class="pro-name">
-                                  <a href="" class="tp_product_name">
+                                  <a href="allproducts.php" class="tp_product_name">
                                     Áo sơ mi cộc
                                     </a>
                                     </h3>
@@ -934,122 +798,127 @@
                                   <span>139,000₫</span></p>
                                   </div>
                                   </div>
-                                  </div>
-                                  <div class="product"></div>
-                                  </div>
-                                  </div>
-                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Items-2 -->
             <div class="section-item">
-                                    <div class="product-lists-item">
-                                      <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                                <span class="discount">-45%</span>
-                                <div class="btn-action">
-                                  <div class="action-cart" style="background: #fff;">
-                                        <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                        </div>
-                                        </div>
-                                        <a href="#">
-                                          <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                          </a></div>
-                            <div class="product-info">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
-                                <div class="selectionColor">
-                                  <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
                                       </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                        <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                              </div>
-                              <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Items-3 -->
-            <div class="section-item">
-                      <div class="product-lists-item">
-                        <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                              <span class="discount">-45%</span>
-                              <div class="btn-action">
-                                <div class="action-cart" style="background: #fff;">
-                                  <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                  </div>
-                                  </div>
-                                  <a href="#">
-                                    <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                    </a></div>
-                                    <div class="product-info">
-                                      <div class="product-detail clearfix">
-                                        <!-- Màu áo -->
-                                        <div class="selectionColor">
-                                          <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
-                                      </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                  <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="product"></div>
-                          </div>
+              <div class="section-item">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
                         </div>
                       </div>
-            </div>
-            <!-- Xem them -->
-            <div class="section-item">
-              <div class="more">
-                <a href="">Xem thêm</a>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
+                              <div class="product-detail clearfix">
+                                <!-- Màu áo -->
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
+                                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+                    <!-- Xem them -->
+                    <div class="section-item">
+                      <div class="more">
+                        <a href="">Xem thêm</a>
+                                    </div>
+                            </div>
       </section>
       <!-- hoodie -->
       <section class="section_products">
         <div class="container">
-          <h2 class="cata-title">Hoodie</h2>
+          <h2 class="cata-title">Áo Hoodie</h2>
           <div class="section-list">
             <!-- Items-1 -->
             <div class="section-item">
@@ -1060,30 +929,30 @@
                     <div class="product-img" style="position: relative; text-align: center;">
                       <span class="discount">-45%</span>
                       <div class="btn-action">
-                        <div class="action-cart" style="background: #fff;">
-                          <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                          </div>
-                          </div>
-                          <a href="#">
-                            <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                            </a></div>
-                            <div class="product-info">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
                               <div class="selectionColor">
                                 <ul>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
                                   <li>
-                                    <a href="">
+                                    <a href="allproducts.php">
                                       <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
                                       </ul>
                                       </div>
                                       <!-- Tên sản phẩm -->
                                       <div class="box-pro-detail">
                                 <h3 class="pro-name">
-                                  <a href="" class="tp_product_name">
+                                  <a href="allproducts.php" class="tp_product_name">
                                     Áo sơ mi cộc
                                     </a>
                                     </h3>
@@ -1094,117 +963,122 @@
                                   <span>139,000₫</span></p>
                                   </div>
                                   </div>
-                                  </div>
-                                  <div class="product"></div>
-                                  </div>
-                                  </div>
-                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Items-2 -->
             <div class="section-item">
-                                    <div class="product-lists-item">
-                                      <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                                <span class="discount">-45%</span>
-                                <div class="btn-action">
-                                  <div class="action-cart" style="background: #fff;">
-                                        <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                        </div>
-                                        </div>
-                                        <a href="#">
-                                          <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                          </a></div>
-                            <div class="product-info">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                        </div>
+                      </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
-                                <div class="selectionColor">
-                                  <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
                                       </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                        <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                              </div>
-                              <div class="product"></div>
-                          </div>
-                        </div>
-                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- Items-3 -->
-            <div class="section-item">
-                      <div class="product-lists-item">
-                        <div class="product-items">
-                          <div class="product-block">
-                            <!-- Ảnh sản phẩm -->
-                            <div class="product-img" style="position: relative; text-align: center;">
-                              <span class="discount">-45%</span>
-                              <div class="btn-action">
-                                <div class="action-cart" style="background: #fff;">
-                                  <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
-                                  </div>
-                                  </div>
-                                  <a href="#">
-                                    <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                                    </a></div>
-                                    <div class="product-info">
-                                      <div class="product-detail clearfix">
-                                        <!-- Màu áo -->
-                                        <div class="selectionColor">
-                                          <ul>
-                                    <li>
-                                      <a href="">
-                                        <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
-                                        <li>
-                                          <a href="">
-                                            <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
-                                            </ul>
-                                            </div>
-                                            <!-- Tên sản phẩm -->
-                                            <div class="box-pro-detail">
-                                  <h3 class="pro-name">
-                                    <a href="" class="tp_product_name">
-                                      Áo sơ mi cộc
-                                      </a>
-                                      </h3>
-                                      </div>
-                                      <!-- Giá sản phẩm -->
-                                      <div class="box-pro-prices">
-                                  <p class="pro-price highlight tp_product_price">
-                                    <span>139,000₫</span></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="product"></div>
-                          </div>
+              <div class="section-item">
+              <div class="product-lists-item">
+                <div class="product-items">
+                  <div class="product-block">
+                    <!-- Ảnh sản phẩm -->
+                    <div class="product-img" style="position: relative; text-align: center;">
+                      <span class="discount">-45%</span>
+                      <div class="btn-action">
+                        <div class="action-cart" >
+                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
                         </div>
                       </div>
+                      <a href="allproducts.php">
+                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                    </a></div>
+                  <div class="product-info">
+                              <div class="product-detail clearfix">
+                                <!-- Màu áo -->
+                              <div class="selectionColor">
+                                <ul>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
+                                  <li>
+                                    <a href="allproducts.php">
+                                      <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
+                                      </ul>
+                                      </div>
+                                      <!-- Tên sản phẩm -->
+                                      <div class="box-pro-detail">
+                                <h3 class="pro-name">
+                                  <a href="allproducts.php" class="tp_product_name">
+                                    Áo sơ mi cộc
+                                    </a>
+                                    </h3>
+                                    </div>
+                                    <!-- Giá sản phẩm -->
+                                    <div class="box-pro-prices">
+                                <p class="pro-price highlight tp_product_price">
+                                  <span>139,000₫</span></p>
+                                  </div>
+                                  </div>
+                  </div>
+                  <div class="product">
+                  <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- Xem them -->
-            <div class="section-item">
-              <div class="more">
-                <a href="">Xem thêm</a>
-                </div>
-                </div>
-        </div>
+                    <!-- Xem them -->
+                    <div class="section-item">
+                      <div class="more">
+                        <a href="">Xem thêm</a>
+                                    </div>
+                            </div>
       </section>
     </section>
     

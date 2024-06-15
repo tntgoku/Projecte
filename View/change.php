@@ -48,23 +48,23 @@
       <h1>C L O S E T</h1>
         <ul class="nav-list">
           <li><a href="index1.php">TRANG CHỦ</a></li>
-          <li><a href="./change.html">CHÍNH SÁCH ĐỔI TRẢ</a></li>
+          <li><a href="./change.php">CHÍNH SÁCH ĐỔI TRẢ</a></li>
           <li><a href="/View//User/index.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
-            <li><a href="size.html">BẢNG SIZE</a></li>
-            <li><a href="store.html">HỆ THỐNG CỬA HÀNG</a></li>
+            <li><a href="size.php">BẢNG SIZE</a></li>
+            <li><a href="store.php">HỆ THỐNG CỬA HÀNG</a></li>
         </ul>
         <div class="close-menu ">
           <div class="title d-lg-none d-block">MENU</div>
           <div class="menu-slider">
               <ul>
-                <li><a href="allproducts.html">Tất cả sản phẩm</a></li>
-                <li><a href="allproducts.html">Áo Thun</a></li>
-                <li><a href="allproducts.html">Baby Tee</a></li>
-                <li><a href="allproducts.html">Áo Polo</a></li>
-                <li><a href="allproducts.html">Áo Sơ Mi</a></li>
-                <li><a href="allproducts.html">Áo Khoác</a></li>
-                <li><a href="allproducts.html">Hoodie</a></li>
+                <li><a href="allproducts.php">Tất cả sản phẩm</a></li>
+                <li><a href="allproducts.php">Áo Thun</a></li>
+                <li><a href="allproducts.php">Baby Tee</a></li>
+                <li><a href="allproducts.php">Áo Polo</a></li>
+                <li><a href="allproducts.php">Áo Sơ Mi</a></li>
+                <li><a href="allproducts.php">Áo Khoác</a></li>
+                <li><a href="allproducts.php">Hoodie</a></li>
                 </ul>
           </div>
         </div>  
@@ -196,9 +196,9 @@
                     <h3>ABOUT US</h3>
                     <ul>
                       <li><a href="https://www.facebook.com/profile.php?id=100013900096508" title="Facebook">Trang chủ</a></li>
-                      <li><a href="allproducts.html" title="Instagram">Tất cả sản phẩm</a></li>
-                      <li><a href="size.html" title="Messenger">Bảng size</a></li>
-                      <li><a href="store.html" title="Tiktok">Hệ thống cửa hàng</a></li>
+                      <li><a href="allproducts.php" title="Instagram">Tất cả sản phẩm</a></li>
+                      <li><a href="size.php" title="Messenger">Bảng size</a></li>
+                      <li><a href="store.php" title="Tiktok">Hệ thống cửa hàng</a></li>
                       </ul>
                       </div>
                       <div class="col-sm">

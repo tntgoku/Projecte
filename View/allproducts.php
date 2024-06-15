@@ -47,11 +47,11 @@
       <h1>C L O S E T</h1>
         <ul class="nav-list">
           <li><a href="index1.php">TRANG CHỦ</a></li>
-          <li><a href="change.html">CHÍNH SÁCH ĐỔI TRẢ</a></li>
+          <li><a href="change.php">CHÍNH SÁCH ĐỔI TRẢ</a></li>
           <li><a href="index1.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
-            <li><a href="size.html">BẢNG SIZE</a></li>
-            <li><a href="store.html">HỆ THỐNG CỬA HÀNG</a></li>
+            <li><a href="size.php">BẢNG SIZE</a></li>
+            <li><a href="store.php">HỆ THỐNG CỬA HÀNG</a></li>
         </ul>
         <div class="close-menu ">
           <div class="title d-lg-none d-block">MENU</div>
@@ -87,7 +87,7 @@
                       <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
                       </div>
                       </div>
-                      <a href="chitiet.html">
+                      <a href="chitiet.php">
                         <img src="../img/item/a1.jpg" width="230px" style="object-fit: cover;" alt="" class="main-img">
                         </a></div>
                         <div class="product-info">
@@ -96,17 +96,17 @@
                           <div class="selectionColor">
                             <ul>
                               <li>
-                                <a href="chitiet.html">
+                                <a href="chitiet.php">
                                   <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
                               <li>
-                                <a href="chitiet.html">
+                                <a href="chitiet.php">
                                   <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
                                   </ul>
                                   </div>
                                   <!-- Tên sản phẩm -->
                                   <div class="box-pro-detail">
                             <h3 class="pro-name">
-                              <a href="chitiet.html" class="tp_product_name">
+                              <a href="chitiet.php" class="tp_product_name">
                                 Áo Thun Teelab Local Brand Unisex Slow Sunday Tshirt TS270
                                 </a>
                                 </h3>
