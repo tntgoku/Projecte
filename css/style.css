@@ -542,31 +542,42 @@ form label{
     box-sizing: border-box;
     color: #212b35;
 }
+#targetselection .btn-review {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+#targetselection .btn-review button{
+      background-color: #36A9AE;
+      background-image: linear-gradient(#37ADB2, #329CA0);
+      border: 1px solid #2A8387;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: block;
+      font-family: -apple-system,".SFNSDisplay-Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-size: 17px;
+      line-height: 100%;
+      margin: 0;
+      outline: 0;
+      padding: 11px 15px 12px;
+      text-align: center;
+      transition: box-shadow .05s ease-in-out,opacity .05s ease-in-out;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      width: 20%;
 
-#targetselection .btn-review{
-  border-radius: 4px;
-  border: 0;
-  box-sizing: border-box;
-  color: #fff;
-  display: inherit;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24px;
-  margin: 0;
-  min-height: 56px;
-  min-width: 120px;
-  padding: 16px 20px;
-  position: relative;
-  text-align: center;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  transition: all .2s cubic-bezier(.22, .61, .36, 1);
   }  
-
-.btn-review:hover {
-      transform: translateY(-2px);
+    .btn-review button:active{
+        box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
+    }
+.btn-review button:hover {
+        box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+        text-decoration: none;
+        transition-duration: .15s, .15s;
     }
     
     @media (min-width: 768px) {
@@ -574,4 +585,32 @@ form label{
         padding: 16px 44px;
         min-width: 150px;
       }
+}
+
+
+
+
+
+/* binhluan */
+
+.chat1{
+    display: flex;
+}
+.chat1 .avata{
+    width: 8%;
+}
+.chat1 .content{
+    margin: auto;
+    width: 80%;
+}
+.chat1 .content .user-chat{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.content .commits{
+    display: flex;
+}
+.content .commits .comment-admin{
+margin-left: 25px;
+margin-top: 10px;
 }

@@ -42,45 +42,45 @@ $data->connect();
 <body>
     <form class="sidebar" method="post">
         <div class="logo-details">
-            <img src="/img/icon/LogoSecondP.jpg" alt="" width="100px">
+            <img src="/Projecte/img/icon/LogoSecondP.jpg" alt="" width="100px">
             <span class="logo_name">C L O S E T</span>
         </div>
         
         <ul class="nav-link">
             <li>
-                <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                <a href="dashboard.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="product.php">
-                    <img src="/img/icon/product-page.png">
+                    <img src="/Projecte/img/icon/product-page.png">
                     <span class="link_name">Sản phẩm</span>
                 </a>
                 
             </li>
             <li>
                 <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Hóa đơn</span>
                 </a>
             </li>
             <li>
                 <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
-                <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                <a href="News.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
             <li>
-                <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                <a href="vendors.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Cái này là cái gì?</span>
                 </a>
             </li>
@@ -101,7 +101,7 @@ $data->connect();
                 <span style="font-size: 35px;">Dashboard</span>
             </div>
             <div class="profile-user">
-                <img src="/img/item/a3.png" width="40px" alt="">
+                <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
                 font-weight: 600;">aadwawd</span>
@@ -119,10 +119,10 @@ $data->connect();
                     <div class="number" style="font-size: 20px; font-weight: 500; margin-top: 5px;">
                     <?php 
                         $month=6;
-                        $sql="select sum(trigia) as tong from hoadon where month(nghd) ='$month'";
+                        $sql="select sum(Total) as tong from bill where month(ngtao) ='$month'";
                         $toltal=$data->query($sql);
-                        $result=$toltal->fetch_assoc();
-                                echo $result['tong'];
+                        $result1=$toltal->fetch_assoc();
+                                echo $result1['tong'];
                         ?>
                     </div>
                     <div class="indicator">
@@ -136,7 +136,7 @@ $data->connect();
                     <div class="box_topic"><span>Hoa don</span></div>
                     <div class="number" style="font-size: 35px; font-weight: 500; margin-top: 5px;">
                         <?php
-                        $sql="select count(*) as tong from hoadon where month(nghd)= '$month'";
+                        $sql="select count(id_Bill) as tong from bill where month(ngtao)= '$month'";
                         $truyvan=$data->query($sql);
                         $result= $truyvan->fetch_assoc();
                         echo $result['tong'];
@@ -153,8 +153,8 @@ $data->connect();
                     <div class="box_topic"><span>Hoa don</span></div>
                     <div class="number" style="font-size: 35px; font-weight: 500; margin-top: 5px;">
                         <?php 
-                        $date="2024-6-15";
-                        $sql="select count(*) as tong from hoadon where nghd ='$date'";
+                        $date="2024-6-17";
+                        $sql="select count(*) as tong from bill where ngtao ='$date'";
                         $toltal=$data->query($sql);
                         $result=$toltal->fetch_assoc();
                                 echo $result['tong'];
@@ -167,7 +167,7 @@ $data->connect();
                 <div style="display: flex; align-items: center;"><i class="fa-solid fa-cart-shopping cart" style="font-size:35px; height: 50px;  width: 50px; text-align: center;"></i></div>
             </div>
         </div>
-        <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+        <div id="columnchart_material" style="width: 450px; height: 250px;"></div>
     
         <script>
         </script>

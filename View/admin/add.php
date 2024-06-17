@@ -2,17 +2,7 @@
 include '/xampp/htdocs/Projecte/App/connect.php';
 $data=new Database();
 $data->connect();
-if(isset($_POST['btn-add'])){
-    $id=$_POST['id_product'];
-    $name=$_POST['name'];
-    $type_id=$_POST['type_id'];
-    $color=$_POST['color'];
-    $size=$_POST['size'];
-    $cost=$_POST['cost'];
-    $amount=$_POST['amount'];
-    $discount=$_POST['discount'];
-    $img=$_POST['img'];
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -23,32 +13,6 @@ if(isset($_POST['btn-add'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Dashboard</title>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Profit'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
@@ -119,18 +83,13 @@ if(isset($_POST['btn-add'])){
             </div>
         </nav>
         <div class="container-fluid">
-            <div class="card">
+            <div class="card" style="margin-bottom:15px;">
                 <div class="card-header">
                     <h2>thêm sản phẩm</h2>
                 </div>
             </div>
-            <div class="card-body " style="">
-                <form action="" method="post" enctype="multipart/form-data">
-                
-                    <div class="form-group" style="margin-top: 10px;">
-                        <label for="">Mã sản phẩm</label>
-                        <input type="text" name="id_product">
-                    </div>
+            <div class="card-body " style="margin-bottom:15px;">
+                <form action="process_add.php" method="post" enctype="multipart/form-data" width="600px">
                     <div class="form-group">
                         <label for="">Tên sản phẩm</label>
                         <input type="text" name="name">
@@ -170,7 +129,7 @@ if(isset($_POST['btn-add'])){
                     </div>
                     <div class="form-group">
                         <label for="">Hình ảnh</label>
-                        <input type="text" name="img">
+                        <input type="file" name="img">
                     </div>
                     <div class="btn-box">
                         <button name="submit" class="btn btn-success" type="submit"> them san pham</button>

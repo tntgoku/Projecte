@@ -1,11 +1,28 @@
-
 <?php 
-include '/xampp/htdocs/Projecte/App/connect.php';
+include '../../App/connect.php';
 $data=new Database();
 $data->connect();
+$product = null;
+if (isset($_GET['id_product'])) {
+    $id = $_GET['id_product'];
+    $sql = "SELECT id_product, Name, Type_id, Color, Size, Cost, Amount, Discount, img FROM product WHERE id_product = $id";
+    $result = mysqli_fetch_object($db->query($sql));
+    
+    $idpr = $result->id_product;
+    $name = $result->Name;
+    $color = $result->Color;
+    $Size = $result->Size;
+    $Cost = $result->Cost;
+    $typeid = $result->Type_id;
+    $Amount = $result->Amount;
+    $Discount = $result->Discount;
+    $img = $result->img;
+    echo "
+    <script>console.log('$idpr') </script>";
+}
 
-    // Display form to edit product details
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,32 +31,6 @@ $data->connect();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Dashboard</title>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Profit'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
@@ -78,12 +69,6 @@ $data->connect();
             <li>
                 <a href="dashboard.html">
                     <img src="/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Quản lý bài viết(news)</span>
-                </a>
-            </li>
-            <li>
-                <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
                     <span class="link_name">Cái này là cái gì?</span>
                 </a>
             </li>
@@ -115,21 +100,38 @@ $data->connect();
                 </div>
             </div>
         </nav>
-           <div class="container">
-           <div class="card-header">
-                    <h2>Thay đổi thông tin sản phẩm</h2>
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Thay đổi thông tin sản phẩm có id=<?php  
+                if (isset($_GET['id_product'])) {
+                    $edit_id = $_GET['id_product'];
+                    // Fetch product details based on edit_id
+                    $sql = "SELECT id_product, Name, Type_id, Color, Size, Cost, Amount, Discount, img FROM product WHERE id_product = $edit_id";
+                        $result =mysqli_fetch_object($db->query($sql));
+                        $id=$result->id_product;
+                        echo $id;
+                } 
+                    ?></h2>
                 </div>
-           <form action="process_update.php" method="post">
+            </div>
+            <div class="card-body " style="">
+            <form action="process_update.php" method="post">
                     <div class="form-group" style="margin-top: 10px;">
                         <label for="">Mã sản phẩm</label>
-                        <input type="text" name="id_product">
+                        <input type="text" name="id_product" value="<?php echo $idpr;?>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Hình ảnh</label>
+                        <img src="/img/item/<?php echo $img;?>" alt="" width="150px">
+                        <input type="file" width="80px" name="img">
                     </div>
                     <div class="form-group">
                         <label for="">Tên sản phẩm</label>
-                        <input type="text" name="name">
+                        <input type="text" name="name"  value="<?php echo $name;?>">
                     </div>
                     <div class="form-group">
-                        <label for="">Chủng loại</label>
+                        <label for="">loại sản phẩm</label>
                         <select name="type_id" id="">
                         <?php 
                         $truyvan=$data->query("select* from product_list");
@@ -143,38 +145,32 @@ $data->connect();
                     </div>
                     <div class="form-group">
                         <label for="">Màu sắc</label>
-                        <input type="text" name="color">
+                        <input type="text" name="color" value="<?php echo $color;?>">
                     </div>
                     <div class="form-group">
                         <label for="">Size</label>
-                        <input type="text" name="size">
+                        <input type="text" name="size"  value="<?php echo $Size;?>">
                     </div>
                     <div class="form-group">
                         <label for="">Giá</label>
-                        <input type="text" name="cost">
+                        <input type="text" name="cost"  value="<?php echo $Cost;?>">
                     </div>
                     <div class="form-group">
                         <label for="">Số lượng</label>
-                        <input type="text" name="amount">
+                        <input type="text" name="amount"  value="<?php echo $Amount;?>">
                     </div>
                     <div class="form-group">
                         <label for="">Giảm giá</label>
-                        <input type="text" name="discount">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Hình ảnh</label>
-                        <input type="text" name="img">
+                        <input type="text" name="discount"  value="<?php echo $Discount;?>">
                     </div>
                 <!-- Add other fields as needed -->
                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
             </form>
-           </div>
+            </div>
         </div>
-    
-        <script>
-        </script>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script scr="scriptad.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="scriptad.js">
+</script>
 </body>
 </html>

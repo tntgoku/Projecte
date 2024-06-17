@@ -33,7 +33,7 @@
                       <div class="top-cart-content">
                           <div class="CartHeaderContainer" style="width: 340px;">
                             <div class="cart--empty--message" style="text-align: center;">
-                                  <img src="../img/shopping-bag.png" alt="" width="80px">
+                                  <img src="/Projecte/img/shopping-bag.png" alt="" width="80px">
                                   <p>Không có sản phẩm nào trong giỏ hàng của bạn</p>
                                   </div>  
                                   </div>
@@ -46,9 +46,9 @@
       <nav class="header-nav container">
       <h1>C L O S E T</h1>
         <ul class="nav-list">
-          <li><a href="index1.php">TRANG CHỦ</a></li>
+          <li><a href="./index.php">TRANG CHỦ</a></li>
           <li><a href="change.php">CHÍNH SÁCH ĐỔI TRẢ</a></li>
-          <li><a href="index1.php">
+          <li><a href="./index.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
             <li><a href="size.php">BẢNG SIZE</a></li>
             <li><a href="store.php">HỆ THỐNG CỬA HÀNG</a></li>

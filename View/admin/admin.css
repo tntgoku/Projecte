@@ -173,6 +173,14 @@
 
 
     /* form product  */
+h2{
+    margin:20px;
+}
+
+
+
+
+
 
 .form-group{
     margin-bottom: 10px;
@@ -202,4 +210,15 @@ background-clip: padding-box;
 border: var(--bs-border-width) solid var(--bs-border-color);
 border-radius: var(--bs-border-radius);
 transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-add{
+    margin: 0 20px;
+}
+form table td {
+    text-align:center;
+}
+    
+form table td button {
+    width: 90%;
 }

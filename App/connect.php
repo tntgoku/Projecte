@@ -12,12 +12,11 @@ class Database{
         if($this->conn->connect_error){
             die("Không thể kết nối tới Database: '$this->DB'");
         }
-            echo "Connect Successfully $this->DB";
         return $this->conn;
     }
-    public function insertData($id,$name,$type_id,$color,$size,$cost,$amount,$discount,$img){
-        $sql= "INSERT INTO product(id_product,Name,Type_id,Color,Size,Color,Amount,Discount,img)
-                VALUES ($id, $name, $type_id, $color, $size, $cost, $amount, $discount,$img)";
+    public function insertData($name,$type_id,$color,$size,$cost,$amount,$discount,$img){
+        $sql= "INSERT INTO product(Name,Type_id,Color,Size,Color,Amount,Discount,img)
+                VALUES ($name, $type_id, $color, $size, $cost, $amount, $discount,$img)";
          if ($this->conn->query($sql) === TRUE) {
             echo "
 <script>
@@ -30,19 +29,8 @@ class Database{
         }
         
     }
-    public function getSumHoadon($month){
-        $sum = 0;
-
-        $query = "SELECT SUM(TRIGIA) AS '$month' FROM hoadon WHERE MONTH(NGHD) = :month";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':month', $month, PDO::PARAM_INT);
-
-        if($stmt->execute()) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $sum = $row[$month];
-        }
-
-        return $sum;
+    public function closedDB(){
+        mysqli_close($this->conn);
     }
     public function query($sql){
         $query=mysqli_query($this->conn,$sql);
