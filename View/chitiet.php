@@ -146,8 +146,12 @@
                   <input type="number" name="amount" id="" value="1" style="text-align: center; width: 70px;">
                 </div>
                 <div class="box-btn">
-                  <button class="buy-btn"> Them vao gio</button>
-                  <button type="button"> Thanh toan</button>
+                  <a href="cartproduct.php">
+                    <button class="buy-btn"> Them vao gio</button>
+                  </a>
+                  <a href="">
+                    <button type="button"> Thanh toan</button>
+                  </a>
                 </div>
             </form>
           

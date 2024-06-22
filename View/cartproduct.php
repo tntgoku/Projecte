@@ -115,9 +115,8 @@
                   </tbody>
                 </table>
               </div>
-              <div class="btn-paypal" style="margin: auto;">
-                  <div class="cash" style="display: flex; justify-content: flex-end; margin-bottom: 10px;"><button class="btn btn-success">Thanh toan khi nhan hang</button></div>
-                  <div class="cash1" style="display: flex; justify-content: flex-end;"><button class="btn btn-success">Thanh toan bang the VNPAY</button></div>
+              <div class="btn-paypal" style="margin: auto; float: right;">
+                  <a href="" class="btn btn-success"><button type="button" class="btn btn-success">Thanh toán</button></a>
               </div>
             </form>
       </div>
