@@ -11,8 +11,8 @@ if(isset($_POST['submit'])){
 		  $amount = $_REQUEST["amount"];
 		  $discount = $_REQUEST["discount"];
 		  $uploadDir_logo = "../../img/item/"; //đg dẫn ảnh
-		  $file_tmp = isset($_FILES['img']['tmp_name']) ? $_FILES['img']['tmp_name'] : ""; //xử lí ảnh
-	      $file_name = isset($_FILES['img']['name']) ? $_FILES['img']['name'] : "";
+		  $file_tmp = isset($_FILES['img']['tmp_name']) ? $_FILES['img']['tmp_name'] : "a1.png"; //xử lí ảnh
+	      $file_name = isset($_FILES['img']['name']) ? $_FILES['img']['name'] : "a1.png";
 		  copy ( $file_tmp, $uploadDir_logo.$file_name);
 		  $sql = "INSERT INTO `product` (`id_product`, `Name`, `Type_id`, `Color`, `Size`, `Cost`, `Amount`, `Discount`, `img`) VALUES 
 		  (NULL, '$name', '$id_type', '$color', '$size', '$cost', '$amount', '$discount', '$file_name');";

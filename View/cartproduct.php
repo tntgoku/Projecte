@@ -1,3 +1,4 @@
+<?php require_once("user_UI_index.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,18 +28,31 @@
                 </div>
                 <!-- ---LOGIN--- -->
                 <div class="login">
-                  <a href="footer.html" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
+                  <a href="login.php" ><label for=""><?php echo  $user_name;?></label> </label><i class="fa-regular fa-user"></i></a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">
                     <a href="">
                       <i class="fa-solid fa-cart-shopping"></i>
-                      <span class="count_item_pr hidden-count" style="padding-left:  3px;">0</span></a>
+                      <span class="count_item_pr hidden-count" style="padding-left: 3px;"><?php echo $count_sp;?></span></a>
                       <div class="top-cart-content">
                           <div class="CartHeaderContainer" style="width: 340px;">
                             <div class="cart--empty--message" style="text-align: center;">
                                   <img src="../img/shopping-bag.png" alt="" width="80px">
-                                  <p>Không có sản phẩm nào trong giỏ hàng của bạn</p>
+                                  <p><?php // Them UI vao ho nha
+									  if ($id !="-1")
+									  {
+									   while ($row_sp = mysqli_fetch_assoc($sp) )
+									   {
+										   echo $row_sp["Name"]."\\";
+										   echo $row_sp["Color"]."\\";
+										   echo $row_sp["Size"]."\\";
+										   echo $row_sp["Cost"] * $row_sp["amount"]."K<br>";
+									   }
+									  }
+									  if($count_sp == '0') 
+										  echo "Không có sản phẩm nào trong giỏ hàng";
+									  ?></p>
                                   </div>  
                                   </div>
                                   </div>
@@ -61,7 +75,7 @@
           <div class="title d-lg-none d-block">MENU</div>
           <div class="menu-slider">
               <ul>
-                <li><a href="allproducts.html">Tất cả sản phẩm</a></li>
+                <li><a href="allproducts.php">Tất cả sản phẩm</a></li>
                 <li><a href="">Áo Thun</a></li>
                 <li><a href="">Baby Tee</a></li>
                 <li><a href="">Áo Polo</a></li>
@@ -89,34 +103,42 @@
                     </tr>
                   </thead>
                   <tbody >
+					  <?php
+					  	$sql = "SELECT cart.id_sp, product.Name, product.Color, product.Size, product.Cost,cart.amount, product.img from product inner join cart on product.id_product = cart.id_sp where cart.id_us = '$id'";
+						$sp = $data->query($sql);
+					  	while ($row = mysqli_fetch_assoc($sp))
+						{
+						?>	
                     <tr >
                       <td class="product-thumbnail">
-                        <img src="../img/item/f1.jpg" alt="Image" class="img-fluid" style="max-width: 200px;">
+                        <img src="../img/item/<?php echo $row["img"];?>" alt="Image" class="img-fluid" style="max-width: 200px;">
                       </td>
                       <td class="product-name">
-                        <h2 class="h5 text-black">Áo sơ mi cộc</h2>
+                        <h2 class="h5 text-black"><?php echo $row["Name"];?></h2>
                       </td>
-                      <td>49.00</td>
+                      <td><?php echo $row["Cost"]; ?></td>
                       <td>
                         <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
                           <div class="input-group-prepend">
                             <button class="btn btn-outline-black decrease" type="button">−</button>
                           </div>
-                          <input type="text" class="form-control text-center quantity-amount" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                          <input type="text" class="form-control text-center quantity-amount" value="<?php echo $row["amount"];?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                           <div class="input-group-append">
                             <button class="btn btn-outline-black increase" type="button">+</button>
                           </div>
                         </div>
-    
                       </td>
-                      <td>1249.00</td>
+                      <td><?php echo $row["amount"] * $row["Cost"].".000";?></td>
                       <td><a href="#" class="btn btn-black btn-sm"><i class="fa fa-trash"></i></a></td>
                     </tr>
+					  <?php
+					  }
+					  ?>
                   </tbody>
                 </table>
               </div>
               <div class="btn-paypal" style="margin: auto; float: right;">
-                  <a href="" class="btn btn-success"><button type="button" class="btn btn-success">Thanh toán</button></a>
+                  <a href="thanhtoan.php" class="btn btn-success"><button type="button" class="btn btn-success">Thanh toán</button></a>
               </div>
             </form>
       </div>

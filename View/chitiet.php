@@ -228,7 +228,7 @@
                             <ul class="icon-logo">
                               <li>
                                 <a href="https://www.facebook.com/profile.php?id=100013900096508" title="Facebook">
-                                  <img src="../img/icon/facebook.png" alt=""></a></li>
+                                  <img src="../../img/icon/facebook.png" alt=""></a></li>
                                   <li>
                                     <a href="" title="Instagram">
                                       <img src="/img/icon/instagram.png" alt=""></a></li>

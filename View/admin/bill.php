@@ -1,6 +1,6 @@
 
 <?php 
-include '/xampp/htdocs/Projecte/App/connect.php';
+include '../../App/connect.php';
 $data=new Database();
 $data->connect();
 ?>

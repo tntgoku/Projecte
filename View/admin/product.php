@@ -1,5 +1,5 @@
 <?php 
-include '/xampp/htdocs/Projecte/App/connect.php';
+include '../../App/connect.php';
 $data=new Database();
 $data->connect();
 if(isset($_POST['btn-addpro'])){
@@ -165,8 +165,8 @@ if(isset($_POST['deleted'])){
                                 <td><?PHP echo $row['Cost'] ?></td>
                                 <td><?PHP echo $row['Amount'] ?></td>
                                 <td><?PHP echo $row['Discount'] ?></td>
-                                <td><a href="update.php?id_product="><button type="button" class="btn btn-success">Sua</button></a></td>
-                                <td><a href="deleted.php?id_product="><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
+                                <td><a href="update.php?id_product=<?php echo $row["id_product"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
+                                <td><a href="deleted.php?id_product=<?php echo $row["id_product"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
                             </tr>
                         <?php
                         }

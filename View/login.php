@@ -1,14 +1,14 @@
 <?php 
 session_start(); // Start the session at the beginning of the script
 
-include '/xampp/htdocs/Projecte/App/connect.php';
+include '../App/connect.php';
 $data = new Database();
 $data->connect();
 // Code nay no ko chay
 if (isset($_POST['login'])) {
     $user = $_POST['username'];
     $pwd = $_POST['password'];
-    $pwd = md5($pwd); 
+    //$pwd = md5($pwd); 
 
     function escape_string($input) {
         return str_replace(
@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
     $user = escape_string($user);
     $pwd = escape_string($pwd);
 
-    $sql = "SELECT * FROM user WHERE Phone_Num = '$user' AND pass = '$pwd'";
+    $sql = "SELECT * FROM user WHERE Login_name = '$user' AND pass = '$pwd'";
     $result = $data->query($sql);
 
     if ($result->num_rows > 0) {
@@ -44,7 +44,7 @@ if (isset($_POST['login'])) {
 </head>
 <body>
 <main>
-    <form action="login.php" method="post">
+    <form action="login_proces.php" method="post">
         <h1>Login</h1>
         <div>
             <label for="username">Username:</label>

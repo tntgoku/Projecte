@@ -123,7 +123,7 @@ if (isset($_GET['id_product'])) {
                     </div>
                     <div class="form-group">
                         <label for="">Hình ảnh</label>
-                        <img src="/img/item/<?php echo $img;?>" alt="" width="150px">
+                        <img src="../../img/item/<?php echo $img;?>" alt="" width="150px">
                         <input type="file" width="80px" name="img">
                     </div>
                     <div class="form-group">

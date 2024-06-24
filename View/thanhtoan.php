@@ -1,3 +1,4 @@
+<?php require_once("user_UI_index.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,18 +23,18 @@
                         <div class="content-user col-md-7">
                                 <div class="title-header">
                                     <h5 class="title-layour">Thông tin nhận hàng 
-                                        <a href="" class="login-user" style="float: right;"><i class="fa-regular fa-user"></i>Đăng nhập</a>
+                                        <a href="" class="login-user" style="float: right;"><i class="fa-regular fa-user"></i><?php echo  $user_name;?></a>
                                     </h5>
                                 </div>
                                 <div class="user-infor">
                                     <div class="form-group">
                                         <label for="" name="">Họ và tên</label>
-                                        <input type="text" class="form-control" id="" aria-describedby="" placeholder="Nhập họ và tên">
+                                        <input type="text" class="form-control" id="" aria-describedby="" value="<?php echo $user_name;?>">
                                         <small id="" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group">
                                         <label for="" name="">Số điện thoại</label>
-                                        <input type="text" class="form-control" id="" aria-describedby="" placeholder="Nhập số điện thoại">
+                                        <input type="text" class="form-control" id="" aria-describedby="" value="<?php echo $user_sdt;?>">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Tỉnh/ Thành phố</label>
@@ -124,7 +125,7 @@
         </div>
         <div class="cartshopping">
             <div class="title" style="display: flex;"><h3 class="header" >Đơn hàng </h3>
-            <h3>(4 sản phẩm)</h3></div>
+            <h3>(<?php echo $count_sp;?></h3></div>
             <div class="content">
                 <div class="order-table">
                     <table class="product-table">
@@ -138,24 +139,34 @@
                         </thead>
                         <tbody>
                             <tr class="product">
+								<?php
+								$sql = "SELECT cart.id_sp, product.Name, product.Color, product.Size, product.Cost,cart.amount, product.img from product inner join cart on product.id_product = cart.id_sp where cart.id_us = '$id'";
+								$sp = $data->query($sql);
+								$total = 0;
+									while ($row = mysqli_fetch_assoc($sp)){
+										$total += ($row["Cost"] * $row["amount"]);
+								?>
                                 <td>
                                     <div class="img-pro" >
-                                        <div class="img-tile"><img src="../img/item/a1.jpg" alt="" width="50px"></div>
-                                        <span>3</span>
+                                        <div class="img-tile"><img src="../img/item/<?php echo $row["img"];?>" alt="" width="50px"></div>
+                                        <span><?php echo $row["amount"];?></span>
                                     </div>
                                 </td>
                                 <td colspan="2">
                                     <span class="product_name">
-									Áo Thun ádas
+									<?php echo $row["Name"];?>
 									</span>
                                     <br>
                                     <span class="property" style="font-size: 13px;">
-                                        Đen/M
+                                        <?php echo $row["Color"];?>/<?php echo $row["Size"];?>
                                     </span>
                                 </td>
                                 <td></td>
-                                <td><span class="cost">555.123đ</span></td>
+                                <td><span class="cost"><?php echo $row["amount"] * $row["Cost"].".000";?></span></td>
                             </tr>
+							<?php
+									}
+								?>
                         </tbody>
                     </table>
                     <div class="form-group1">
@@ -169,17 +180,17 @@
                     <div class="form-group1">
                         <div class="cost1">
                             <span>Tạm phí</span>
-                            <span>555.123đ</span>
+                            <span><?php echo $total.".000đ";?></span>
                         </div>
                         <div class="cost1">
                             <span>Phí vận chuyển</span>
-                            <span>-</span>
+                            <span>30.000</span>
                         </div>
                     </div>
                     <div class="form-group1">
                         <div class="cost1">
                             <span>Tổng cộng</span>
-                            <span style="font-weight: bold;">555.123đ</span>
+                            <span style="font-weight: bold;"><?php echo $total + 30 .".000đ";?></span>
                         </div>
                         <div class="btn-order">
                             <a href="cartproduct.php">

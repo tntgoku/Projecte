@@ -1,6 +1,3 @@
-
-
-
 <!-- <?php 
 
 include "../../App/connect.php";
@@ -127,15 +124,7 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 				<td colspan="2" >Chức năng</td></tr>
 			</thead>
 			<tbody>
-                <tr style="text-align: center;">
-                    <td>ID</td>
-                    <td>Tên bài viết</td>
-                    <td>Loại bài viết</td>
-                    <td>Nội dụng</td>
-                    <td><button type="button" class="btn btn-success">Sửa</button></td>
-                    <td><button type="button" class="btn btn-danger">Xóa</button></td>
-                </tr>
-				<!-- <?php 
+				 <?php 
 				$i=1;
 				$sql= "SELECT news.id_News,news.Name,news_list.Name_type,news.Content FROM news inner JOIN news_list on news_list.Type_id=news.Type_id";
 				
@@ -147,12 +136,12 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 						<td><?php echo $row['Name']?></td>
 						<td><?php echo $row['Name_type']?></td>
 						<td><?php echo $row['Content']?></td>
-						<td><a href="update.php?id_product="><button type="button" class="btn btn-success">Sua</button></a></td>
-                                <td><a href="deleted.php?id_product="><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
+						<td><a href="update.php?id_product=<?php echo $row["id_news"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
+                        <td><a href="deleted.php?id_product=<?php echo $row["id_news"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
 					</tr>
 				<?php
 				}
-				?> -->
+				?>
 			</tbody>
 		</table>
 		

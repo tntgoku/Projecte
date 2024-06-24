@@ -2,5 +2,5 @@
 define('SEVERNAME','localhost');
 define('USERNAME','root');
 define('PASSWORD','');
-define('DATABASE','store');
+define('DATABASE','project_web_ban_hang');
 ?>

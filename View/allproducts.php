@@ -1,3 +1,4 @@
+<?php require_once("user_UI_index.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,19 +23,32 @@
                 </form>
                 </div>
                 <!-- ---LOGIN--- -->
-                <div class="login">
-                  <a href="login.php" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
+                <div class="./View/login">
+                  <a href="login.php" ><label for=""><?php echo  $user_name;?></label> </label><i class="fa-regular fa-user"></i></a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">
-                    <a href="cartshopping.php">
+                    <a href="cartproduct.php">
                       <i class="fa-solid fa-cart-shopping"></i>
-                      <span class="count_item_pr hidden-count" style="padding-left:  3px;">0</span></a>
+                      <span class="count_item_pr hidden-count" style="padding-left:  3px;"><?php echo $count_sp;?></span></a>
                       <div class="top-cart-content">
                           <div class="CartHeaderContainer" style="width: 340px;">
                             <div class="cart--empty--message" style="text-align: center;">
-                                  <img src="/Projecte/img/shopping-bag.png" alt="" width="80px">
-                                  <p>Không có sản phẩm nào trong giỏ hàng của bạn</p>
+                                  <img src="../img/shopping-bag.png" alt="" width="80px">
+                                  <p><?php // Them UI vao ho nha
+									  if ($id !="-1")
+									  {
+									   while ($row_sp = mysqli_fetch_assoc($sp) )
+									   {
+										   echo $row_sp["Name"]."\\";
+										   echo $row_sp["Color"]."\\";
+										   echo $row_sp["Size"]."\\";
+										   echo $row_sp["Cost"] * $row_sp["amount"]."K<br>";
+									   }
+									  }
+									  if($count_sp == '0') 
+										  echo "Không có sản phẩm nào trong giỏ hàng";
+									  ?></p>
                                   </div>  
                                   </div>
                                   </div>

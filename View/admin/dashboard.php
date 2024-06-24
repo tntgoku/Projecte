@@ -1,6 +1,6 @@
 
 <?php 
-include '/xampp/htdocs/Projecte/App/connect.php';
+include '../../App/connect.php';
 $data=new Database();
 $data->connect();
 ?>
@@ -67,7 +67,7 @@ $data->connect();
                 </a>
             </li>
             <li>
-                <a href="dashboard.html">
+                <a href="customer.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
@@ -119,7 +119,7 @@ $data->connect();
                     <div class="number" style="font-size: 20px; font-weight: 500; margin-top: 5px;">
                     <?php 
                         $month=6;
-                        $sql="select sum(Total) as tong from bill where month(ngtao) ='$month'";
+                        $sql="select sum(Total) as tong from bill "; //where month(ngtao) ='$month'
                         $toltal=$data->query($sql);
                         $result1=$toltal->fetch_assoc();
                                 echo $result1['tong'];
@@ -136,7 +136,7 @@ $data->connect();
                     <div class="box_topic"><span>Hoa don</span></div>
                     <div class="number" style="font-size: 35px; font-weight: 500; margin-top: 5px;">
                         <?php
-                        $sql="select count(id_Bill) as tong from bill where month(ngtao)= '$month'";
+                        $sql="select count(id_Bill) as tong from bill ";//where month(ngtao)= '$month'
                         $truyvan=$data->query($sql);
                         $result= $truyvan->fetch_assoc();
                         echo $result['tong'];
@@ -154,7 +154,7 @@ $data->connect();
                     <div class="number" style="font-size: 35px; font-weight: 500; margin-top: 5px;">
                         <?php 
                         $date="2024-6-17";
-                        $sql="select count(*) as tong from bill where ngtao ='$date'";
+                        $sql="select count(*) as tong from bill ";//where ngtao ='$date'
                         $toltal=$data->query($sql);
                         $result=$toltal->fetch_assoc();
                                 echo $result['tong'];

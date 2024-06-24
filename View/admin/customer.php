@@ -1,6 +1,3 @@
-
-
-
 <!-- <?php 
 
 include "../../App/connect.php";
@@ -123,42 +120,32 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 					<!-- <td colspan="6" style="text-align: center; font-size: 32px; font-weight: 600; "> Danh sách các bài viết</td> -->
 				</tr>
 				<tr style="text-align: center;"> <td>ID</td>
-                    <td>Mã KH</td>
                     <td>Tên KH</td>
                     <td>SĐT</td>
-                    <td>Email</td>
                     <td>Địa chỉ</td>
+                    <td>Tên đăng nhập</td>
 				<td colspan="2" >Chức năng</td></tr>
 			</thead>
 			<tbody>
-                <tr style="text-align: center;">
-                    <td>ID</td>
-                    <td>Mã KH</td>
-                    <td>Tên KH</td>
-                    <td>SĐT</td>
-                    <td>Email</td>
-                    <td>Địa chỉ</td>
-                    <td><button type="button" class="btn btn-success">Sửa</button></td>
-                    <td><button type="button" class="btn btn-danger">Xóa</button></td>
-                </tr>
-				<!-- <?php 
+				 <?php 
 				$i=1;
-				$sql= "SELECT news.id_News,news.Name,news_list.Name_type,news.Content FROM news inner JOIN news_list on news_list.Type_id=news.Type_id";
+				$sql= "SELECT * from User";
 				
 				$result=$data->query($sql);
 				while($row=mysqli_fetch_assoc($result)){
 					?>
 					<tr>
-						<td><?php echo $row['id_News']?></td>
+						<td><?php echo $row['id_user']?></td>
 						<td><?php echo $row['Name']?></td>
-						<td><?php echo $row['Name_type']?></td>
-						<td><?php echo $row['Content']?></td>
-						<td><a href="update.php?id_product="><button type="button" class="btn btn-success">Sua</button></a></td>
-                                <td><a href="deleted.php?id_product="><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
+						<td><?php echo $row['Phone_Num']?></td>
+						<td><?php echo $row['Address']?></td>
+						<td><?php echo $row['Login_name']?></td>
+						<td><a href="update.php?id_product=<?php echo $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
+                        <td><a href="deleted.php?id_product=<?php echo $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
 					</tr>
 				<?php
 				}
-				?> -->
+				?>
 			</tbody>
 		</table>
 		
