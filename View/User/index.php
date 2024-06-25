@@ -23,7 +23,7 @@
                 </div>
                 <!-- ---LOGIN--- -->
                 <div class="login">
-                  <a href="login.php" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
+                  <a href="../../View/login.php" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">

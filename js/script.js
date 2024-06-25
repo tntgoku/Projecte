@@ -19,3 +19,14 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
    let add=document.querySelectorAll('')
 });
+
+document.addEventListener("DOMContentLoaded",function(){
+    var quantityInput = document.getElementById('quantity');
+    var cost = parseFloat(quantityInput.getAttribute('data-cost'));
+
+    quantityInput.addEventListener('input', function() {
+        var quantity = parseInt(this.value);
+        var totalCost = quantity * cost;
+        document.getElementById('price').innerText = totalCost.toLocaleString();
+    });
+})

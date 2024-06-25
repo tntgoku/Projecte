@@ -1,4 +1,40 @@
-<?php require_once("user_UI_index.php");?>
+<?php require_once("user_UI_index.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  // Check if it's a checkout request
+  if (isset($_POST['checkout'])) {
+      // Handle checkout logic here, such as redirecting to payment gateway or processing the order
+      // For demonstration, let's assume you want to display the cart items after checkout
+      echo "<h1>Order Summary</h1>";
+      foreach ($_SESSION['cart'] as $key => $product) {
+          $quantity = isset($_POST['quantity'][$key]) ? $_POST['quantity'][$key] : $product['Quantity'];
+          echo "<p>Product: " . $product['Name'] . ", Quantity: " . $quantity . "</p>";
+      }
+      // You can perform additional processing here, such as updating database, sending confirmation emails, etc.
+      exit; // Stop further execution after displaying order summary
+  }
+
+  // Check if it's a delete request
+  if (isset($_POST['product_key'])) {
+      $keyToDelete = $_POST['product_key'];
+      unset($_SESSION['cart'][$keyToDelete]); // Remove product from cart based on product key
+      // Optionally, you can redirect back to the cart page or refresh the current page
+  }
+}
+// Assume $data is your database connection
+$id = isset($_SESSION['user_id']); // Assuming user ID is stored in session
+print_r($id); 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Update the session cart quantities based on POST data
+    if (isset($_POST['quantity']) && is_array($_POST['quantity'])) {
+        foreach ($_POST['quantity'] as $key => $quantity) {
+            if (isset($_SESSION['cart'][$key])) {
+                $_SESSION['cart'][$key]['Quantity'] = $quantity;
+            }
+        }
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,57 +126,59 @@
     <div class="container">
       <div class="row md-5">
       <form class="col-md-12" method="post">
-              <div class="site-blocks-table">
-                <table class="table" >
-                  <thead >
-                    <tr>
-                      <th class="product-thumbnail">Sản Phẩm</th>
-                      <th class="product-name">Tên Sản Phẩm</th>
-                      <th class="product-price">Giá</th>
-                      <th class="product-quantity">Số Lượng</th>
-                      <th class="product-total">Tổng </th>
-                      <th class="product-remove">Thao tác</th>
-                    </tr>
-                  </thead>
-                  <tbody >
-					  <?php
-					  	$sql = "SELECT cart.id_sp, product.Name, product.Color, product.Size, product.Cost,cart.amount, product.img from product inner join cart on product.id_product = cart.id_sp where cart.id_us = '$id'";
-						$sp = $data->query($sql);
-					  	while ($row = mysqli_fetch_assoc($sp))
-						{
-						?>	
-                    <tr >
-                      <td class="product-thumbnail">
-                        <img src="../img/item/<?php echo $row["img"];?>" alt="Image" class="img-fluid" style="max-width: 200px;">
-                      </td>
-                      <td class="product-name">
-                        <h2 class="h5 text-black"><?php echo $row["Name"];?></h2>
-                      </td>
-                      <td><?php echo $row["Cost"]; ?></td>
-                      <td>
-                        <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
-                          <div class="input-group-prepend">
-                            <button class="btn btn-outline-black decrease" type="button">−</button>
-                          </div>
-                          <input type="text" class="form-control text-center quantity-amount" value="<?php echo $row["amount"];?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-black increase" type="button">+</button>
-                          </div>
-                        </div>
-                      </td>
-                      <td><?php echo $row["amount"] * $row["Cost"].".000";?></td>
-                      <td><a href="#" class="btn btn-black btn-sm"><i class="fa fa-trash"></i></a></td>
-                    </tr>
-					  <?php
-					  }
-					  ?>
-                  </tbody>
-                </table>
-              </div>
-              <div class="btn-paypal" style="margin: auto; float: right;">
-                  <a href="thanhtoan.php" class="btn btn-success"><button type="button" class="btn btn-success">Thanh toán</button></a>
-              </div>
-            </form>
+    <div class="site-blocks-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="product-thumbnail">Sản Phẩm</th>
+                    <th class="product-name">Tên Sản Phẩm</th>
+                    <th class="product-price">Giá</th>
+                    <th class="product-quantity">Số Lượng</th>
+                    <th class="product-total">Tổng</th>
+                    <th class="product-remove">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+               if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['payment'])) {
+                   // Lấy dữ liệu giỏ hàng từ session
+                   $cart = $_SESSION['cart'] ?? [];
+                   if (!empty($cart)) {
+                    $total=0;
+
+                    foreach ($cart as $item) {
+                    echo '<tr>';
+                    echo '<td class="product-thumbnail"><img src="../img/item/' . $item["img"] . '" alt="Image" class="img-fluid" style="max-width: 200px;"></td>';
+                    echo '<td class="product-name"><h2 class="h5 text-black">' . $item["Name"] . '</h2></td>';
+                    echo '<td>' . $item["Cost"] . '</td>';
+                    echo '<td>
+                            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-black decrease" type="button">−</button>
+                                </div>
+                                <input type="text" class="form-control text-center quantity-amount" value="' . $item["Quantity"] . '" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-black increase" type="button">+</button>
+                                </div>
+                            </div>
+                          </td>';
+                          $total+= $item['Quantity']*$item['Cost'];
+                          echo '<td>' . $total . '</td>';
+                    echo '<td><a href="#" class="btn btn-black btn-sm"><i class="fa fa-trash"></i></a></td>';
+                    echo '</tr>';
+                }
+              }}
+
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn-paypal" style="margin: auto; float: right;">
+        <a href="thanhtoan.php" class="btn btn-success">
+            <button type="button" class="btn btn-success">Thanh toán</button>
+        </a>
+    </div>
+</form>
       </div>
     </div>
     

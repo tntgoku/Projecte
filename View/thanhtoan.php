@@ -192,12 +192,13 @@
                             <span>Tổng cộng</span>
                             <span style="font-weight: bold;"><?php echo $total + 30 .".000đ";?></span>
                         </div>
-                        <div class="btn-order">
+                        <form class="btn-order" method="post">
+                            
                             <a href="cartproduct.php">
                             <i class="fa-solid fa-chevron-left"></i>Quay lại giỏ hàng
                             </a>
                             <button type="submit" class="btn btn-success"> Đặt hàng</button>
-                        </div>
+                                </form>
                     </div>
                 </div>
             </div>

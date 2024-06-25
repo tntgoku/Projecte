@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+      .user-login label{
+        cursor: pointer;
+      }
+    </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -22,8 +27,8 @@
                 </form>
                 </div>
                 <!-- ---LOGIN--- -->
-                <div class="./View/login">
-                  <a href="login.php" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
+                <div class="user-login">
+                  <a href="login.php" ><label for="" >Đăng nhập</label><i class="fa-regular fa-user"></i></a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">

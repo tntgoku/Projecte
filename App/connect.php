@@ -41,7 +41,35 @@ class Database{
     }
 }
 $db =new Database();
-$db->connect()
+$db->connect();
+class Product{
+    public $id;
+    public $name;
+    public $color;
+    public $cost;
+    public $discount;
+    public $img;
+}
+class Cart{
+    private $cartItems; 
+    public function addToCart($productId) {
+        // Example: In a real scenario, you would fetch product details from the database
+        // Replace with your actual database query
+        $product = $this->getProductById($productId);
 
+        if ($product) {
+            $this->cartItems[] = $product->id;
+            return true;
+        }
+        return false;
+    }
+    private function getProductById($productId) {
+        // Example: Fetch product details from database based on $productId
+        // Replace with your actual database query
+        // For demonstration, creating a dummy product
+        $dummyProduct = new Product($productId, "Product $productId", "Color", 10, 0, "img.jpg");
+        return $dummyProduct;
+    }
+}
 
 ?>

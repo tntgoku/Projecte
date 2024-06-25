@@ -8,7 +8,6 @@ $data->connect();
 if (isset($_POST['login'])) {
     $user = $_POST['username'];
     $pwd = $_POST['password'];
-    //$pwd = md5($pwd); 
 
     function escape_string($input) {
         return str_replace(
@@ -27,6 +26,7 @@ if (isset($_POST['login'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $_SESSION['id_user'] = $row['id_user'];
+        $_SESSION['role'] = $row['role'];
         echo $_SESSION['id_user']; // Output the session id_user for debugging
     } else {
         echo "Invalid username or password.";

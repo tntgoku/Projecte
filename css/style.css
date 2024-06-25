@@ -62,14 +62,14 @@ nav h1{
     border: 1px solid var(--search-color--);
     border-radius: 10px;
 }
-.header-top form{
+.header-top .search-box .search-group{
     position: relative;
     display: flex;
      width: 100%;
     min-width: 400px;
     height: 100%;
 }
-.header-top form input{
+.header-top .search-group input{
     background: var(--search-color--);
     margin: 0;
     outline: none;
@@ -80,7 +80,7 @@ nav h1{
     font-family: "Roboto", sans-serif;
 
 }
-.header-top form button{
+.header-top .search-box button{
     width: 40px;
     border: none;
     margin: 1px;
@@ -216,6 +216,8 @@ ddd
     transition: all .4s ease;
 }
  .product-img img{
+    height: 280px;
+    object-fit: contain;
     transition: all .4s ease;
 }
 .product-img:hover .selectionColor img{
@@ -261,17 +263,12 @@ ddd
 }
 
 .product-img .main-img {
+
     transition: opacity 2s ease;
 }
 .product-img .main-img.hidden {
     opacity: 0;
 }
-
-
-
-
-
-
  .product-items{
     margin-bottom: 40px;
 }
@@ -614,3 +611,7 @@ form label{
 margin-left: 25px;
 margin-top: 10px;
 }
+
+
+
+

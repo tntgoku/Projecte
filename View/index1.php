@@ -1,4 +1,75 @@
-<?php require_once("user_UI_index.php"); ?>
+<?php require_once("user_UI_index.php"); 
+?>
+<?php
+$data = new Database();
+$data->connect();
+$sql= "SELECT * FROM product";
+ $result=$data->query($sql);
+ $product=array();
+  if($result->num_rows>0){
+    while($row=$result->fetch_assoc()){
+      $products[] = $row;
+    }
+  }
+  $_SESSION['products'] = $products;
+  $cartProducts = array();
+  $totalQuantity = 0;
+  foreach ($_SESSION['cart'] as $key => $product) {
+    // Ensure Quantity is set and numeric
+    if (!isset($product['Quantity']) || !is_numeric($product['Quantity'])) {
+        $_SESSION['cart'][$key]['Quantity'] = 1; // Default to 1 if not set or not numeric
+    }
+    $quantity = $_SESSION['cart'][$key]['Quantity'];
+    $totalQuantity += $quantity; }
+  function addToCart($productId, &$cartProducts) {
+      global $data; // Assuming $data is your Database object
+      
+      $sql = "SELECT * FROM product WHERE id_product = $productId";
+      $result = $data->query($sql);
+      
+      if ($result->num_rows > 0) {
+          $row = $result->fetch_assoc();
+          $cartProducts[] = $row;
+      }
+      session_start();
+    if(!isset($_SESSION['cartshoping']))
+    $_SESSION['cartshopping']=[];
+      if(isset($_POST['payment'])&& ($_POST['payment'])){
+        $img1=$_POST[''];
+      }
+  }
+  
+  if (isset($_REQUEST['idproduct'])) {
+      if (is_array($_REQUEST['idproduct'])) {
+          foreach ($_REQUEST['idproduct'] as $productId) {
+              addToCart($productId, $_SESSION['cart']);
+          }
+      } else {
+          $productId = $_REQUEST['idproduct'];
+          addToCart($productId, $_SESSION['cart']);
+      }
+  }
+  echo "du lieu cart <br>";
+  print_r($_SESSION['cart'] );
+  if (isset($_POST['key']) && isset($_POST['quantity'])) {
+    $key = $_POST['key'];
+    $quantity = $_POST['quantity'];
+
+    if (isset($_SESSION['cart'][$key])) {
+        $_SESSION['cart'][$key]['Quantity'] = $quantity;
+    }
+}
+
+if (isset($_POST['product_key'])) {
+  $key = $_POST['product_key'];
+  unset($_SESSION['cart'][$key]);
+  header('Location: index1.php'); // Redirect back to the cart page
+  exit();
+}
+
+
+  ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,41 +88,145 @@
         <div class="topbar-right">
           <!-- ----SEARCH-BOX--- -->
           <div class="search-box">
-            <form action="get" enctype="application/x-www-form-urlencoded">
+            <form action="get" enctype="application/x-www-form-urlencoded" class="search-group">
               <input type="text" name="search" id="search-input" placeholder="Tìm kiếm sản phẩm....">
               <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 </div>
                 <!-- ---LOGIN--- -->
-                <div class="./View/login">
-                  <a href="login.php" ><label for=""><?php echo  $user_name;?></label> </label><i class="fa-regular fa-user"></i></a>
+                <div class="./View/login" style="margin-top: 6px;">
+                  <a href="infor-user.php"  style="cursor: pointer;">
+                    <label for="" style="cursor:pointer;"><?php echo  $user_name;
+                                 
+                    
+                    
+                    
+                    ?></label> 
+                    <i class="fa-regular fa-user"></i>
+                  </a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">
-                    <a href="cartproduct.php">
+                    <a href="cartproduct.php" id="cartLink">
                       <i class="fa-solid fa-cart-shopping"></i>
-                      <span class="count_item_pr hidden-count" style="padding-left:  3px;"><?php echo $count_sp;?></span></a>
+                      <span class="count_item_pr hidden-count" style="padding-left:  3px;"><?php echo $totalQuantity;?></span></a>
                       <div class="top-cart-content">
                           <div class="CartHeaderContainer" style="width: 340px;">
                             <div class="cart--empty--message" style="text-align: center;">
-                                  <img src="../img/shopping-bag.png" alt="" width="80px">
-                                  <p><?php // Them UI vao ho nha
-									  if ($id !="-1")
-									  {
-									   while ($row_sp = mysqli_fetch_assoc($sp) )
-									   {
-										   echo $row_sp["Name"]."\\";
-										   echo $row_sp["Color"]."\\";
-										   echo $row_sp["Size"]."\\";
-										   echo $row_sp["Cost"] * $row_sp["amount"]."K<br>";
-									   }
-									  }
-									  if($count_sp == '0') 
-										  echo "Không có sản phẩm nào trong giỏ hàng";
-									  ?></p>
+                                <?php   
+                                  // Them UI vao ho nha
+                                  $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+                                  if($count == 0) 
+                                  echo '<img src="../img/shopping-bag.png" alt="" width="80px">
+                                  <p>Không có sản phẩm nào trong giỏ hàng</p>';        
+                                  else{
+                                    foreach ($_SESSION['cart'] as $key => $product) {
+                                      if (!isset($product['Quantity'])) {
+                                        $_SESSION['cart'][$key]['Quantity'] = 0;
+                                        $key=1;
+                                    }
+                                    $quantity = $_SESSION['cart'][$key]['Quantity'];
+                                      echo '<div class="productcart">
+                                                <div class="header-cart">
+                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="' . $product['Name'] . '>
+                                                "<p id="cont" name="namepro">' . $product['Name'] . '</p>'.
+                                                  '</div>'
+                                      ;
+                                      echo '
+                                      <div class="gop" style="display:flex; flex-direction: column;">
+                                      <div class="body-cart">';
+
+                                      echo '<p id="cont" name="color">Màu sắc:<br> ' . $product['Color'] . "/".$product['Size'].'</p>';
+                                      echo '<input type="hidden" value="'.$product['id_product'].'name="id"';
+                                      echo '<input type="number" class="quantity" id="quantity-' . $key . '" name="quantity[' . $key . ']" min="1" max="55" value="'.$quantity.'" data-cost="' . $product['Cost'] . '
+                                      " data-key="' . $key . '">';
+                                      echo '<p id="conti">Giá: <span class="price" id="price-' . $key . '" style="color:#f81f1f;">' . 
+                                              $product['Cost'] . '</span> đ</p>
+                                              <form method="post" action="index1.php">
+                                      <input type="hidden" name="product_key" value="' . $key . '">
+  <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
+</form>
+                                              </div>
+                                              ';
+                                      echo '<form method="post" action="cartproduct.php" style="float:right";>
+                                      <input type="hidden" name="product_key" value="' . $key . '">
+  <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;">Thanh Toán</button>
+</form>
+</div>
+';
+                                      // Thêm các thông tin khác của sản phẩm nếu cần
+                                      echo '<style>
+                                      .productcart {
+                                        display:flex;
+                                            align-items: center;
+
+                                      } 
+                                      .productcart img{
+                                        object-fit:contain;
+                                        width:90px;
+                                      }
+                                      .header-cart #cont{
+                                          font-weight:bold;
+                                        }
+                                        .body-cart{
+                                          display: flex;
+                                          margin-left:15px;
+                                      }
+                                      .productcart #cont{
+                                      font-size:10px;
+                                      }
+                                      .productcart #conti{
+                                      font-size:10px;
+                                      color: #f81f1f;
+                                      }
+                                      input#quantity-'. $key.'{
+                                      margin-top:17px;
+                                        height: 15px;
+                                        width: 45px;
+                                      }
+                                      </style>'
+                                      .'<script>
+                                      document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".quantity").forEach(function(input) {
+        var cost = parseFloat(input.getAttribute("data-cost"));
+        var key = input.getAttribute("data-key");
+
+        input.addEventListener("input", function() {
+            var quantity = parseInt(this.value);
+            var totalCost = quantity * cost;
+            document.getElementById("price-" + key).innerText = totalCost.toLocaleString();
+            updateCart(key, quantity); // Function to update cart in session
+        });
+    });
+    // document.querySelector(".btn-success").addEventListener("click", function(event) {
+    //         event.preventDefault(); // Prevent default form submission
+    //         document.querySelector("form").submit(); // Submit the form
+    //     });
+});
+
+function updateCart(key, quantity) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "index1.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("key=" + key + "&quantity=" + quantity);
+}
+   document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("cartLink").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent default action
+        document.getElementById("cartForm").submit(); // Submit the form
+    })
+});
+                                      </script>'
+                                      ;
+                                      echo '</div>';
+                                  }
+                                  
+                                  }   
+									  ?>
                                   </div>  
                                   </div>
                                   </div>
+                                  
                                   </div>
                                   </div>
       </div>
@@ -108,21 +283,32 @@
           <h2 class="cata-title">Áo Thun</h2>
           <div class="section-list">
             <!-- Items-1 -->
+             <!-- doan nay la lay het thong tin san pham -->
+             <?php 
+              if (!empty($_SESSION['products'])) {
+        reset($_SESSION['products']); // Reset the array pointer
+        while ($product = current($_SESSION['products'])) {
+            ?>
             <div class="section-item">
               <div class="product-lists-item">
                 <div class="product-items">
                   <div class="product-block">
                     <!-- Ảnh sản phẩm -->
                     <div class="product-img" style="position: relative; text-align: center;">
-                      <span class="discount">-45%</span>
+                      <span class="discount">
+                      <!-- product.Discount   -->
+                      <?= $product['Discount'] ?>%</span>
                       <div class="btn-action">
                         <div class="action-cart" >
-                        <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;"><i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                              <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;">
+                              <i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
                         </div>
                       </div>
                       <a href="chitiet.php">
-                        <img src="../img/item/AoPolo.png" width="230px" alt="" class="main-img">
-                    </a></div>
+                        <!-- product.img -->
+                        <img src="../img/item/<?= $product['img'] ?>" width="230px" alt="" class="main-img">
+                    </a>
+                  </div>
                   <div class="product-info">
                               <div class="product-detail clearfix">
                                 <!-- Màu áo -->
@@ -138,28 +324,38 @@
                                       </div>
                                       <!-- Tên sản phẩm -->
                                       <div class="box-pro-detail">
-                                <h3 class="pro-name">
-                                  <a href="allproducts.php" class="tp_product_name">
-                                    Áo sơ mi cộc
+                                        <a href="allproducts.php" class="tp_product_name">
+                                <h5 class="pro-name">
+                                    <!-- product.Name -->
+                                    <?= $product['Name'] ?>
+                                  </h5>
                                     </a>
-                                    </h3>
                                     </div>
                                     <!-- Giá sản phẩm -->
                                     <div class="box-pro-prices">
                                 <p class="pro-price highlight tp_product_price">
-                                  <span>139,000₫</span></p>
+                                  <span>
+                                  <!-- product.cost -->
+                                  <?= $product['Cost'] ?>
+                                  </span></p>
                                   </div>
                                   </div>
                   </div>
                   <div class="product">
-                    <a href="cartproduct.php">
-                      <button type="button" class="btn btn-primary btn-lg">Them vao gio hang</button>
-                    </a>
+                    <form action="index1.php" method="post" enctype="application/x-www-form-urlencoded">
+                      <input type="hidden" name="idproduct[]" value="<?= $product['id_product']?>">
+                      <button type="submit" name="addcart" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                    </form>
                   </div>
                   </div>
                 </div>
               </div>
             </div>
+            <?php 
+            next($_SESSION['products']);
+            }
+            }
+            ?>
                     <!-- Xem them -->
                     <div class="section-item">
                       <div class="more">
