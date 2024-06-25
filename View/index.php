@@ -1,3 +1,4 @@
+<?php require_once("user_UI_index.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +29,7 @@
                 </div>
                 <!-- ---LOGIN--- -->
                 <div class="user-login">
-                  <a href="login.php" ><label for="" >Đăng nhập</label><i class="fa-regular fa-user"></i></a>
+                  <a href="login.php"><label for="" >Đăng nhập</label><i class="fa-regular fa-user"></i></a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">

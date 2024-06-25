@@ -49,7 +49,7 @@
         <ul class="nav-list">
           <li><a href="index1.php">TRANG CHỦ</a></li>
           <li><a href="change.php">CHÍNH SÁCH ĐỔI TRẢ</a></li>
-          <li><a href="index.php">
+          <li><a href="index1.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
             <li><a href="size.php">BẢNG SIZE</a></li>
             <li><a href="store.php">HỆ THỐNG CỬA HÀNG</a></li>

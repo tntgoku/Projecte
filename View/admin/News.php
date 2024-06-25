@@ -1,31 +1,8 @@
-<!-- <?php 
-
+<?php
 include "../../App/connect.php";
 $data=new Database();
 $data->connect();
-if(isset($_POST["name_news"]) && $_POST["name_news"])
-{
-	$name = $_POST["name_news"];
-	$sql = "INSERT INTO `news_list` (`Type_id`, `Name_type`) VALUES (NULL, '$name');";
-	mysqli_query($conn,$sql);
-}
-// Sua sp
-if (isset($_POST["name_news_sua"]) && $_POST["name_news_sua"] )
-{
-  $id = $_REQUEST["id"];
-  $name = $_REQUEST["name_news_sua"];
-  $sql = "UPDATE `news_list` SET `Name_type` = '$name' WHERE `news_list`.`Type_id` = $id;";
-  mysqli_query($conn,$sql);
-}
-// Xoa sp
-if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
-{
-  $id = $_REQUEST["id_xoa"];
-  $sql = "DELETE FROM `news_list` WHERE `Type_id` = $id;";
-  mysqli_query($conn,$sql);
-}
-?> -->
-
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +42,7 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
                 </a>
             </li>
             <li>
-                <a href="dashboard.php">
+                <a href="dcustomer.php">
                     <img src="../../img/icon/dashboard.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
@@ -107,7 +84,7 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 		<h2>Quản lý bài viết</h2>
         <div class="btn-add" style=" display: flex; justify-content:flex-start; gap: 30px; margin-left: 5px;">
             <div class="add-newsl" style="margin: 0 15px;">
-                <button type="button" class="btn btn-primary">Thêm bài viết mới</button>
+            <a href = "addnews.php"><button type="button" class="btn btn-primary">Thêm bài viết mới</button></a>
             </div>
             <div class="add-news"></div>
         </div>
@@ -136,8 +113,8 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 						<td><?php echo $row['Name']?></td>
 						<td><?php echo $row['Name_type']?></td>
 						<td><?php echo $row['Content']?></td>
-						<td><a href="update.php?id_product=<?php echo $row["id_news"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
-                        <td><a href="deleted.php?id_product=<?php echo $row["id_news"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
+						<td><a href="addnews.php?id_add=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
+                        <td><a href="deleted_new.php?id_del=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
 					</tr>
 				<?php
 				}

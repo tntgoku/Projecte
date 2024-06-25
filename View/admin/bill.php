@@ -44,7 +44,7 @@ $data->connect();
                 </a>
             </li>
             <li>
-                <a href="dashboard.html">
+                <a href="customer.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
