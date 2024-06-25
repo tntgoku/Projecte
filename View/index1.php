@@ -14,6 +14,8 @@ $sql= "SELECT * FROM product";
   $_SESSION['products'] = $products;
   $cartProducts = array();
   $totalQuantity = 0;
+
+  // --- daon nay ne----
   foreach ($_SESSION['cart'] as $key => $product) {
     // Ensure Quantity is set and numeric
     if (!isset($product['Quantity']) || !is_numeric($product['Quantity'])) {
@@ -123,9 +125,9 @@ if (isset($_POST['product_key'])) {
                                     foreach ($_SESSION['cart'] as $key => $product) {
                                       if (!isset($product['Quantity'])) {
                                         $_SESSION['cart'][$key]['Quantity'] = 0;
+                                        $quantity = $_SESSION['cart'][$key]['Quantity'];
                                         $key=1;
                                     }
-                                    $quantity = $_SESSION['cart'][$key]['Quantity'];
                                       echo '<div class="productcart">
                                                 <div class="header-cart">
                                                   <img src="../img/item/' . $product['img'] . '"name="img" alt="' . $product['Name'] . '>
@@ -148,10 +150,7 @@ if (isset($_POST['product_key'])) {
 </form>
                                               </div>
                                               ';
-                                      echo '<form method="post" action="cartproduct.php" style="float:right";>
-                                      <input type="hidden" name="product_key" value="' . $key . '">
-  <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;">Thanh Toán</button>
-</form>
+                                      echo '
 </div>
 ';
                                       // Thêm các thông tin khác của sản phẩm nếu cần
@@ -220,6 +219,10 @@ function updateCart(key, quantity) {
                                       ;
                                       echo '</div>';
                                   }
+                                  echo '<form method="post" action="cartproduct.php" style="float:right";>
+                                      <input type="hidden" name="product_key" value="' . $key . '">
+  <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;" value="Thanh Toán">
+</form>';
                                   
                                   }   
 									  ?>
