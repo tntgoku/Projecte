@@ -83,7 +83,12 @@ if (isset($_POST['product_key'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/reponse.css">
     <title>CloSet</title>
-    <style>#box {
+    <style>
+      .hidden {
+    display: none;
+}
+
+#box {
     width: 160px;
     height: 120px;
     position: absolute;
@@ -116,7 +121,7 @@ if (isset($_POST['product_key'])) {
 #list-itema #itema:hover a{
     color: #126964;
 }
-</style>
+
     </style>
     </head>
     <body>
@@ -130,10 +135,10 @@ if (isset($_POST['product_key'])) {
                 </form>
                 </div>
                 <!-- ---LOGIN--- -->
-                <div class="./View/login" style="margin-top: 6px;">
+                <div class="./View/" style="margin-top: 6px;">
                     <?php 
                             if(isset($_SESSION['Name']) && ($_SESSION['Name'] !='') ){ echo'<div class="login">
-                      <label for="">'.$_SESSION['Name'].'<a href="../View/User/changuser.php"> 
+                      <label for="">'.$_SESSION['Name'].'<a href="Projecte/View/User/changuser.php"> 
                           <i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a>
                       </label>
                       <div id="box">

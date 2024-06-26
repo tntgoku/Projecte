@@ -1,30 +1,27 @@
-<!-- <?php 
+ <?php 
 
 include "../../App/connect.php";
 $data=new Database();
 $data->connect();
-if(isset($_POST["name_news"]) && $_POST["name_news"])
+if (isset($_REQUEST["id_add"]))
 {
-	$name = $_POST["name_news"];
-	$sql = "INSERT INTO `news_list` (`Type_id`, `Name_type`) VALUES (NULL, '$name');";
-	mysqli_query($conn,$sql);
+    $tittle = "Sửa bài viết";
+    $id = $_REQUEST["id_add"]; 
+    $sql = "SELECT * from news where id_News = '$id'";
+    $row = mysqli_fetch_assoc($data->query($sql));
+    $name = $row["Name"];
+    $type = $row["Type_id"];
+    $content = $row["Content"];
 }
-// Sua sp
-if (isset($_POST["name_news_sua"]) && $_POST["name_news_sua"] )
+else 
 {
-  $id = $_REQUEST["id"];
-  $name = $_REQUEST["name_news_sua"];
-  $sql = "UPDATE `news_list` SET `Name_type` = '$name' WHERE `news_list`.`Type_id` = $id;";
-  mysqli_query($conn,$sql);
+    $tittle = "Thêm bài viết";
+    $id ="";
+    $name = "";
+    $type = "";
+    $content = "";
 }
-// Xoa sp
-if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
-{
-  $id = $_REQUEST["id_xoa"];
-  $sql = "DELETE FROM `news_list` WHERE `Type_id` = $id;";
-  mysqli_query($conn,$sql);
-}
-?> -->
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +66,7 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
                 </a>
             </li>
             <li>
-                <a href="dashboard.php">
+                <a href="customer.php">
                     <img src="../../img/icon/dashboard.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
@@ -115,40 +112,39 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
             </div>
         </nav>
 		<h2>Quản lý bài viết</h2>
-        <div class="btn-add" style=" display: flex; justify-content:flex-start; gap: 30px; margin-left: 5px;">
+            <form action="process_update_new.php?id_news=<?php echo $id;?>" method="post">
+            <div class="btn-add" style=" display: flex; justify-content:flex-start; gap: 30px; margin-left: 5px;">
             <div class="add-newsl" style="margin: 0 15px;">
-                <button type="button" class="btn btn-primary">Thêm bài viết mới</button>
+                <button type="submit" class="btn btn-primary"><?php echo $tittle;?></button>
             </div>
             <div class="add-news"></div>
         </div>
-		<form action="" method="post">
-            <form>
                 <div class="form-group">
                   <label for="formGroupExampleInput">Tên bài viết</label>
                   <!-- Name này của  news(name) -->
-                  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" name="Name">
+                  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" name="Name" value = "<?php echo $name;?>">
                 </div>
                 <div class="form-group">
                   <label for="formGroupExampleInput2">Loại bài viết: </label>
                   <select name="Type_id" id="">
-                    <!-- doan nay thi viet lai truy van
                     <?php 
-                    $truyvan=$data->query("select* from news_list");
+                    $truyvan=$data->query("select * from news_list");
                     while($row=mysqli_fetch_assoc($truyvan)){
+                        $select = $row["Type_id"] == $type ? "selected" :"";
                         ?>
-                        <option value="<?php echo $row['Type_id']?>"><?php echo $row['Name_type']?></option>
+                        
+                        <option value="<?php echo $row['Type_id']?>" <?php echo $select;?>><?php echo $row['Name_type']?></option>
                         <?php
                     }
-                    ?> -->
+                    ?> 
                     </select>
                 </div>
                 <div class="form-group" style="display: flex; flex-direction: column;">
                     <label for="formGroupExampleInput" style="margin-bottom: 10px;">Nội dung</label>
                     <!-- Name này của  news(name) -->
-                    <textarea name="content" id="content" rows="8" class="form-control"></textarea>
+                    <textarea name="content" id="content" rows="8" class="form-control" ><?php echo $content;?></textarea>
                   </div>
               </form>
-		</form>
         <script src="scriptad.js"></script>
     <script>
         CKEDITOR.replace('content');

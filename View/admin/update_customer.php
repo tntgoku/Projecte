@@ -2,6 +2,23 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
+$product = null;
+session_start();
+if (isset($_GET['id_us']) || isset($_SESSION['id_us'])) {
+    if(isset($_GET['id_us'])) {
+    $_SESSION['id_us']= $_GET['id_us'];
+    }
+    $id = $_SESSION['id_us'];
+    $sql = "SELECT * from user where id_user = '$id'";
+    $result = mysqli_fetch_object($db->query($sql));
+    
+    $idus = $id;
+    $name = $result->Name;
+    $address = $result->Address;
+    $Phone_Num = $result->Phone_Num;
+    $Login_name = $result->Login_name;
+    $pass = $result->pass;
+}
 
 ?>
 
@@ -18,39 +35,39 @@ $data->connect();
 <body>
     <form class="sidebar" method="post">
         <div class="logo-details">
-            <img src="/img/icon/LogoSecondP.jpg" alt="" width="100px">
+            <img src="../..//img/icon/LogoSecondP.jpg" alt="" width="100px">
             <span class="logo_name">C L O S E T</span>
         </div>
         
         <ul class="nav-link">
             <li>
                 <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                    <img src="../../img/icon/dashboard.png" alt="">
                     <span class="link_name">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="product.php">
-                    <img src="/img/icon/product-page.png">
+                    <img src="../..//img/icon/product-page.png">
                     <span class="link_name">Sản phẩm</span>
                 </a>
                 
             </li>
             <li>
                 <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                    <img src="../..//img/icon/dashboard.png" alt="">
                     <span class="link_name">Hóa đơn</span>
                 </a>
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="/img/icon/dashboard.png" alt="">
+                    <img src="../..//img/icon/dashboard.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                    <img src="../..//img/icon/dashboard.png" alt="">
                     <span class="link_name">Cái này là cái gì?</span>
                 </a>
             </li>
@@ -71,7 +88,7 @@ $data->connect();
                 <span style="font-size: 35px;">Dashboard</span>
             </div>
             <div class="profile-user">
-                <img src="/img/item/a3.png" width="40px" alt="">
+                <img src="../..//img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
                 font-weight: 600;">aadwawd</span>
@@ -83,58 +100,40 @@ $data->connect();
             </div>
         </nav>
         <div class="container-fluid">
-            <div class="card" style="margin-bottom:15px;">
+            <div class="card">
                 <div class="card-header">
-                    <h2>thêm sản phẩm</h2>
+                    <h2>Thay đổi thông tin người dùng <?php echo $name;?></h2>
                 </div>
             </div>
-            <div class="card-body " style="margin-bottom:15px;">
-                <form action="process_add.php" method="post" enctype="multipart/form-data" width="600px">
-                    <div class="form-group">
-                        <label for="">Tên sản phẩm</label>
-                        <input type="text" name="name">
+            <div class="card-body " style="">
+            <form action="process_update_us.php" method="post">
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label for="">Mã người dùng</label>
+                        <input type="text" name="id_us" value="<?php echo $idus;?>" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="">Chủng loại</label>
-                        <select name="type_id" id="">
-                        <?php 
-                        $truyvan=$data->query("select* from product_list");
-                        while($row=mysqli_fetch_assoc($truyvan)){
-                            ?>
-                            <option value="<?php echo $row['Type_id']?>"><?php echo $row['Type_name']?></option>
-                            <?php
-                        }
-                        ?>
-                        </select>
+                        <label for="">Tên người dùng</label>
+                        <input type="text" name="name"  value="<?php echo $name;?>">
                     </div>
                     <div class="form-group">
-                        <label for="">Màu sắc</label>
-                        <input type="text" name="color">
+                        <label for="">Địa chỉ</label>
+                        <input type="text" name="address" value="<?php echo $address;?>">
                     </div>
                     <div class="form-group">
-                        <label for="">Size</label>
-                        <input type="text" name="size">
+                        <label for="">Số điện thoại</label>
+                        <input type="text" name="sdt"  value="<?php echo $Phone_Num;?>">
                     </div>
                     <div class="form-group">
-                        <label for="">Giá</label>
-                        <input type="text" name="cost">
+                        <label for="">Tên đăng nhập</label>
+                        <input type="text" name="Login_name"  value="<?php echo $Login_name;?>">
                     </div>
                     <div class="form-group">
-                        <label for="">Số lượng</label>
-                        <input type="text" name="amount">
+                        <label for="">Mật khẩu</label>
+                        <input type="password" name="pass"  value="<?php echo $pass;?>">
                     </div>
-                    <div class="form-group">
-                        <label for="">Giảm giá</label>
-                        <input type="text" name="discount">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Hình ảnh</label>
-                        <input type="file" name="img">
-                    </div>
-                    <div class="btn-box">
-                        <button name="submit" class="btn btn-success" type="submit"> them san pham</button>
-                    </div>
-                </form>
+                <!-- Add other fields as needed -->
+                <button type="submit" class="btn btn-primary" name = "update">Lưu thay đổi</button>
+            </form>
             </div>
         </div>
     </div>

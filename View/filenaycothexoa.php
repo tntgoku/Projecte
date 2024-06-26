@@ -1,5 +1,4 @@
-<?php require_once("user_UI_index.php"); 
-?>
+<?php require_once("user_UI_index.php");?>
 <?php
 $data = new Database();
 $data->connect();
@@ -26,7 +25,7 @@ $sql= "SELECT * FROM product";
   function addToCart($productId, &$cartProducts) {
       global $data; // Assuming $data is your Database object
       
-      $sql = "SELECT * FROM product WHERE id_product = $productId";
+      $sql = "SELECT * FROM product WHERE id_product = '$productId'";
       $result = $data->query($sql);
       
       if ($result->num_rows > 0) {
