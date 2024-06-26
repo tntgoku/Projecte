@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <?php 
 // phan nay la thong tin khach hang 
 
-=======
-<!-- <?php 
->>>>>>> 8cdbd5ba696bc7bfe6a2aadc1e257c332d713dd5
 include "../../App/connect.php";
 $data=new Database();
 $data->connect();
@@ -29,7 +25,7 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
   $sql = "DELETE FROM `news_list` WHERE `Type_id` = $id;";
   mysqli_query($conn,$sql);
 }
-?> -->
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -146,7 +142,6 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 				while($row=mysqli_fetch_assoc($result)){
 					?>
 					<tr>
-<<<<<<< HEAD
 						<td><?= $row['id_user']?></td>
 						<td><?= $row['Name']?></td>
 						<td><?= $row['Phone_Num']?></td>
@@ -154,7 +149,6 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 						<td><?= $row['Login_name']?></td>
 						<td><a href="update.php?id_product=<?= $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
                         <td><a href="deleted.php?id_product=<?= $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
-=======
 						<td><?php echo $row['id_user']?></td>
 						<td><?php echo $row['Name']?></td>
 						<td><?php echo $row['Phone_Num']?></td>
@@ -162,7 +156,6 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 						<td><?php echo $row['Login_name']?></td>
 						<td><a href="update_customer.php?id_us=<?php echo $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
                         <td><a href="delete_us.php?id_us=<?php echo $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
->>>>>>> 8cdbd5ba696bc7bfe6a2aadc1e257c332d713dd5
 					</tr>
 				<?php
 				}
