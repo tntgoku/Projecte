@@ -22,13 +22,21 @@ function execPostRequest($url, $data)
 
 
 $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-
+if (isset($_POST['tong'])) {
+    $total = $_POST['tong'];
+    $idbill=$_POST['bill1'];
+    $nameuser=$_POST['name-user'];
+} else {
+    $total = 195000;
+    $idbill=2;
+    $nameuser='Hieu';
+}
 
 $partnerCode = 'MOMOBKUN20180529';
 $accessKey = 'klm05TvNBzhg7h7j';
 $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-$orderInfo = "Thanh toán qua ATM MoMo";
-$amount = "2220000";
+$orderInfo = 'Thanh toán qua ATM MoMo '.$nameuser;
+$amount = $total;
 $orderId = time() ."";
 $redirectUrl = "http://localhost/projecte/view/thanhtoan.php";
 $ipnUrl = "http://localhost/projecte/view/thanhtoan.php";

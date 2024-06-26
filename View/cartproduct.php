@@ -1,37 +1,26 @@
 <?php require_once("user_UI_index.php");
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  // Check if it's a checkout request
-  if (isset($_POST['checkout'])) {
-      // Handle checkout logic here, such as redirecting to payment gateway or processing the order
-      // For demonstration, let's assume you want to display the cart items after checkout
-      echo "<h1>Order Summary</h1>";
-      foreach ($_SESSION['cart'] as $key => $product) {
-          $quantity = isset($_POST['quantity'][$key]) ? $_POST['quantity'][$key] : $product['Quantity'];
-          echo "<p>Product: " . $product['Name'] . ", Quantity: " . $quantity . "</p>";
-      }
-      // You can perform additional processing here, such as updating database, sending confirmation emails, etc.
-      exit; // Stop further execution after displaying order summary
-  }
 
-  // Check if it's a delete request
-  if (isset($_POST['product_key'])) {
-      $keyToDelete = $_POST['product_key'];
-      unset($_SESSION['cart'][$keyToDelete]); // Remove product from cart based on product key
-      // Optionally, you can redirect back to the cart page or refresh the current page
+
+if (isset($_POST['payment'])) {
+  // Lấy thông tin giỏ hàng từ session
+  $cart = $_SESSION['cart'] ?? [];
+  $cartshop=new Cart();
+  $currentDate = date("Y-m-d");
+  $total=0;
+  $sum=0;
+  // Hiển thị thông tin đơn hàng
+  $id_bill=4;
+  foreach ($cart as $key => $product) {
+      $amount = $product['Quantity'];
+      $total+=$amount*$product['Cost'];
+      $sum+=$amount;
   }
-}
-// Assume $data is your database connection
-$id = isset($_SESSION['user_id']); // Assuming user ID is stored in session
-print_r($id); 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Update the session cart quantities based on POST data
-    if (isset($_POST['quantity']) && is_array($_POST['quantity'])) {
-        foreach ($_POST['quantity'] as $key => $quantity) {
-            if (isset($_SESSION['cart'][$key])) {
-                $_SESSION['cart'][$key]['Quantity'] = $quantity;
-            }
-        }
-    }
+  echo $sum;
+  $cartshop->insertbilltong($id,2,$sum,$total,0,$currentDate);
+  // Ví dụ: Cập nhật vào CSDL, xử lý thanh toán, etc.
+  // Sau khi xử lý, có thể chuyển hướng hoặc hiển thị thông báo thành công
+  // header("Location: thanhcong.php");
+  // exit();
 }
 
 ?>
@@ -57,38 +46,131 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="topbar-right">
           <!-- ----SEARCH-BOX--- -->
           <div class="search-box">
-            <form action="get" enctype="application/x-www-form-urlencoded">
+            <form action="get" enctype="application/x-www-form-urlencoded"  class="search-group">
               <input type="text" name="search" id="search-input" placeholder="Tìm kiếm sản phẩm....">
               <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 </div>
                 <!-- ---LOGIN--- -->
                 <div class="login">
-                  <a href="login.php" ><label for=""><?php echo  $user_name;?></label> </label><i class="fa-regular fa-user"></i></a>
+                  <a href="login.php" ><label for=""><?=$user_name;?></label> </label><i class="fa-regular fa-user"></i></a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">
                     <a href="">
                       <i class="fa-solid fa-cart-shopping"></i>
-                      <span class="count_item_pr hidden-count" style="padding-left: 3px;"><?php echo $count_sp;?></span></a>
+                      <span class="count_item_pr hidden-count" style="padding-left: 3px;"><?= $count_sp;?></span></a>
                       <div class="top-cart-content">
                           <div class="CartHeaderContainer" style="width: 340px;">
                             <div class="cart--empty--message" style="text-align: center;">
-                                  <img src="../img/shopping-bag.png" alt="" width="80px">
-                                  <p><?php // Them UI vao ho nha
-									  if ($id !="-1")
-									  {
-									   while ($row_sp = mysqli_fetch_assoc($sp) )
-									   {
-										   echo $row_sp["Name"]."\\";
-										   echo $row_sp["Color"]."\\";
-										   echo $row_sp["Size"]."\\";
-										   echo $row_sp["Cost"] * $row_sp["amount"]."K<br>";
-									   }
-									  }
-									  if($count_sp == '0') 
-										  echo "Không có sản phẩm nào trong giỏ hàng";
-									  ?></p>
+                            <?php   
+                                  // Them UI vao ho nha
+                                  $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+                                  if($count == 0) 
+                                  echo '<img src="../img/shopping-bag.png" alt="" width="80px">
+                                  <p>Không có sản phẩm nào trong giỏ hàng</p>';        
+                                  else{
+                                    foreach ($_SESSION['cart'] as $key => $product) {
+                                      if (!isset($product['Quantity'])) {
+                                        $_SESSION['cart'][$key]['Quantity'] = 0;
+                                        $quantity = $_SESSION['cart'][$key]['Quantity'];
+                                        $key=1;
+                                    }
+                                      echo '<div class="productcart">
+                                                <div class="header-cart">
+                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="'.'>
+                                                "<p id="cont" name="namepro" style="font-size:10px;">' . $product['Name'] . '</p>'.
+                                                  '</div>'
+                                      ;
+                                      echo '
+                                      <div class="gop" style="display:flex; flex-direction: column;">
+                                      <div class="body-cart">';
+
+                                      echo '<p id="cont" name="color">Màu sắc:<br> ' . $product['Color'] . "/".$product['Size'].'</p>';
+                                      echo '<input type="hidden" value="'.$product['id_product'].'name="id">';
+                                      echo '';
+                                      echo '
+                                              <form method="post" action="index1.php">
+                                      <input type="hidden" name="product_key" value="' . $key . '">
+  <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
+</form>
+                                              </div>
+                                              ';
+                                      echo '
+</div>
+';
+                                      // Thêm các thông tin khác của sản phẩm nếu cần
+                                      echo '<style>
+                                      .productcart {
+                                        display:flex;
+                                            align-items: center;
+
+                                      } 
+                                      .productcart img{
+                                        object-fit:contain;
+                                        width:90px;
+                                      }
+                                      .header-cart #cont{
+                                          font-weight:bold;
+                                        }
+                                        .body-cart{
+                                          display: flex;
+                                          margin-left:15px;
+                                      }
+                                      .productcart #cont{
+                                      font-size:10px;
+                                      }
+                                      .productcart #conti{
+                                      font-size:10px;
+                                      color: #f81f1f;
+                                      }
+                                      input#quantity-'. $key.'{
+                                        height: 25px;
+                                        width: 55px;
+                                      }
+                                      </style>'
+                                      .'<script>
+                                      document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".quantity").forEach(function(input) {
+        var cost = parseFloat(input.getAttribute("data-cost"));
+        var key = input.getAttribute("data-key");
+
+        input.addEventListener("input", function() {
+            var quantity = parseInt(this.value);
+            var totalCost = quantity * cost;
+            document.getElementById("price-" + key).innerText = totalCost.toLocaleString();
+            updateCart(key, quantity); // Function to update cart in session
+        });
+    });
+    // document.querySelector(".btn-success").addEventListener("click", function(event) {
+    //         event.preventDefault(); // Prevent default form submission
+    //         document.querySelector("form").submit(); // Submit the form
+    //     });
+});
+
+function updateCart(key, quantity) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "index1.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("key=" + key + "&quantity=" + quantity);
+}
+   document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("cartLink").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent default action
+        document.getElementById("cartForm").submit(); // Submit the form
+    })
+});
+                                      </script>'
+                                      ;
+                                      echo '</div>';
+                                  }
+                                  echo '<form method="post" action="cart1.php" style="float:right";>
+                                      <input type="hidden" name="product_key" value="' . $key . '">
+  <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;" value="Thanh Toán">
+</form>';
+                                  
+                                  }   
+									  ?>
                                   </div>  
                                   </div>
                                   </div>
@@ -125,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </nav>
     <div class="container">
       <div class="row md-5">
-      <form class="col-md-12" method="post">
+      <form class="col-md-12" method="post" action="thanhtoan.php">
     <div class="site-blocks-table">
         <table class="table">
             <thead>
@@ -136,6 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <th class="product-quantity">Số Lượng</th>
                     <th class="product-total">Tổng</th>
                     <th class="product-remove">Thao tác</th>
+                  </th>
                 </tr>
             </thead>
             <tbody>
@@ -165,7 +248,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           $total+= $item['Quantity']*$item['Cost'];
                           echo '<td>' . $total . '</td>';
                     echo '<td><a href="#" class="btn btn-black btn-sm"><i class="fa fa-trash"></i></a></td>';
-                    echo '</tr>';
+                    echo '</tr>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Giảm số lượng
+    $(".decrease").click(function() {
+        let $input = $(this).closest(".input-group-prepend").next(".quantity-amount");
+        let value = parseInt($input.val());
+        if (value > 1) { // Đảm bảo không giảm xuống dưới 1
+            $input.val(value - 1);
+        }
+    });
+
+    // Tăng số lượng
+    $(".increase").click(function() {
+        let $input = $(this).closest(".input-group-append").prev(".quantity-amount");
+        let value = parseInt($input.val());
+        $input.val(value + 1);
+    });
+});
+</script>';
                 }
               }}
 
@@ -174,8 +277,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </table>
     </div>
     <div class="btn-paypal" style="margin: auto; float: right;">
-        <a href="thanhtoan.php" class="btn btn-success">
-            <button type="button" class="btn btn-success">Thanh toán</button>
+      <input type="hidden" name="total" id="" value="<?= $total?>">
+            <input type="submit" name="thanhtoan" class="btn btn-success" value="Thanh toán">
         </a>
     </div>
 </form>

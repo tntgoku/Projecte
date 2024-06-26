@@ -83,7 +83,46 @@ if (isset($_POST['product_key'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/reponse.css">
     <title>CloSet</title>
-    
+    <style>
+      .hidden {
+    display: none;
+}
+
+#box {
+    width: 160px;
+    height: 120px;
+    position: absolute;
+    border: 1px solid #9ae6e2;
+    display: none;
+    border-radius: 5px;
+    z-index: 456;
+    background-color: #9dd8d5;
+}
+.login:hover #box{
+    display: block;
+}
+.login {
+    margin-bottom: 20px;
+}
+.header-top .login{
+    margin-left: 3%;
+    margin-top: 16%;
+    width: 100%;
+    position: relative;
+}
+
+#list-itema{
+    margin-left: 17px;
+    list-style: none;
+}
+#list-itema #itema{
+    margin-top: 9px;
+}
+#list-itema #itema:hover a{
+    color: #126964;
+}
+
+    </style>
     </head>
     <body>
       <div class="header-top">
@@ -97,14 +136,25 @@ if (isset($_POST['product_key'])) {
                 </div>
                 <!-- ---LOGIN--- -->
                 <div class="./View/login" style="margin-top: 6px;">
-                  <a href="infor-user.php"  style="cursor: pointer;">
-                    <label for="" style="cursor:pointer;"><?php echo  $user_name;
-                                 
-                    
-                    
-                    
-                    ?></label> 
-                    <i class="fa-regular fa-user"></i>
+                    <?php 
+                            if(isset($_SESSION['Name']) && ($_SESSION['Name'] !='') ){ echo'<div class="login">
+                      <label for="">'.$_SESSION['Name'].'<a href="tes1.php"> 
+                          <i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a>
+                      </label>
+                      <div id="box">
+                          <ul id="list-itema">
+                              <li id="itema"><a href="">Tài khoản của tôi</a></li>
+                              <li id="itema"><a href="">Lịch sử đơn hàng</a></li>
+                              <li id="itema"><a href="logout.php">Đăng xuất</a></li> <!-- Thêm link đăng xuất -->
+                          </ul>
+                      </div></div>';?>
+                  <?php }else{ 
+                    echo '
+                    <div class="login">
+                      <label for=""><a href="login.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
+                    </div>';
+                   } ?>
+              </div>
                   </a>
                   </div>
                   <!-- ---cart-shopping--- -->
@@ -113,7 +163,7 @@ if (isset($_POST['product_key'])) {
                       <i class="fa-solid fa-cart-shopping"></i>
                       <span class="count_item_pr hidden-count" style="padding-left:  3px;"><?php echo $totalQuantity;?></span></a>
                       <div class="top-cart-content">
-                          <div class="CartHeaderContainer" style="width: 340px;">
+                          <div class="CartHeaderContainer" style="width: 440px;">
                             <div class="cart--empty--message" style="text-align: center;">
                                 <?php   
                                   // Them UI vao ho nha
@@ -130,8 +180,9 @@ if (isset($_POST['product_key'])) {
                                     }
                                       echo '<div class="productcart">
                                                 <div class="header-cart">
-                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="' . $product['Name'] . '>
-                                                "<p id="cont" name="namepro">' . $product['Name'] . '</p>'.
+                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="'.'>
+                                                  <input type="text"
+                                                "<p id="cont" name="namepro" style="font-size:10px;">' . $product['Name'] . '</p>'.
                                                   '</div>'
                                       ;
                                       echo '
@@ -139,15 +190,15 @@ if (isset($_POST['product_key'])) {
                                       <div class="body-cart">';
 
                                       echo '<p id="cont" name="color">Màu sắc:<br> ' . $product['Color'] . "/".$product['Size'].'</p>';
-                                      echo '<input type="hidden" value="'.$product['id_product'].'name="id"';
+                                      echo '<input type="hidden" value="'.$product['id_product'].'name="id">';
                                       echo '<input type="number" class="quantity" id="quantity-' . $key . '" name="quantity[' . $key . ']" min="1" max="55" value="'.$quantity.'" data-cost="' . $product['Cost'] . '
                                       " data-key="' . $key . '">';
                                       echo '<p id="conti">Giá: <span class="price" id="price-' . $key . '" style="color:#f81f1f;">' . 
                                               $product['Cost'] . '</span> đ</p>
                                               <form method="post" action="index1.php">
-                                      <input type="hidden" name="product_key" value="' . $key . '">
-  <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
-</form>
+                                                <input type="hidden" name="product_key" value="' . $key . '">
+                                                <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
+                                              </form>
                                               </div>
                                               ';
                                       echo '
@@ -179,9 +230,8 @@ if (isset($_POST['product_key'])) {
                                       color: #f81f1f;
                                       }
                                       input#quantity-'. $key.'{
-                                      margin-top:17px;
-                                        height: 15px;
-                                        width: 45px;
+                                        height: 25px;
+                                        width: 55px;
                                       }
                                       </style>'
                                       .'<script>

@@ -40,7 +40,7 @@ $data->connect();
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <form class="sidebar" method="post">
+    <form class="sidebar" method="post" style="transition: all 1s cubic-bezier(0.4, 0, 1, 1);">
         <div class="logo-details">
             <img src="/Projecte/img/icon/LogoSecondP.jpg" alt="" width="100px">
             <span class="logo_name">C L O S E T</span>
@@ -61,20 +61,20 @@ $data->connect();
                 
             </li>
             <li>
-                <a href="dashboard.html">
+                <a href="bill.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Hóa đơn</span>
                 </a>
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="/Projecte/img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/customer.php" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="News.php">
-                    <img src="/Projecte/img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/News.php" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
@@ -119,7 +119,7 @@ $data->connect();
                     <div class="number" style="font-size: 20px; font-weight: 500; margin-top: 5px;">
                     <?php 
                         $month=6;
-                        $sql="select sum(Total) as tong from bill "; //where month(ngtao) ='$month'
+                        $sql="select sum(Total_payment) as tong from bill "; //where month(ngtao) ='$month'
                         $toltal=$data->query($sql);
                         $result1=$toltal->fetch_assoc();
                                 echo $result1['tong'];

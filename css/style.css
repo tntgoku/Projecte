@@ -87,6 +87,8 @@ nav h1{
     border-radius: 10px;
 }
 .header-top .login{
+    margin-left: 2%;
+
     width: 20%;
 }
 .header-top .login a{
@@ -615,3 +617,4 @@ margin-top: 10px;
 
 
 
+/* modal */

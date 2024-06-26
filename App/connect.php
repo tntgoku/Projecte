@@ -39,6 +39,13 @@ class Database{
         }
         return $query;
     }
+    public function query1($sql) {
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die('Prepare Statement Error: ' . $this->conn->error);
+        }
+        return $stmt;
+    }
 }
 $db =new Database();
 $db->connect();
@@ -70,6 +77,65 @@ class Cart{
         $dummyProduct = new Product($productId, "Product $productId", "Color", 10, 0, "img.jpg");
         return $dummyProduct;
     }
+    public function insertBill($id_bill,$id_sp,$amount,$cost,$ngtao){
+        $sql="INSERT INTO billall(id_bill,id_sp,amount,cost,ngtao)
+                VALUES ($id_bill,$id_sp,$amount,$cost,'$ngtao');
+        ";
+        $data =new Database();
+        $data->connect();
+        $result=$data->query($sql);
+        if($result===TRUE){
+            echo '
+            <script>
+                    alert("Bill inserted successfully!");
+                </script>
+                        ';
+        }
+    }
+    public function insertbilltong($idcus,$id_sp,$amount,$total,$status,$ngtao){
+        $sql="INSERT INTO bill(id_us,id_sp,count,Total_payment,status,ngtao)
+        VALUES ($idcus,$id_sp,$amount,$total,$status,'$ngtao');
+";
+$data =new Database();
+$data->connect();
+$result=$data->query($sql);
+if($result===TRUE){
+    echo '
+    <script>
+            alert("Thanh toan thanh cong");
+        </script>
+                ';
 }
+    }
+}
+class Customer{
+    private $idcus;
+    private $name;
+    private $data;
+    public function __construct() {
+        $this->data = new Database();
+        $this->data->connect();
+    }
+    public function getinforcus($idcustomer){
+        $sql= "select * from user where Name = '$idcustomer'";
+        $result=$this->data->query( $sql);
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        }
+        return null;
+    }
+    public function displayCustomerInfo($idcustomer) {
+        $customerInfo = $this->getinforcus($idcustomer);
+        if ($customerInfo) {
+            foreach ($customerInfo as $info) {
+                echo $info . "<br>";
+            }
+            // Thêm các trường thông tin khác theo yêu cầu
+        } else {
+            echo "Customer not found.";
+        }
+    }
+}
+
 
 ?>

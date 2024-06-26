@@ -1,4 +1,5 @@
-<!-- <?php 
+<?php 
+// phan nay la thong tin khach hang 
 
 include "../../App/connect.php";
 $data=new Database();
@@ -38,40 +39,46 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-<form class="sidebar" method="post">
+<form class="sidebar" method="post" style="transition: all 1s cubic-bezier(0.4, 0, 1, 1);">
         <div class="logo-details">
-            <img src="../../img/icon/LogoSecondP.jpg" alt="" width="100px">
+            <img src="/Projecte/img/icon/LogoSecondP.jpg" alt="" width="100px">
             <span class="logo_name">C L O S E T</span>
         </div>
         
         <ul class="nav-link">
             <li>
                 <a href="dashboard.php">
-                    <img src="../../img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="product.php">
-                    <img src="../../img/icon/product-page.png">
+                    <img src="/Projecte/img/icon/product-page.png">
                     <span class="link_name">Sản phẩm</span>
                 </a>
                 
             </li>
             <li>
-                <a href="dashboard.php">
-                    <img src="../../img/icon/dashboard.png" alt="">
+                <a href="bill.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Hóa đơn</span>
                 </a>
             </li>
             <li>
-                <a href="dashboard.php">
-                    <img src="../../img/icon/dashboard.png" alt="">
+                <a href="customer.php">
+                    <img src="/Projecte/img/icon/customer.php" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
-                <a href="dashboard.php">
+                <a href="News.php">
+                    <img src="/Projecte/img/icon/News.php" alt="">
+                    <span class="link_name">Quản lý bài viết(news)</span>
+                </a>
+            </li>
+            <li>
+                <a href="vendors.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Cái này là cái gì?</span>
                 </a>
@@ -135,13 +142,13 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 				while($row=mysqli_fetch_assoc($result)){
 					?>
 					<tr>
-						<td><?php echo $row['id_user']?></td>
-						<td><?php echo $row['Name']?></td>
-						<td><?php echo $row['Phone_Num']?></td>
-						<td><?php echo $row['Address']?></td>
-						<td><?php echo $row['Login_name']?></td>
-						<td><a href="update.php?id_product=<?php echo $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
-                        <td><a href="deleted.php?id_product=<?php echo $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
+						<td><?= $row['id_user']?></td>
+						<td><?= $row['Name']?></td>
+						<td><?= $row['Phone_Num']?></td>
+						<td><?= $row['Address']?></td>
+						<td><?= $row['Login_name']?></td>
+						<td><a href="update.php?id_product=<?= $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
+                        <td><a href="deleted.php?id_product=<?= $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
 					</tr>
 				<?php
 				}

@@ -34,7 +34,7 @@ if (isset($_GET['id_product'])) {
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <form class="sidebar" method="post">
+    <form class="sidebar" method="post" style="transition: all 1s cubic-bezier(0.4, 0, 1, 1);">
         <div class="logo-details">
             <img src="/img/icon/LogoSecondP.jpg" alt="" width="100px">
             <span class="logo_name">C L O S E T</span>
@@ -116,7 +116,7 @@ if (isset($_GET['id_product'])) {
                 </div>
             </div>
             <div class="card-body " style="">
-            <form action="process_update.php" method="post">
+            <form action="process_update.php" method="post" style="background :#e4e9f7;">
                     <div class="form-group" style="margin-top: 10px;">
                         <label for="">Mã sản phẩm</label>
                         <input type="text" name="id_product" value="<?php echo $idpr;?>" readonly>

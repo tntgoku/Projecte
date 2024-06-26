@@ -16,7 +16,7 @@
         <div class="topbar-right">
           <!-- ----SEARCH-BOX--- -->
           <div class="search-box">
-            <form action="get" enctype="application/x-www-form-urlencoded">
+            <form action="get" enctype="application/x-www-form-urlencoded" >
               <input type="text" name="search" id="search-input" placeholder="Tìm kiếm sản phẩm....">
               <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>

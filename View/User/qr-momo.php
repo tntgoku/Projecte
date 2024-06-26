@@ -22,6 +22,12 @@ function execPostRequest($url, $data)
 }
 
 
+
+if (isset($_POST['tong'])) {
+    $total = $_POST['tong'];
+} else {
+    $total = 195000;
+}
 $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
 
@@ -29,7 +35,7 @@ $partnerCode = 'MOMOBKUN20180529';
 $accessKey = 'klm05TvNBzhg7h7j';
 $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
 $orderInfo = "Thanh toán qua QRcode MoMo";
-$amount = "1950000";
+$amount = $total;
 $orderId = time() ."";
 $redirectUrl = "http://localhost/projecte/view/thanhtoan.php";
 $ipnUrl = "http://localhost/projecte/view/thanhtoan.php";

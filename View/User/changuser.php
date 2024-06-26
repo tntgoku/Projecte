@@ -1,3 +1,18 @@
+
+<?php 
+session_start();
+
+include '/xampp/htdocs/Projecte/App/connect.php';
+$data=new Database();
+$data->connect();
+$sql='SELECT * FROM `user` WHERE id_user= '.$_SESSION['id_user'].'';
+$user_data=array();
+    $result=$data->query($sql);
+    while($row =$result->fetch_assoc() ){
+        $user_data[]=$row;
+    }
+    print_r($user_data);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,22 +24,63 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="/Projecte/css/reponse.css">
     <title>CloSet</title>
-    
+    <style>#box {
+    width: 160px;
+    height: 120px;
+    position: absolute;
+    border: 1px solid #9ae6e2;
+    display: none;
+    border-radius: 5px;
+    z-index: 456;
+    background-color: #9dd8d5;
+}
+.login:hover #box{
+    display: block;
+}
+.login {
+    margin-bottom: 20px;
+}
+.header-top .login{
+    margin-left: 3%;
+    margin-top: 4%;
+    position: relative;
+}
+
+#list-itema{
+    margin-left: 17px;
+    list-style: none;
+}
+#list-itema #itema{
+    margin-top: 9px;
+}
+#list-itema #itema:hover a{
+    color: #126964;
+}
+</style>
     </head>
-    <body>
+    <body style="background: #f8f8f8;">
       <div class="header-top">
         <div class="topbar-right">
           <!-- ----SEARCH-BOX--- -->
           <div class="search-box">
-            <form action="get" enctype="application/x-www-form-urlencoded">
+            <form action="get" enctype="application/x-www-form-urlencoded" class="search-group">
               <input type="text" name="search" id="search-input" placeholder="Tìm kiếm sản phẩm....">
               <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 </div>
                 <!-- ---LOGIN--- -->
                 <div class="login">
-                  <a href="login.php" ><label for="">Đăng nhập</label> </label><i class="fa-regular fa-user"></i></a>
+                <label for=""><?=$_SESSION["Name"]?><a href="http://localhost/projecte/view/user/changuser.php"> 
+                      <i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a>
+                  </label>
+                  <div id="box">
+                    <ul id="list-itema">
+                      <li id="itema"><a href="http://localhost/projecte/view/user/changuser.php">Tài khoản của tôi</a></li>
+                      <li id="itema"><a href="">Lịch sử đơn hàng</a></li>
+                      <li id="itema"><a href="/Projecte/View/logout.php">Đăng xuất</a></li>
+                    </ul>
                   </div>
+                </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">
                     <a href="">
@@ -69,9 +125,10 @@
         </div>  
       </nav>
     <div class="main container">
+        <br>
         <div class="header">
         <div class="nameuser">
-            <h2>CHÀO HIẾU</h2>
+            <h2>CHÀO <?= $_SESSION['Name']?></h2>
         </div>
         <div class="pointpay">
             <h4>Điểm 111111</h4>
@@ -83,9 +140,9 @@
                     <h5>Thông tin tài khoản</h5>
                     <ul class="user-item">
                         <li class="item infor-user"><span>Thông tin cá nhân</span><i class="fa-solid fa-chevron-right"></i></li>
-                        <li class="item loc-user"><span>Sổ địa chỉ</span><i class="fa-solid fa-chevron-right"></i></li>
+                        <li class="item loc-user"><span>Lịch sử mua hàng</span><i class="fa-solid fa-chevron-right"></i></li>
                         <li class="item"><span>Thẻ thành viên</span><i class="fa-solid fa-chevron-right"></i></li>
-                        <li class="item"><span>Đăng xuất</span><i class="fa-solid fa-chevron-right"></i></li>
+                        <li class="item"><span><a href="/Projecte/View/logout.php">Đăng xuất</a></span><i class="fa-solid fa-chevron-right"></i></li>
                     </ul>
                 </div>
             </div>
@@ -94,18 +151,40 @@
                     <h2>THÔNG TIN CỦA TÔI</h2>
                     <h5>Hãy chỉnh sửa bất kỳ thông tin chi tiết nào bên dưới để tài khoản của bạn luôn được cập nhật.</h5>
                 </div>
+                <br>
                 <form action="">
                     <div class="content-user">
-                        <h2 class="header-content">THÔNG TIN CHI TIẾT</h2>
+                        <h2 class="header-content">THÔNG TIN CHI TIẾT</h2><br>
+                        <?php  foreach ($user_data as $user) {?>
+                            <h5>
+                            <?php 
+                            if($user['role'] ==1){
+                                echo 'Admin';
+                            }else{
+                                echo 'Khách hàng thân thiết';
+                            }
+                            ?>
+                            </h5>
+                            <br>
                         <div class="form-group">
                              <label for="">Họ tên</label>
                             <br>
-                            <input type="text" class="form-control" id="" aria-describedby="" value="Bế Văn Hàng">
+                            <input type="text" class="form-control" id="" name="Name" aria-describedby="" value="<?= $user['Name']?>">
                         </div>
                         <div class="form-group">
                              <label for="">Giới tính</label>
                             <br>
-                            <input type="text" class="form-control" id="" aria-describedby="" value="Nam">
+                            <input type="text" class="form-control" name="addres" id="" aria-describedby="" value="<?= $user['Address']?>">
+                        </div>
+                        <div class="form-group" style="display: none;">
+                             <label for="">Giới tính</label>
+                            <br>
+                            <input type="text" class="form-control" name="addres" id="" aria-describedby="" value="<?= $user['Address']?>">
+                        </div>
+                        <div class="form-group">
+                             <label for="">Số điện thoại</label>
+                            <br>
+                            <input type="text" class="form-control" name="number" id="" aria-describedby="" value="<?= $user['Phone_Num']?>">
                         </div>
                     </div>
                     <div class="content-user">
@@ -113,12 +192,16 @@
                         <div class="form-group">
                              <label for="">Tên đăng nhập</label>
                             <br>
-                            <input type="text" class="form-control" id="" aria-describedby="" value="trunghieuhsdd@gmail.com">
+                            <input type="text" name="account" class="form-control" id="" aria-describedby="" value="<?= $user['Login_name']?>">
                         </div>
                         <div class="form-group">
                              <label for="">mật khẩu</label>
                             <br>
-                            <input type="password" class="form-control" id="" aria-describedby="" value="Nam">
+                            <input type="password" name="pwd" class="form-control" id="" aria-describedby="" value="<?= $user['pass']?>">
+                                <br>
+                                <label for="">Nhap lai mat khau</label>
+                                <br>
+                            <input type="password" name="pwd1" class="form-control" id="" aria-describedby="" value="Nam">
                         </div>
                     </div>
                     <div class="content-user-address">
@@ -130,7 +213,7 @@
                                             <div class="input-group ">
                                                 <select class="custom-select" id="inputGroupSelect02">
                                                     <option selected>Choose...</option>
-                                                    <option value="1">Hà Nội</option>
+                                                    <option value="1"><?= $user['Address']?></option>
                                                     <option value="2">Vĩnh Phúc</option>
                                                     <option value="3">Hải Phòng</option>
                                                     <option value="4">Yên Bái</option>
@@ -182,6 +265,11 @@
                                             </textarea>
                                             </div>
                     </div>
+                    <?php }?>
+                    <div class="save-btn">
+                        <input type="hidden" name="idu" id="" value="<?= $user['id_user']?>">
+                        <button type="submit" name="save" class="btn btn-success" id="save">Lưu</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -189,6 +277,18 @@
     </body>
 </html>
 <style>
+.save-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    .save-btn #save{
+        font-weight: bold;
+    font-size: 20px;
+    height: 40px;
+    margin: auto;
+    width: 100px;
+    }
 .user-card{
     margin-top: 20px;
     margin-right: 40px;
@@ -231,3 +331,54 @@
         margin-top: 15px;
     }
 </style>
+
+
+<?php 
+    // if(isset($_POST['save']) && $_POST['save']){
+    //     if($_POST['pwd']=$_POST['pwd1']){
+    //         $pwd=md5($_POST['pwd']);
+    //         $sql= 'UPDATE `user` SET Name = '.$_POST['Name'].',Address='.$_POST['address'].
+    //         ',Phone_Num='.$_POST['phone'].',pass='.$pwd.' WHERE `user`.`id_user` = '.$idus.'';
+    //         $result=$data->query($sql);
+    //         if($result==true){
+    //             echo '<script>
+    //             alert("Thay đổi thành công sản phẩm '.$name.'");
+    //           window.location.href="changuser.php";</script>';
+    //         }
+    //         else{
+    //             echo"ada";
+    //         }
+            
+    //     }
+    //     else{
+    //         echo '123';
+    //     }
+    // }
+    // else{
+    //     echo 'adsadasd';
+    // }
+    if(isset($_POST['save']) && $_POST['save']){
+        if($_POST['pwd'] == $_POST['pwd1']){
+            // Hash the password before storing it (consider using stronger hashing methods than MD5)
+            $pwd = md5($_POST['pwd']);
+            
+            // Assuming $data is your database connection
+            $sql = 'UPDATE `user` SET Name = "'.$_POST['Name'].'", Address = "'.$_POST['address'].'", Phone_Num = "'.$_POST['phone'].'", pass = "'.$pwd.'" WHERE `user`.`id_user` = '.$_POST['idu'];
+            
+            // Execute the query
+            $result = $data->query($sql);
+            
+            if($result === true){
+                echo '<script>
+                alert("Thay đổi thành công sản phẩm '.$name.'");
+                window.location.href="changuser.php";
+                </script>';
+            } else {
+                echo "Có lỗi xảy ra khi cập nhật thông tin người dùng.";
+            }
+            
+        } else {
+            echo 'Mật khẩu không khớp. Vui lòng nhập lại.';
+        }
+    }
+?>

@@ -3,6 +3,9 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
+$sql="select bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total_payment,
+      bill.status FROM bill JOIN user ON user.id_user=bill.id_us;";
+$result=$data->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +20,7 @@ $data->connect();
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <form class="sidebar" method="post">
+<form class="sidebar" method="post" style="transition: all 1s cubic-bezier(0.4, 0, 1, 1);">
         <div class="logo-details">
             <img src="/Projecte/img/icon/LogoSecondP.jpg" alt="" width="100px">
             <span class="logo_name">C L O S E T</span>
@@ -44,14 +47,14 @@ $data->connect();
                 </a>
             </li>
             <li>
-                <a href="dashboard.html">
-                    <img src="/Projecte/img/icon/dashboard.png" alt="">
+                <a href="customer.php">
+                    <img src="/Projecte/img/icon/customer.php" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="News.php">
-                    <img src="/Projecte/img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/News.php" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
@@ -105,19 +108,29 @@ $data->connect();
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>Hieu</td>
-                            <td>10</td>
-                            <td>1000.000đ</td>
-                            <td>Đã thanh toán</td>
+                        <?php 
+                        while($row =mysqli_fetch_assoc($result)){
+                            ?>
+                        <tr style="margin-left: 10px;">
+                            <td><?=  $row['id_Bill']; ?></td>
+                            <td><?=  $row['id_us']; ?></td>
+                            <td><?=  $row['Name']; ?></td>
+                            <td><?=  $row['count']; ?></td>
+                            <td><?=  $row['Total_payment']; ?>đ</td>
+                            <td>
+                                <?php  
+                                    if($row['status']==1){
+                                        echo "Đã thanh toán";
+                                    }else{
+                                        echo "Khách hàng chưa thanh toán";
+                                    }
+                            ?></td>
                             <td><a href="chitietbill.html">
                                 <button type="button" class="btn btn-info">Xem chi tiết</button>
                             </a>
                         </td>
                             <td><button type="button" class="btn btn-danger">Xóa hóa đơn</button></td>
-                        </tr>
+                        </tr> <?php }?>
                     </tbody>
                 </table>
             </form>

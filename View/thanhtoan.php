@@ -1,4 +1,29 @@
-<?php require_once("user_UI_index.php");?>
+<?php require_once("user_UI_index.php");
+
+if (isset($_POST['total'])) {
+    $total = $_POST['total'];
+} else {
+    // Fallback if no total amount is received
+    $total = 0;
+}
+if (isset($_POST['action']) && $_POST['action'] == 'thanhtoan') {
+    // Lưu lại thông tin số lượng sản phẩm vào session
+    if (isset($_POST['quantity']) && is_array($_POST['quantity'])) {
+        foreach ($_POST['quantity'] as $key => $quantity) {
+            // Cập nhật số lượng cho từng sản phẩm trong giỏ hàng
+            if (isset($_SESSION['cart'][$key])) {
+                $_SESSION['cart'][$key]['Quantity'] = $quantity;
+            }
+        }
+    }
+    echo $_POST['Name'];
+    echo "<pre>";
+    print_r($_SESSION['cart']);
+    echo "</pre>";
+    // Redirect to the payment processing page or display the payment details
+    // Ví dụ: Chuyển hướng tới trang xử lý thanh toán
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,9 +148,12 @@
                     </div>
                 </form>
         </div>
+        <form class="btn-order" method="post" action="User/atm-momo.php">
         <div class="cartshopping">
             <div class="title" style="display: flex;"><h3 class="header" >Đơn hàng </h3>
-            <h3>(<?php echo $count_sp;?></h3></div>
+            <h3><?php
+            //  echo $count_sp;
+             ?></h3></div>
             <div class="content">
                 <div class="order-table">
                     <table class="product-table">
@@ -140,32 +168,46 @@
                         <tbody>
                             <tr class="product">
 								<?php
-								$sql = "SELECT cart.id_sp, product.Name, product.Color, product.Size, product.Cost,cart.amount, product.img from product inner join cart on product.id_product = cart.id_sp where cart.id_us = '$id'";
-								$sp = $data->query($sql);
-								$total = 0;
-									while ($row = mysqli_fetch_assoc($sp)){
-										$total += ($row["Cost"] * $row["amount"]);
+								// $sql = "SELECT cart.id_sp, product.Name, product.Color, product.Size, product.Cost,cart.amount, product.img from product inner join cart on product.id_product = cart.id_sp where cart.id_us = '$id'";
+								// $sp = $data->query($sql);
+								// $total = 0;
+								// 	while ($row = mysqli_fetch_assoc($sp)){
+								// 		$total += ($row["Cost"] * $row["amount"]);
 								?>
                                 <td>
                                     <div class="img-pro" >
-                                        <div class="img-tile"><img src="../img/item/<?php echo $row["img"];?>" alt="" width="50px"></div>
-                                        <span><?php echo $row["amount"];?></span>
+                                        <div class="img-tile"><img src="../img/item/<?php 
+                                        // echo $row["img"];
+                                        ?>" alt="" width="50px"></div>
+                                        <span>
+                                            <?php
+                                            //  echo $row["amount"];
+                                             ?>
+                                        </span>
                                     </div>
                                 </td>
                                 <td colspan="2">
                                     <span class="product_name">
-									<?php echo $row["Name"];?>
+									<?php
+                                    //  echo $row["Name"];
+                                     ?>
 									</span>
                                     <br>
                                     <span class="property" style="font-size: 13px;">
-                                        <?php echo $row["Color"];?>/<?php echo $row["Size"];?>
+                                        <?php 
+                                        // echo $row["Color"];
+                                        ?>/<?php 
+                                        // echo $row["Size"];
+                                        ?>
                                     </span>
                                 </td>
                                 <td></td>
-                                <td><span class="cost"><?php echo $row["amount"] * $row["Cost"].".000";?></span></td>
+                                <td><span class="cost"><?php 
+                                // echo $row["amount"] * $row["Cost"].".000";
+                                ?></span></td>
                             </tr>
 							<?php
-									}
+									// }
 								?>
                         </tbody>
                     </table>
@@ -180,7 +222,7 @@
                     <div class="form-group1">
                         <div class="cost1">
                             <span>Tạm phí</span>
-                            <span><?php echo $total.".000đ";?></span>
+                            <span><?= $total?> đ</span>
                         </div>
                         <div class="cost1">
                             <span>Phí vận chuyển</span>
@@ -190,14 +232,15 @@
                     <div class="form-group1">
                         <div class="cost1">
                             <span>Tổng cộng</span>
-                            <span style="font-weight: bold;"><?php echo $total + 30 .".000đ";?></span>
+                            <input type="text" name="tong" id="" style="font-weight: bold;" readonly value="<?= $total+30000 ?>"> 
                         </div>
-                        <form class="btn-order" method="post">
                             
                             <a href="cartproduct.php">
                             <i class="fa-solid fa-chevron-left"></i>Quay lại giỏ hàng
                             </a>
-                            <button type="submit" class="btn btn-success"> Đặt hàng</button>
+                            <input type="text" name="name-user" value="<?= $id?>">
+                            <input type="text" name="bill1" value="<?= 5?>">
+                            <button type="submit" class="btn btn-success" > Đặt hàng</button>
                                 </form>
                     </div>
                 </div>

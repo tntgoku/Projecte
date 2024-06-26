@@ -7,7 +7,7 @@
     --primary-color-light:#f6f5ff;
     --toggle-color:#ddd;
     --text-color:#0E6D67D9;
-    ---tran-03:all 0.3s ease;
+    ---tran-03:all 0.3ms ease;
     }
     *{
         padding: 0;
@@ -30,7 +30,6 @@
         height: 100%;
         top:0;
         left:0;
-        transition: all 1s ease;
         width: 260px;
         background-color: var(--sidebar-color);
     }
@@ -114,7 +113,7 @@
         height: 100%;
         width: calc(100% - 260px);
         left: 260px;
-        transition: all 1s ease-in;
+        transition: all 1s ease;
     }
     .home-section.active{
         width: calc(100% - 60px);
@@ -209,7 +208,7 @@ background-color: var(--bs-body-bg);
 background-clip: padding-box;
 border: var(--bs-border-width) solid var(--bs-border-color);
 border-radius: var(--bs-border-radius);
-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out;
 }
 
 .btn-add{
