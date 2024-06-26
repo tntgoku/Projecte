@@ -9,10 +9,22 @@ if(isset($_REQUEST["id_news"]) && $_REQUEST["id_news"] !="")
 {
     $id = $_REQUEST["id_news"];
     $sql = "UPDATE `news` SET `Name` = '$name', `Type_id` = '$type', `Content` = '$content' WHERE `news`.`id_News` = '$id';";
+    $tittle = "Sửa";
 }
 else{
     $sql = "INSERT INTO `news` (`id_News`, `Name`, `Type_id`, `Content`) VALUES (NULL, '$name', '$type', '$content');";
+    $tittle = "Thêm";
 }
-$data->query($sql);
-header("Location:News.php");
+if ($data->query($sql) == TRUE)
+{
+    echo '<script>
+		    alert("'.$tittle.' thành công bài viết '.$name.'");
+		  window.location.href="News.php";</script>';
+}
+else 
+{
+    echo '<script>
+    alert("'.$tittle.' thất bại bài viết '.$name.'");
+  window.location.href="News.php";</script>';
+}
 ?> 

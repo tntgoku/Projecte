@@ -139,8 +139,8 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 						<td><?php echo $row['Phone_Num']?></td>
 						<td><?php echo $row['Address']?></td>
 						<td><?php echo $row['Login_name']?></td>
-						<td><a href="update.php?id_product=<?php echo $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
-                        <td><a href="deleted.php?id_product=<?php echo $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
+						<td><a href="update_customer.php?id_us=<?php echo $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
+                        <td><a href="delete_us.php?id_us=<?php echo $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
 					</tr>
 				<?php
 				}

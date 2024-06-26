@@ -1,4 +1,4 @@
-<!-- <?php 
+ <?php 
 
 include "../../App/connect.php";
 $data=new Database();
@@ -21,28 +21,7 @@ else
     $type = "";
     $content = "";
 }
-// if(isset($_POST["name_news"]) && $_POST["name_news"])
-// {
-// 	$name = $_POST["name_news"];
-// 	$sql = "INSERT INTO `news_list` (`Type_id`, `Name_type`) VALUES (NULL, '$name');";
-// 	mysqli_query($conn,$sql);
-// }
-// // Sua sp
-// if (isset($_POST["name_news_sua"]) && $_POST["name_news_sua"] )
-// {
-//   $id = $_REQUEST["id"];
-//   $name = $_REQUEST["name_news_sua"];
-//   $sql = "UPDATE `news_list` SET `Name_type` = '$name' WHERE `news_list`.`Type_id` = $id;";
-//   mysqli_query($conn,$sql);
-// }
-// // Xoa sp
-// if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
-// {
-//   $id = $_REQUEST["id_xoa"];
-//   $sql = "DELETE FROM `news_list` WHERE `Type_id` = $id;";
-//   mysqli_query($conn,$sql);
-// }
-?> -->
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
