@@ -70,17 +70,13 @@ if(isset($_POST['deleted'])){
             </li>
             <li>
                 <a href="customer.php">
-<<<<<<< HEAD
-                    <img src="/Projecte/img/icon/customer.php" alt="">
-=======
-                    <img src="../../img/icon/dashboard.png" alt="">
->>>>>>> 8cdbd5ba696bc7bfe6a2aadc1e257c332d713dd5
+                    <img src="../../img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="News.php">
-                    <img src="/Projecte/img/icon/News.php" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>

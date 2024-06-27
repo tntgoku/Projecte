@@ -3,7 +3,7 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
-$sql="select bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total_payment,
+$sql="select bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,
       bill.status FROM bill JOIN user ON user.id_user=bill.id_us;";
 $result=$data->query($sql);
 ?>
@@ -48,14 +48,13 @@ $result=$data->query($sql);
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="/Projecte/img/icon/customer.php" alt="">
-                    <img src="/Projecte/img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="News.php">
-                    <img src="/Projecte/img/icon/News.php" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
@@ -94,7 +93,7 @@ $result=$data->query($sql);
             </div>
         </nav>
         <div class="container">
-            <form action="">
+            <form action="" method = "post">
                 <h2>Danh sách hóa đơn mua hàng</h2>
                 <table class="table">
                     <thead>
@@ -117,7 +116,7 @@ $result=$data->query($sql);
                             <td><?=  $row['id_us']; ?></td>
                             <td><?=  $row['Name']; ?></td>
                             <td><?=  $row['count']; ?></td>
-                            <td><?=  $row['Total_payment']; ?>đ</td>
+                            <td><?=  $row['Total']; ?>đ</td>
                             <td>
                                 <?php  
                                     if($row['status']==1){
@@ -126,7 +125,7 @@ $result=$data->query($sql);
                                         echo "Khách hàng chưa thanh toán";
                                     }
                             ?></td>
-                            <td><a href="chitietbill.html">
+                            <td><a href="chitietbill.php?id=<?php echo $row["id_Bill"];?>">
                                 <button type="button" class="btn btn-info">Xem chi tiết</button>
                             </a>
                         </td>

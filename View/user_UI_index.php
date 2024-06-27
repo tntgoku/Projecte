@@ -3,7 +3,7 @@ session_start();
 include '../App/connect.php';
 $data = new Database();
 $data->connect();
-	if($_SESSION["id_user"] != "")
+	if(isset($_SESSION["id_user"]))
 	{
 		$id = $_SESSION["id_user"];
 		$sql = "SELECT * from User where id_user = '$id'";

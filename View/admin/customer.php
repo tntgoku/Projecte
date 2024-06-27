@@ -67,13 +67,13 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="/Projecte/img/icon/customer.php" alt="">
+                    <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="News.php">
-                    <img src="/Projecte/img/icon/News.php" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
@@ -147,15 +147,8 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 						<td><?= $row['Phone_Num']?></td>
 						<td><?= $row['Address']?></td>
 						<td><?= $row['Login_name']?></td>
-						<td><a href="update.php?id_product=<?= $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
-                        <td><a href="deleted.php?id_product=<?= $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
-						<td><?php echo $row['id_user']?></td>
-						<td><?php echo $row['Name']?></td>
-						<td><?php echo $row['Phone_Num']?></td>
-						<td><?php echo $row['Address']?></td>
-						<td><?php echo $row['Login_name']?></td>
-						<td><a href="update_customer.php?id_us=<?php echo $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
-                        <td><a href="delete_us.php?id_us=<?php echo $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
+						<td><a href="update_customer.php?id_us=<?= $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
+                        <td><a href="deleted_us.php?id_us=<?= $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
 					</tr>
 				<?php
 				}

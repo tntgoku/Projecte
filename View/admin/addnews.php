@@ -3,10 +3,10 @@
 include "../../App/connect.php";
 $data=new Database();
 $data->connect();
-if (isset($_REQUEST["id_add"]))
+if (isset($_REQUEST["id_News"]))
 {
     $tittle = "Sửa bài viết";
-    $id = $_REQUEST["id_add"]; 
+    $id = $_REQUEST["id_News"]; 
     $sql = "SELECT * from news where id_News = '$id'";
     $row = mysqli_fetch_assoc($data->query($sql));
     $name = $row["Name"];

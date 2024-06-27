@@ -16,41 +16,47 @@ $data->connect();
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <form class="sidebar" method="post">
+<form class="sidebar" method="post" style="transition: all 1s cubic-bezier(0.4, 0, 1, 1);">
         <div class="logo-details">
-            <img src="/img/icon/LogoSecondP.jpg" alt="" width="100px">
+            <img src="/Projecte/img/icon/LogoSecondP.jpg" alt="" width="100px">
             <span class="logo_name">C L O S E T</span>
         </div>
         
         <ul class="nav-link">
             <li>
-                <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                <a href="dashboard.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="product.php">
-                    <img src="/img/icon/product-page.png">
+                    <img src="/Projecte/img/icon/product-page.png">
                     <span class="link_name">Sản phẩm</span>
                 </a>
                 
             </li>
             <li>
-                <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                <a href="bill.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Hóa đơn</span>
                 </a>
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="/img/icon/dashboard.png" alt="">
+                    <img src="../../img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
-                <a href="dashboard.html">
-                    <img src="/img/icon/dashboard.png" alt="">
+                <a href="News.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
+                    <span class="link_name">Quản lý bài viết(news)</span>
+                </a>
+            </li>
+            <li>
+                <a href="vendors.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Cái này là cái gì?</span>
                 </a>
             </li>
