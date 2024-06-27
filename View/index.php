@@ -195,7 +195,7 @@ if (isset($_POST['product_key'])) {
                                       " data-key="' . $key . '">';
                                       echo '<p id="conti">Giá: <span class="price" id="price-' . $key . '" style="color:#f81f1f;">' . 
                                               $product['Cost'] . '</span> đ</p>
-                                              <form method="post" action="index1.php">
+                                              <form method="post" action="index.php">
                                                 <input type="hidden" name="product_key" value="' . $key . '">
                                                 <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
                                               </form>
@@ -255,7 +255,7 @@ if (isset($_POST['product_key'])) {
 
 function updateCart(key, quantity) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "index1.php", true);
+    xhr.open("POST", "index.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send("key=" + key + "&quantity=" + quantity);
 }
@@ -395,7 +395,7 @@ function updateCart(key, quantity) {
                                   </div>
                   </div>
                   <div class="product">
-                    <form action="index1.php" method="post" enctype="application/x-www-form-urlencoded">
+                    <form action="index.php" method="post" enctype="application/x-www-form-urlencoded">
                       <input type="hidden" name="idproduct[]" value="<?= $product['id_product']?>">
                       <button type="submit" name="addcart" class="btn btn-primary btn-lg">Them vao gio hang</button>
                     </form>

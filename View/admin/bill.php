@@ -4,8 +4,9 @@ include '../../App/connect.php';
 $data=new Database();
 $data->connect();
 $sql="select bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total_payment,
-      bill.status FROM bill JOIN user ON user.id_user=bill.id_us;";
+bill.status FROM bill JOIN user ON user.id_user=bill.id_us;";
 $result=$data->query($sql);
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,14 +49,13 @@ $result=$data->query($sql);
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="/Projecte/img/icon/customer.php" alt="">
-                    <img src="/Projecte/img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="News.php">
-                    <img src="/Projecte/img/icon/News.php" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
@@ -68,7 +68,7 @@ $result=$data->query($sql);
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
-                <a href="" style="text-decoration: none;">
+                <a href="/Projecte/View/logout.php" style="text-decoration: none;">
                     <i class="fa-solid fa-right-from-bracket" style="font-size: 30px; margin-left: 5px;"></i>
                     <span class="nav-text" style="margin-left: 45px;">Logout</span>
                 </a>
@@ -85,7 +85,7 @@ $result=$data->query($sql);
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;">aadwawd</span>
+                font-weight: 600;"><?=$_SESSION['Name']?></span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -94,7 +94,7 @@ $result=$data->query($sql);
             </div>
         </nav>
         <div class="container">
-            <form action="">
+            <form action="" method = "post">
                 <h2>Danh sách hóa đơn mua hàng</h2>
                 <table class="table">
                     <thead>
@@ -126,7 +126,7 @@ $result=$data->query($sql);
                                         echo "Khách hàng chưa thanh toán";
                                     }
                             ?></td>
-                            <td><a href="chitietbill.html">
+                            <td><a href="chitietbill.php?id=<?php echo $row["id_Bill"];?>">
                                 <button type="button" class="btn btn-info">Xem chi tiết</button>
                             </a>
                         </td>

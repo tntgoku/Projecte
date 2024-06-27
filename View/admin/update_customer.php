@@ -1,25 +1,30 @@
-<?php 
+    <?php 
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
+$custommer= new Customer();
 $product = null;
-session_start();
-if (isset($_GET['id_us']) || isset($_SESSION['id_us'])) {
-    if(isset($_GET['id_us'])) {
-    $_SESSION['id_us']= $_GET['id_us'];
-    }
-    $id = $_SESSION['id_us'];
-    $sql = "SELECT * from user where id_user = '$id'";
-    $result = mysqli_fetch_object($db->query($sql));
-    
-    $idus = $id;
-    $name = $result->Name;
-    $address = $result->Address;
-    $Phone_Num = $result->Phone_Num;
-    $Login_name = $result->Login_name;
-    $pass = $result->pass;
+$customer12=array();
+$id_customer = isset($_REQUEST['id_customer']) ? $_REQUEST['id_customer'] : null;
+if ($_REQUEST['id_customer'] !== null) {
+    // Tạo mảng customer1 và thêm thông tin khách hàng vào mảng
+       $customer1=$custommer->getinforcus($id_customer);
+       if($customer1){
+        foreach($customer1 as $info)
+        {$customer12[]=$info;
+
+        }
+       } 
+} else {
+    echo "Không có id_customer trong REQUEST.";
 }
 
+
+// doan nay la luu thong tin
+if(isset($_POST['update'])){
+
+}
+ 
 ?>
 
 <!DOCTYPE html>
@@ -33,41 +38,47 @@ if (isset($_GET['id_us']) || isset($_SESSION['id_us'])) {
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <form class="sidebar" method="post">
+<form class="sidebar" method="post" style="transition: all 1s cubic-bezier(0.4, 0, 1, 1);">
         <div class="logo-details">
-            <img src="../..//img/icon/LogoSecondP.jpg" alt="" width="100px">
+            <img src="/Projecte/img/icon/LogoSecondP.jpg" alt="" width="100px">
             <span class="logo_name">C L O S E T</span>
         </div>
         
         <ul class="nav-link">
             <li>
-                <a href="dashboard.html">
-                    <img src="../../img/icon/dashboard.png" alt="">
+                <a href="dashboard.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="product.php">
-                    <img src="../..//img/icon/product-page.png">
+                    <img src="/Projecte/img/icon/product-page.png">
                     <span class="link_name">Sản phẩm</span>
                 </a>
                 
             </li>
             <li>
-                <a href="dashboard.html">
-                    <img src="../..//img/icon/dashboard.png" alt="">
+                <a href="bill.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Hóa đơn</span>
                 </a>
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="../..//img/icon/dashboard.png" alt="">
+                    <img src="../../img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
-                <a href="dashboard.html">
-                    <img src="../..//img/icon/dashboard.png" alt="">
+                <a href="News.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
+                    <span class="link_name">Quản lý bài viết(news)</span>
+                </a>
+            </li>
+            <li>
+                <a href="vendors.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Cái này là cái gì?</span>
                 </a>
             </li>
@@ -102,34 +113,38 @@ if (isset($_GET['id_us']) || isset($_SESSION['id_us'])) {
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <h2>Thay đổi thông tin người dùng <?php echo $name;?></h2>
+                    <h2>Thay đổi thông tin người dùng <?=  $customer12[1];?></h2>
                 </div>
             </div>
-            <div class="card-body " style="">
+            <div class="card-body ">
             <form action="process_update_us.php" method="post">
                     <div class="form-group" style="margin-top: 10px;">
                         <label for="">Mã người dùng</label>
-                        <input type="text" name="id_us" value="<?php echo $idus;?>" readonly>
+                        <input type="text" name="id_us" value="<?=$customer12[0];?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="">Tên người dùng</label>
-                        <input type="text" name="name"  value="<?php echo $name;?>">
+                        <input type="text" name="name"  value="<?=$customer12[1];?>">
                     </div>
                     <div class="form-group">
                         <label for="">Địa chỉ</label>
-                        <input type="text" name="address" value="<?php echo $address;?>">
+                        <input type="text" name="address" value="<?=$customer12[2];?>">
                     </div>
                     <div class="form-group">
                         <label for="">Số điện thoại</label>
-                        <input type="text" name="sdt"  value="<?php echo $Phone_Num;?>">
+                        <input type="text" name="sdt"  value="<?=$customer12[3];?>">
                     </div>
                     <div class="form-group">
                         <label for="">Tên đăng nhập</label>
-                        <input type="text" name="Login_name"  value="<?php echo $Login_name;?>">
+                        <input type="text" name="Login_name"  value="<?=$customer12[4];?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="">Mật khẩu</label>
-                        <input type="password" name="pass"  value="<?php echo $pass;?>">
+                        <input type="password" name="pass"  value="<?=$customer12[5];?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nhập lại mật khẩu</label>
+                        <input type="password" name="pass1"  >
                     </div>
                 <!-- Add other fields as needed -->
                 <button type="submit" class="btn btn-primary" name = "update">Lưu thay đổi</button>

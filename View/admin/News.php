@@ -2,6 +2,7 @@
 include "../../App/connect.php";
 $data=new Database();
 $data->connect();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,13 +43,8 @@ $data->connect();
                 </a>
             </li>
             <li>
-<<<<<<< HEAD
                 <a href="customer.php">
                     <img src="/Projecte/img/icon/customer.php" alt="">
-=======
-                <a href="dcustomer.php">
-                    <img src="../../img/icon/dashboard.png" alt="">
->>>>>>> 8cdbd5ba696bc7bfe6a2aadc1e257c332d713dd5
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
@@ -67,7 +63,7 @@ $data->connect();
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
-                <a href="" style="text-decoration: none;">
+                <a href="/Projecte/View/logout.php" style="text-decoration: none;">
                     <i class="fa-solid fa-right-from-bracket" style="font-size: 30px; margin-left: 5px;"></i>
                     <span class="nav-text" style="margin-left: 45px;">Logout</span>
                 </a>
@@ -84,7 +80,7 @@ $data->connect();
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;">aadwawd</span>
+                font-weight: 600;"><?=$_SESSION['Name']?></span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -124,13 +120,8 @@ $data->connect();
 						<td><?php echo $row['Name']?></td>
 						<td><?php echo $row['Name_type']?></td>
 						<td><?php echo $row['Content']?></td>
-<<<<<<< HEAD
 						<td><a href="update.php?id_product=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
                         <td><a href="deleted.php?id_product=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
-=======
-						<td><a href="addnews.php?id_add=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
-                        <td><a href="deleted_new.php?id_del=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
->>>>>>> 8cdbd5ba696bc7bfe6a2aadc1e257c332d713dd5
 					</tr>
 				<?php
 				}

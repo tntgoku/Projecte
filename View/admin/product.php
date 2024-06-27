@@ -2,6 +2,7 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
+session_start();
 if(isset($_POST['btn-addpro'])){
     header("Location:add.php");
 }
@@ -70,17 +71,13 @@ if(isset($_POST['deleted'])){
             </li>
             <li>
                 <a href="customer.php">
-<<<<<<< HEAD
-                    <img src="/Projecte/img/icon/customer.php" alt="">
-=======
-                    <img src="../../img/icon/dashboard.png" alt="">
->>>>>>> 8cdbd5ba696bc7bfe6a2aadc1e257c332d713dd5
+                    <img src="../../img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="News.php">
-                    <img src="/Projecte/img/icon/News.php" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
@@ -110,7 +107,7 @@ if(isset($_POST['deleted'])){
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;">aadwawd</span>
+                font-weight: 600;"><?=$_SESSION['Name']?></span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">

@@ -3,6 +3,7 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +105,7 @@ $data->connect();
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;">aadwawd</span>
+                font-weight: 600;"><?=$_SESSION['Name']?></span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">

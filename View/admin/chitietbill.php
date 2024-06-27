@@ -3,24 +3,34 @@ include '../../App/connect.php';
 $data=new Database();
 $data->connect();
 $product = null;
-if (isset($_GET['id_product'])) {
-    $id = $_GET['id_product'];
-    $sql = "SELECT id_product, Name, Type_id, Color, Size, Cost, Amount, Discount, img FROM product WHERE id_product = $id";
-    $result = mysqli_fetch_object($db->query($sql));
-    
-    $idpr = $result->id_product;
-    $name = $result->Name;
-    $color = $result->Color;
-    $Size = $result->Size;
-    $Cost = $result->Cost;
-    $typeid = $result->Type_id;
-    $Amount = $result->Amount;
-    $Discount = $result->Discount;
-    $img = $result->img;
-    echo "
-    <script>console.log('$idpr') </script>";
-}
 
+if (isset($_GET['id']) ) {
+    $id = $_GET['id'];
+    echo $id;
+    $sql = "SELECT bill.Total_payment, 
+    bill.count , 
+    bill.address,
+    bill.note,
+    bill.date,
+    bill.status, 
+    user.Name as us_name,
+    user.Phone_Num as us_sdt,
+    product.id_product as prod_id,
+    product.Name as prod_name,
+    product.Color as prod_color,
+    product.Size as prod_size,
+    product.Cost as prod_cost,
+    product.Discount as prod_discount,
+    product.img as prod_img
+    from bill 
+    inner join user ON bill.id_us = user.id_user 
+    inner join product on bill.id_sp = product.id_product 
+    where bill.id_Bill = '$id'";
+    $result = mysqli_fetch_assoc($db->query($sql));
+}
+else{
+    echo "Loi!!";
+}
 ?>
 
 <!DOCTYPE html>
@@ -95,10 +105,10 @@ if (isset($_GET['id_product'])) {
                 <span style="font-size: 35px;">Dashboard</span>
             </div>
             <div class="profile-user">
-                <img src="/img/item/a3.png" width="40px" alt="">
+                <img src="../../img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;">aadwawd</span>
+                font-weight: 600;"></span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -107,70 +117,75 @@ if (isset($_GET['id_product'])) {
             </div>
         </nav>
         <div class="container-fluid">
-            <div class="card">
+            <!-- <div class="card">
                 <div class="card-header">
                     <h2>Thay đổi thông tin sản phẩm có id=<?php  
-                if (isset($_GET['id_product'])) {
-                    $edit_id = $_GET['id_product'];
-                    // Fetch product details based on edit_id
-                    $sql = "SELECT id_product, Name, Type_id, Color, Size, Cost, Amount, Discount, img FROM product WHERE id_product = $edit_id";
-                        $result =mysqli_fetch_object($db->query($sql));
-                        $id=$result->id_product;
-                        echo $id;
-                } 
+                // if (isset($_GET['id_product'])) {
+                //     $edit_id = $_GET['id_product'];
+                //     // Fetch product details based on edit_id
+                //     $sql = "SELECT id_product, Name, Type_id, Color, Size, Cost, Amount, Discount, img FROM product WHERE id_product = $edit_id";
+                //         $result =mysqli_fetch_object($db->query($sql));
+                //         $id=$result->id_product;
+                //         echo $id;
+                // } 
                     ?></h2>
                 </div>
-            </div>
+            </div> -->
             <div class="card-body " style="">
-            <form action="process_update.php" method="post" style="background :#e4e9f7;">
+            <form action="bill.php" method="post" style="background :#e4e9f7;">
+                    <div class="form-group">
+                        <label for="">Người mua</label>
+                        <input type="text" name="name"  value="<?php echo $result["us_name"];?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Địa chỉ</label>
+                        <input type="text" name="color" value="<?php echo $result["address"];?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Số điện thoại</label>
+                        <input type="text" name="size"  value="<?php echo $result["us_sdt"];?>">
+                    </div>
                     <div class="form-group" style="margin-top: 10px;">
                         <label for="">Mã sản phẩm</label>
-                        <input type="text" name="id_product" value="<?php echo $idpr;?>" readonly>
+                        <input type="text" name="id_product" value="<?php echo $result["prod_id"];?>" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="">Hình ảnh</label>
-                        <img src="../../img/item/<?php echo $img;?>" alt="" width="150px">
-                        <input type="file" width="80px" name="img">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Tên sản phẩm</label>
-                        <input type="text" name="name"  value="<?php echo $name;?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="">loại sản phẩm</label>
-                        <select name="type_id" id="">
-                        <?php 
-                        $truyvan=$data->query("select* from product_list");
-                        while($row=mysqli_fetch_assoc($truyvan)){
-                            ?>
-                            <option value="<?php echo $row['Type_id']?>"><?php echo $row['Type_name']?></option>
-                            <?php
-                        }
-                        ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Màu sắc</label>
-                        <input type="text" name="color" value="<?php echo $color;?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Size</label>
-                        <input type="text" name="size"  value="<?php echo $Size;?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Giá</label>
-                        <input type="text" name="cost"  value="<?php echo $Cost;?>">
+                        <label for="">Chi tiết sản phẩm</label>
+                        <input type="text" width="80px" name="img" value = "<?php echo $result["prod_name"] .'\\'. $result["prod_size"] .'\\'. $result["prod_color"];?>">
+                        <img src="../../img/item/<?php echo $result["prod_img"];?>" alt="" width="150px">
                     </div>
                     <div class="form-group">
                         <label for="">Số lượng</label>
-                        <input type="text" name="amount"  value="<?php echo $Amount;?>">
+                        <input type="text" name="name"  value="<?php echo $result["count"];?>">
                     </div>
                     <div class="form-group">
                         <label for="">Giảm giá</label>
-                        <input type="text" name="discount"  value="<?php echo $Discount;?>">
+                        <input type="text" name="discount"  value="<?php echo $result["prod_discount"];?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Note</label>
+                        <input type="text" name="discount"  value="<?php echo $result["note"];?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Ngày tạo</label>
+                        <input type="text" name="discount"  value="<?php echo $result["date"];?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Thanh toán</label>
+                        <input type="text" name="cost"  value="<?php echo $result["Total_payment"];?>đ">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Trạng thái</label>
+                        <input type="text" name="name"  value="<?php 
+                            if ($result["status"] == 1)
+                            {
+                                echo "Đã thanh toán";
+                            }
+                            else echo "Chưa thanh toán";
+                        ?>">
                     </div>
                 <!-- Add other fields as needed -->
-                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                <button type="submit" class="btn btn-primary">Quay lại</button>
             </form>
             </div>
         </div>

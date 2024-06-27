@@ -117,7 +117,7 @@ class Customer{
         $this->data->connect();
     }
     public function getinforcus($idcustomer){
-        $sql= "select * from user where Name = '$idcustomer'";
+        $sql= "select * from user where id_user = '$idcustomer'";
         $result=$this->data->query( $sql);
         if ($result->num_rows > 0) {
             return $result->fetch_assoc();
@@ -133,6 +133,50 @@ class Customer{
             // Thêm các trường thông tin khác theo yêu cầu
         } else {
             echo "Customer not found.";
+        }
+    }
+    public function deletedCustomer($id,$name){
+        $sql= 'DELETE FROM user WHERE user.id_user ='."$id" ;
+    $result= $this->data->query($sql);
+    if($result===TRUE){
+        echo '
+        <script>alert("Xoa thanh cong'.$name.'") </script> 
+        ';
+    }else{
+        echo '
+        <script>alert("Khong the xoa") </script> 
+        ';
+    }
+    }
+    public function updateCustomer($id,$name,$phone,$address,$pass,$pass1,$account){
+        $sql_check = "SELECT * from user where Login_name = '$account' and id_user <> '$id'";
+        $result_check = $this->data->query($sql_check);
+        if ($result_check->num_rows > 0){
+            echo '<script>
+                alert("Tên đăng nhập đã tồn tại");
+                window.location.href="update_customer.php";
+              </script>'; 
+        }
+        if($pass !=$pass1){
+            echo '
+            <script>alert("Vui lòng nhập lại mật khẩu") </script> 
+            ';
+        }else{
+            $sql ="UPDATE `user` SET `Name` = '$name',Address='$address',Phone_Num='$phone',
+            pass='$pass',Login_name='$account'
+             WHERE `user`.`id_user` = '$id'";
+             $result=$this->data->query($sql);
+             if($result===TRUE){
+                echo '<script>
+                alert("Cập nhật thông tin người dùng '.$name.' thành công");
+                window.location.href="customer.php";
+              </script>';
+             }else{
+                echo '<script>
+                alert("Cập nhật thông tin người dùng '.$name.' thất bại");
+                window.location.href="update_customer.php";
+              </script>';
+             }
         }
     }
 }

@@ -266,7 +266,7 @@
                         </div>
                       </div>
                       <a href="allproducts.php">
-                        <img src="/projecte/img/item/AoPolo.png" width="230px" alt="" class="main-img">
+                        <img src="/projecte/img/item/bb1.jpg" width="230px" alt="" class="main-img">
                     </a></div>
                   <div class="product-info">
                               <div class="product-detail clearfix">
