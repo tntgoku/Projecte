@@ -9,6 +9,7 @@ $data->connect();
 		$sql = "SELECT * from User where id_user = '$id'";
 		$user = mysqli_fetch_assoc($data->query($sql));
 		$user_name = $user["Name"];
+		$_SESSION['Name'] = $user_name;
 		$user_sdt = $user["Phone_Num"];
 		$sql = "SELECT count(id_sp) as sp from cart where id_us = '$id'";
 		$count= mysqli_fetch_assoc($data->query($sql));

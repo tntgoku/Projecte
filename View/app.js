@@ -21,16 +21,18 @@ function check_Resign()
         method : 'post',
         data :
         {
+            tnd :$('#tnd').val(),
             tdn :$('#tdn').val(),
             sdt :$('#sdt').val(),
             mk :$('#mk').val(),
             cmk :$('#check_mk').val(),
+            add :$('#add').val(),
         },
         success :function(res)
         {
             if(res == '0')
             {
-                window.location.href = 'index.php';
+                window.location.href = 'user_UI_index.php';
             }
             if(res == '1')
             {
@@ -55,6 +57,10 @@ function check_Resign()
             if(res == '6')
             {
                 alert('Xác nhận mật khẩu không khớp!!');
+            }
+            if(res == '7')
+            {
+                alert('Chưa chọn Tỉnh/Thành phố!!');
             }
         }
     })

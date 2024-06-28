@@ -6,6 +6,71 @@ session_start();
           </script>';
           unset($_SESSION['Login']);
  }
+ $provinces = array(
+    "An Giang",
+    "Bà Rịa - Vũng Tàu",
+    "Bạc Liêu",
+    "Bắc Kạn",
+    "Bắc Giang",
+    "Bắc Ninh",
+    "Bến Tre",
+    "Bình Dương",
+    "Bình Định",
+    "Bình Phước",
+    "Bình Thuận",
+    "Cà Mau",
+    "Cao Bằng",
+    "Cần Thơ",
+    "Đà Nẵng",
+    "Đắk Lắk",
+    "Đắk Nông",
+    "Điện Biên",
+    "Đồng Nai",
+    "Đồng Tháp",
+    "Gia Lai",
+    "Hà Giang",
+    "Hà Nam",
+    "Hà Nội",
+    "Hà Tĩnh",
+    "Hải Dương",
+    "Hải Phòng",
+    "Hậu Giang",
+    "Hòa Bình",
+    "Hưng Yên",
+    "Khánh Hòa",
+    "Kiên Giang",
+    "Kon Tum",
+    "Lai Châu",
+    "Lâm Đồng",
+    "Lạng Sơn",
+    "Lào Cai",
+    "Long An",
+    "Nam Định",
+    "Nghệ An",
+    "Ninh Bình",
+    "Ninh Thuận",
+    "Phú Thọ",
+    "Phú Yên",
+    "Quảng Bình",
+    "Quảng Nam",
+    "Quảng Ngãi",
+    "Quảng Ninh",
+    "Quảng Trị",
+    "Sóc Trăng",
+    "Sơn La",
+    "Tây Ninh",
+    "Thái Bình",
+    "Thái Nguyên",
+    "Thanh Hóa",
+    "Thừa Thiên Huế",
+    "Tiền Giang",
+    "TP Hồ Chí Minh",
+    "Trà Vinh",
+    "Tuyên Quang",
+    "Vĩnh Long",
+    "Vĩnh Phúc",
+    "Yên Bái"
+);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,12 +90,25 @@ session_start();
                 <form action="" method = "post" name = "frm_dk">
                     <h2>Đăng ký</h2>
                 <div class="input-form">
-                    <input type="text" id ="tdn" required>
-                    <label for="">Tên đăng nhập</label>
+                    <input type="text" id ="tnd" required>
+                    <label for="">Tên người dùng</label>
                 </div>
                 <div class="input-form">
                     <input type="text" id ="sdt" required>
                     <label for="">Số điện thoại</label>
+                </div> <!-- Đoạn này chỉnh lại ui hộ cái nhá -->
+                <div class="input-form">
+                    <select id="add"> 
+                        <option value="0">--Chọn Tỉnh/Thành phố--</option>
+                        <?php foreach ($provinces as $value) { ?>
+                            <option value="<?php echo $value;?>"><?php echo $value;?></option>
+                        <?php } ?>
+                    </select>
+                    <label for="">Địa chỉ (Tỉnh/Thành phố)</label>
+                </div>
+                <div class="input-form">
+                    <input type="text" id ="tdn" required>
+                    <label for="">Tên đăng nhập</label>
                 </div>
                 <div class="input-form">
                     <input type="password" id="mk" required>

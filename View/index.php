@@ -1,5 +1,4 @@
-<?php require_once("user_UI_index.php"); 
-?>
+<?php require_once("user_UI_index.php");?>
 <?php
 $data = new Database();
 $data->connect();
