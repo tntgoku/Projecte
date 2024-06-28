@@ -151,7 +151,7 @@ if (isset($_POST['product_key'])) {
                   <?php }else{ 
                     echo '
                     <div class="login">
-                      <label for=""><a href="login.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
+                      <label for=""><a href="Login_Resign.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
                     </div>';
                    } ?>
               </div>
