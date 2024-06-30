@@ -3,7 +3,8 @@
 
 include "../../App/connect.php";
 $data=new Database();
-$data->connect();
+$data->connect();session_start();
+$custommer=new Customer();
 if(isset($_POST["name_news"]) && $_POST["name_news"])
 {
 	$name = $_POST["name_news"];
@@ -19,11 +20,8 @@ if (isset($_POST["name_news_sua"]) && $_POST["name_news_sua"] )
   mysqli_query($conn,$sql);
 }
 // Xoa sp
-if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
-{
-  $id = $_REQUEST["id_xoa"];
-  $sql = "DELETE FROM `news_list` WHERE `Type_id` = $id;";
-  mysqli_query($conn,$sql);
+if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
+    $custommer->deletedCustomer($_POST['id_dele'],$_POST['name1']);
 }
 ?>
 
@@ -78,15 +76,15 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
                 </a>
             </li>
             <li>
-                <a href="vendors.php">
+            <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Cái này là cái gì?</span>
+                    <span class="link_name">Quay lai trang index</span>
                 </a>
             </li>
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
-                <a href="" style="text-decoration: none;">
+                <a href="/Projecte/View/logout.php" style="text-decoration: none;">
                     <i class="fa-solid fa-right-from-bracket" style="font-size: 30px; margin-left: 5px;"></i>
                     <span class="nav-text" style="margin-left: 45px;">Logout</span>
                 </a>
@@ -103,7 +101,7 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;">aadwawd</span>
+                font-weight: 600;"><?=$_SESSION['Name']?></span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -121,7 +119,7 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
               </form>
             </div>
         </div>
-		<form action="" method="post">
+		<form action="customer.php" method="post">
 		<table class="table">
 			<thead style="text-align: center;">
 				<tr>
@@ -136,13 +134,22 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
 			</thead>
 			<tbody>
 				 <?php 
-				$i=1;
-				$sql= "SELECT * from User";
-				
+    				$sql= "SELECT * from User";
 				$result=$data->query($sql);
 				while($row=mysqli_fetch_assoc($result)){
 					?>
 					<tr>
+						<td name="id"><?= $row['id_user']?></td>
+						<td><?=$row['Name']?></td>
+						<td><?=$row['Phone_Num']?></td>
+						<td><?=$row['Address']?></td>
+						<td><?=$row['Login_name']?></td>
+						<td><a href="update_customer.php?id_customer=<?=$row['id_user']?>"><button type="button" class="btn btn-success" name="update">Sua</button></a></td>
+                        <td><form action="customer.php" method="post" style="display:inline;">
+                        <input type="hidden" name="id_dele" value="<?=$row['id_user'] ?>">
+                        <input type="hidden" name="name1" value="<?=$row['Name'] ?>">
+                        <button type="submit" class="btn btn-danger" name="deleted">Xóa</button>
+                    </form></td>
 						<td><?= $row['id_user']?></td>
 						<td><?= $row['Name']?></td>
 						<td><?= $row['Phone_Num']?></td>

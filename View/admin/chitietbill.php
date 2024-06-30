@@ -7,7 +7,11 @@ $product = null;
 if (isset($_GET['id']) ) {
     $id = $_GET['id'];
     echo $id;
+<<<<<<< HEAD
+    $sql = "SELECT bill.Total_payment, 
+=======
     $sql = "SELECT bill.Total, 
+>>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
     bill.count , 
     bill.address,
     bill.note,
@@ -172,7 +176,11 @@ else{
                     </div>
                     <div class="form-group">
                         <label for="">Thanh toán</label>
+<<<<<<< HEAD
+                        <input type="text" name="cost"  value="<?php echo $result["Total_payment"];?>đ">
+=======
                         <input type="text" name="cost"  value="<?php echo $result["Total"];?>đ">
+>>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
                     </div>
                     <div class="form-group">
                         <label for="">Trạng thái</label>

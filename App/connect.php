@@ -14,6 +14,11 @@ class Database{
         }
         return $this->conn;
     }
+
+    // Cai nay la ep dinh dang 
+    public function real_escape_string($string) {
+        return $this->conn->real_escape_string($string);
+    }
     public function insertData($name,$type_id,$color,$size,$cost,$amount,$discount,$img){
         $sql= "INSERT INTO product(Name,Type_id,Color,Size,Color,Amount,Discount,img)
                 VALUES ($name, $type_id, $color, $size, $cost, $amount, $discount,$img)";
@@ -49,13 +54,32 @@ class Database{
 }
 $db =new Database();
 $db->connect();
-class Product{
+class Product extends Database{
     public $id;
-    public $name;
-    public $color;
-    public $cost;
-    public $discount;
-    public $img;
+    private $name;
+    private $color;
+    private $cost;
+    private $discount;
+    private $img;
+    private $data;
+    public function __construct1() {
+        $this->data = new Database();
+        $this->data->connect();
+    }
+    public function getinforProduct($id){
+       $sql123="select * from product where id_product= $id";
+       $result=$this->data->query($sql123);
+       if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row; // Thêm dòng dữ liệu vào mảng $data
+        }
+        print($data);
+        }
+        else{
+            return null;
+        }
+
+    }
 }
 class Cart{
     private $cartItems; 
@@ -93,7 +117,7 @@ class Cart{
         }
     }
     public function insertbilltong($idcus,$id_sp,$amount,$total,$status,$ngtao){
-        $sql="INSERT INTO bill(id_us,id_sp,count,Total_payment,status,ngtao)
+        $sql="INSERT INTO bill(id_us,id_sp,count,Total,status,date)
         VALUES ($idcus,$id_sp,$amount,$total,$status,'$ngtao');
 ";
 $data =new Database();
@@ -102,10 +126,13 @@ $result=$data->query($sql);
 if($result===TRUE){
     echo '
     <script>
-            alert("Thanh toan thanh cong");
+            alert("Thanh toan  cong");
         </script>
                 ';
 }
+    }
+    public function updatethanhtoan($idcus,$amount,$total,$status,$ngtao){
+        $sql ="Update bill set count = '$amount',Total= '$total',";
     }
 }
 class Customer{
@@ -117,7 +144,7 @@ class Customer{
         $this->data->connect();
     }
     public function getinforcus($idcustomer){
-        $sql= "select * from user where Name = '$idcustomer'";
+        $sql= "select * from user where id_user = $idcustomer";
         $result=$this->data->query( $sql);
         if ($result->num_rows > 0) {
             return $result->fetch_assoc();
@@ -133,6 +160,50 @@ class Customer{
             // Thêm các trường thông tin khác theo yêu cầu
         } else {
             echo "Customer not found.";
+        }
+    }
+    public function deletedCustomer($id,$name){
+        $sql= 'DELETE FROM user WHERE user.id_user ='."$id" ;
+    $result= $this->data->query($sql);
+    if($result===TRUE){
+        echo '
+        <script>alert("Xoa thanh cong'.$name.'") </script> 
+        ';
+    }else{
+        echo '
+        <script>alert("Khong the xoa") </script> 
+        ';
+    }
+    }
+    public function updateCustomer($id,$name,$phone,$address,$pass,$pass1,$account){
+        $sql_check = "SELECT * from user where Login_name = '$account' and id_user <> '$id'";
+        $result_check = $this->data->query($sql_check);
+        if ($result_check->num_rows > 0){
+            echo '<script>
+                alert("Tên đăng nhập đã tồn tại");
+                window.location.href="update_customer.php";
+              </script>'; 
+        }
+        if($pass !=$pass1){
+            echo '
+            <script>alert("Vui lòng nhập lại mật khẩu") </script> 
+            ';
+        }else{
+            $sql ="UPDATE `user` SET `Name` = '$name',Address='$address',Phone_Num='$phone',
+            pass='$pass',Login_name='$account'
+             WHERE `user`.`id_user` = '$id'";
+             $result=$this->data->query($sql);
+             if($result===TRUE){
+                echo '<script>
+                alert("Cập nhật thông tin người dùng '.$name.' thành công");
+                window.location.href="customer.php";
+              </script>';
+             }else{
+                echo '<script>
+                alert("Cập nhật thông tin người dùng '.$name.' thất bại");
+                window.location.href="update_customer.php";
+              </script>';
+             }
         }
     }
 }

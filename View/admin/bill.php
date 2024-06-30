@@ -3,9 +3,14 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
+<<<<<<< HEAD
+$sql="SELECT bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,bill.date,bill.status FROM bill inner JOIN user ON bill.id_us=user.id_user;";
+=======
 $sql="select bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,
       bill.status FROM bill JOIN user ON user.id_user=bill.id_us;";
+>>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
 $result=$data->query($sql);
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,15 +64,15 @@ $result=$data->query($sql);
                 </a>
             </li>
             <li>
-                <a href="vendors.php">
+            <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Cái này là cái gì?</span>
+                    <span class="link_name">Quay lai trang index</span>
                 </a>
             </li>
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
-                <a href="" style="text-decoration: none;">
+                <a href="/Projecte/View/logout.php" style="text-decoration: none;">
                     <i class="fa-solid fa-right-from-bracket" style="font-size: 30px; margin-left: 5px;"></i>
                     <span class="nav-text" style="margin-left: 45px;">Logout</span>
                 </a>
@@ -84,7 +89,7 @@ $result=$data->query($sql);
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;">aadwawd</span>
+                font-weight: 600;"><?=$_SESSION['Name']?></span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -105,6 +110,7 @@ $result=$data->query($sql);
                         <td>Mã KH</td>
                         <td>Tên khách hàng</td>
                         <td>số lượng</td>
+                        <td>Ngày tạo</td>
                         <td>Thành tiền</td>
                         <td>Trạng thái</td>
                         <td colspan="2">Chức năng</td>
@@ -119,6 +125,10 @@ $result=$data->query($sql);
                             <td><?=  $row['id_us']; ?></td>
                             <td><?=  $row['Name']; ?></td>
                             <td><?=  $row['count']; ?></td>
+<<<<<<< HEAD
+                            <td><?=  $row['date']; ?></td>
+=======
+>>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
                             <td><?=  $row['Total']; ?>đ</td>
                             <td>
                                 <?php  
