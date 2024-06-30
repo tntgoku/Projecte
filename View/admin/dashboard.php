@@ -12,31 +12,79 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
+          google.charts.load('current', {'packages':['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawStuff);
 
-      function drawChart() {
+      function drawStuff() {
+
+        var button = document.getElementById('change-chart');
+        var chartDiv = document.getElementById('chart_div');
+        <?php 
+        $sql="select date,sum(Total) as tong from bill group by date ORDER BY `bill`.`date` ASC";
+        $result=$data->query($sql);
+
+        ?>
         var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Profit'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
+          ['Doanh thu từng ngày trong tháng 6', 'Doanh thu'],
+          <?php 
+          while($row=mysqli_fetch_assoc($result)){
+          ?>
+          ['<?= $row['date']?>',<?= $row['tong']?>],
+        <?php
+    }?>
         ]);
 
-        var options = {
+        var materialOptions = {
+          width: 950,
           chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+            title: 'Hieuuuu1',
+            subtitle: 'Hieuuuu1'
+          },
+          series: {
+            0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
+            1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
+          },
+          axes: {
+            y: {
+              distance: {label: 'Việt Nam Đồng'}, // Left y-axis.
+              brightness: {side: 'right', label: 'apparent magnitude'} // Right y-axis.
+            }
           }
         };
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+        var classicOptions = {
+          width: 450,
+          series: {
+            0: {targetAxisIndex: 0},
+            1: {targetAxisIndex: 1}
+          },
+          title: 'Nearby galaxies - distance on the left, brightness on the right',
+          vAxes: {
+            // Adds titles to each axis.
+            0: {title: 'parsecs'},
+            1: {title: 'apparent magnitude'}
+          }
+        };
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
+        function drawMaterialChart() {
+          var materialChart = new google.charts.Bar(chartDiv);
+          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
+          button.innerText = 'Change to Classic';
+          button.onclick = drawClassicChart;
+        }
+
+        function drawClassicChart() {
+          var classicChart = new google.visualization.ColumnChart(chartDiv);
+          classicChart.draw(data, classicOptions);
+          button.innerText = 'Change to Material';
+          button.onclick = drawMaterialChart;
+        }
+
+        drawMaterialChart();
+    };
     </script>
     <link rel="stylesheet" href="admin.css">
 </head>
@@ -80,9 +128,9 @@ session_start();
                 </a>
             </li>
             <li>
-                <a href="vendors.php">
+                <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Cái này là cái gì?</span>
+                    <span class="link_name">Quay lai trang index</span>
                 </a>
             </li>
         </ul>
@@ -120,7 +168,7 @@ session_start();
                     <div class="number" style="font-size: 20px; font-weight: 500; margin-top: 5px;">
                     <?php 
                         $month=6;
-                        $sql="select sum(Total_payment) as tong from bill "; //where month(ngtao) ='$month'
+                        $sql="select sum(Total) as tong from bill "; //where month(ngtao) ='$month'
                         $toltal=$data->query($sql);
                         $result1=$toltal->fetch_assoc();
                                 echo $result1['tong'];
@@ -168,9 +216,33 @@ session_start();
                 <div style="display: flex; align-items: center;"><i class="fa-solid fa-cart-shopping cart" style="font-size:35px; height: 50px;  width: 50px; text-align: center;"></i></div>
             </div>
         </div>
-        <div id="columnchart_material" style="width: 450px; height: 250px;"></div>
-    
-        <script>
+        <div class="bieudo" style="margin-left:30px;">
+        <div id="chart_div" style="width: 450px; height: 400px;"></div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            const ctx = document.getElementById('myChart123');
+
+new Chart(ctx, {
+type: 'bar',
+data: {
+labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+datasets: [{
+  label: '# of Votes',
+  data: [12, 19, 3, 5, 2, 3],
+  borderWidth: 1
+}]
+},
+options: {
+scales: {
+  y: {
+    beginAtZero: true
+  }
+}
+}
+});
+
         </script>
     </div>
 <script src="scriptad.js">

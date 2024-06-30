@@ -326,11 +326,15 @@ function updateCart(key, quantity) {
                 <div class="product-img" style="position: relative; text-align: center;">
                   <span class="discount"><?php echo $row_all_sp["Discount"];?>%</span>
                   <div class="btn-action">
-                    <div class="action-cart" style="background: #fff;">
-                      <button type="submit" title="Thêm vào giỏ hàng"><i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i></button>
+                  <div class="action-cart" >
+                          <form action="index.php" method="post">
+                            <input type="hidden" name="idproduct[]" value="<?= $row_all_sp["id_product"]?>">
+                            <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;">
+                              <i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
+                          </form>
+                        </div>
                       </div>
-                      </div>
-                      <a href="chitiet.php">
+                      <a href="chitiet.php?id_produc=<?= $row_all_sp["id_product"] ?>">
                         <img src="../img/item/<?php echo $row_all_sp["img"];?>" width="230px" style="object-fit: cover;" alt="" class="main-img">
                         </a></div>
                         <div class="product-info">
@@ -361,7 +365,14 @@ function updateCart(key, quantity) {
                               </div>
                               </div>
                               </div>
-                              <div class="product"></div>
+                              <div class="product"> 
+                                <form action="thanhtoan.php?idproduct=<?=$row_all_sp["id_product"]?>&productcost=<?=$row_all_sp['Cost']?>
+                                &productname=<?=$row_all_sp['Name']?>;
+                                " 
+                                method="post" enctype="application/x-www-form-urlencoded">
+                                  <button type="submit" name="thanhtoan" class="btn btn-primary btn-lg">Them vao gio hang</button>
+                                </form>
+                              </div>
                               </div>
                               </div>
                               </div>

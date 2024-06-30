@@ -104,7 +104,9 @@ nav h1{
     display: flex;
     width: 5%;
 }
-
+.cart-shopping #cartLink i{
+    font-size: 23px;
+}
 .cart-shopping a span{
     position: absolute;
     width: 19px;
@@ -114,7 +116,7 @@ nav h1{
     font-size: 14px;
     background: #D64646;
     top: -8px;
-    right: -8px;
+    left: 15px;
     text-align: center;
 }
 .cart-shopping .top-cart-content{
@@ -498,7 +500,6 @@ form label{
     align-items: center;
     justify-content: center;
     border: 1px #fff solid;
-    background: #000;
     color: #fff;
     border-radius: 20px;
 }

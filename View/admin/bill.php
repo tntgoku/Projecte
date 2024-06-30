@@ -3,8 +3,7 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
-$sql="select bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total_payment,
-bill.status FROM bill JOIN user ON user.id_user=bill.id_us;";
+$sql="SELECT bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,bill.date,bill.status FROM bill inner JOIN user ON bill.id_us=user.id_user;";
 $result=$data->query($sql);
 session_start();
 ?>
@@ -60,9 +59,9 @@ session_start();
                 </a>
             </li>
             <li>
-                <a href="vendors.php">
+            <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Cái này là cái gì?</span>
+                    <span class="link_name">Quay lai trang index</span>
                 </a>
             </li>
         </ul>
@@ -103,6 +102,7 @@ session_start();
                         <td>Mã KH</td>
                         <td>Tên khách hàng</td>
                         <td>số lượng</td>
+                        <td>Ngày tạo</td>
                         <td>Thành tiền</td>
                         <td>Trạng thái</td>
                         <td colspan="2">Chức năng</td>
@@ -117,7 +117,8 @@ session_start();
                             <td><?=  $row['id_us']; ?></td>
                             <td><?=  $row['Name']; ?></td>
                             <td><?=  $row['count']; ?></td>
-                            <td><?=  $row['Total_payment']; ?>đ</td>
+                            <td><?=  $row['date']; ?></td>
+                            <td><?=  $row['Total']; ?>đ</td>
                             <td>
                                 <?php  
                                     if($row['status']==1){

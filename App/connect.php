@@ -14,6 +14,11 @@ class Database{
         }
         return $this->conn;
     }
+
+    // Cai nay la ep dinh dang 
+    public function real_escape_string($string) {
+        return $this->conn->real_escape_string($string);
+    }
     public function insertData($name,$type_id,$color,$size,$cost,$amount,$discount,$img){
         $sql= "INSERT INTO product(Name,Type_id,Color,Size,Color,Amount,Discount,img)
                 VALUES ($name, $type_id, $color, $size, $cost, $amount, $discount,$img)";
@@ -49,13 +54,32 @@ class Database{
 }
 $db =new Database();
 $db->connect();
-class Product{
+class Product extends Database{
     public $id;
-    public $name;
-    public $color;
-    public $cost;
-    public $discount;
-    public $img;
+    private $name;
+    private $color;
+    private $cost;
+    private $discount;
+    private $img;
+    private $data;
+    public function __construct1() {
+        $this->data = new Database();
+        $this->data->connect();
+    }
+    public function getinforProduct($id){
+       $sql123="select * from product where id_product= $id";
+       $result=$this->data->query($sql123);
+       if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row; // Thêm dòng dữ liệu vào mảng $data
+        }
+        print($data);
+        }
+        else{
+            return null;
+        }
+
+    }
 }
 class Cart{
     private $cartItems; 
@@ -93,7 +117,7 @@ class Cart{
         }
     }
     public function insertbilltong($idcus,$id_sp,$amount,$total,$status,$ngtao){
-        $sql="INSERT INTO bill(id_us,id_sp,count,Total_payment,status,ngtao)
+        $sql="INSERT INTO bill(id_us,id_sp,count,Total,status,date)
         VALUES ($idcus,$id_sp,$amount,$total,$status,'$ngtao');
 ";
 $data =new Database();
@@ -102,10 +126,13 @@ $result=$data->query($sql);
 if($result===TRUE){
     echo '
     <script>
-            alert("Thanh toan thanh cong");
+            alert("Thanh toan  cong");
         </script>
                 ';
 }
+    }
+    public function updatethanhtoan($idcus,$amount,$total,$status,$ngtao){
+        $sql ="Update bill set count = '$amount',Total= '$total',";
     }
 }
 class Customer{
@@ -117,7 +144,7 @@ class Customer{
         $this->data->connect();
     }
     public function getinforcus($idcustomer){
-        $sql= "select * from user where id_user = '$idcustomer'";
+        $sql= "select * from user where id_user = $idcustomer";
         $result=$this->data->query( $sql);
         if ($result->num_rows > 0) {
             return $result->fetch_assoc();

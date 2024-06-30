@@ -23,7 +23,7 @@ function execPostRequest($url, $data)
 
 
 
-if (isset($_POST['tong'])) {
+if (isset($_POST['thanhtoan123'])) {
     $total = $_POST['tong'];
 } else {
     $total = 195000;

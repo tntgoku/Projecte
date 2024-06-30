@@ -19,51 +19,27 @@ $sql= "SELECT * FROM product";
   foreach ($_SESSION['cart'] as $key => $product) {
     // Ensure Quantity is set and numeric
     if (!isset($product['Quantity']) || !is_numeric($product['Quantity'])) {
-        $_SESSION['cart'][$key]['Quantity'] = 1; 
+        $_SESSION['cart'][$key]['Quantity'] = 1; // Default to 1 if not set or not numeric
     }
     $quantity = $_SESSION['cart'][$key]['Quantity'];
-    $totalQuantity += $quantity; }
-    function addToCart($productId, &$cartProducts) {
+    $totalQuantity += $quantity;
+   }
+  function addToCart($productId, &$cartProducts) {
       global $data; // Assuming $data is your Database object
       
-      // Query the database for the product
       $sql = "SELECT * FROM product WHERE id_product = $productId";
       $result = $data->query($sql);
       
       if ($result->num_rows > 0) {
           $row = $result->fetch_assoc();
-          
-          // Check if product already exists in cart
-          $found = false;
-          foreach ($cartProducts as $key => $product) {
-              if ($product['id_product'] == $row['id_product']) {
-                  // Product already exists in cart, increase quantity
-                  $_SESSION['cart'][$key]['Quantity']++;
-                  $found = true;
-                  break;
-              }
-          }
-          
-          // If not found, add new product to cart with initial quantity 1
-          if (!$found) {
-              $row['Quantity'] = 1; // Set initial quantity
-              $cartProducts[] = $row; // Add product to cart
-          }
+          $cartProducts[] = $row;
       }
-      
-      // Initialize or process any additional session data related to cart shopping
       session_start();
-      if (!isset($_SESSION['cartshopping'])) {
-          $_SESSION['cartshopping'] = []; // Initialize cartshopping if not set
-      }
-      
-      // Handle payment processing if triggered by a form submission
-      if (isset($_POST['payment']) && ($_POST['payment'])) {
-          // Your payment handling logic goes here
-          // This block will execute if the 'payment' form field is submitted
+    if(!isset($_SESSION['cartshoping']))
+    $_SESSION['cartshopping']=[];
+      if(isset($_POST['payment'])&& ($_POST['payment'])){
       }
   }
-  
   
   if (isset($_REQUEST['idproduct'])) {
       if (is_array($_REQUEST['idproduct'])) {
@@ -76,6 +52,7 @@ $sql= "SELECT * FROM product";
       }
   }
   echo "du lieu cart <br>";
+  print_r($_SESSION['cart'] );
   if (isset($_POST['key']) && isset($_POST['quantity'])) {
     $key = $_POST['key'];
     $quantity = $_POST['quantity'];
@@ -84,8 +61,7 @@ $sql= "SELECT * FROM product";
         $_SESSION['cart'][$key]['Quantity'] = $quantity;
     }
 }
-echo "<br><br>";
-print_r($_SESSION['cart']);
+
 if (isset($_POST['product_key'])) {
   $key = $_POST['product_key'];
   unset($_SESSION['cart'][$key]);
@@ -175,7 +151,7 @@ if (isset($_POST['product_key'])) {
                   <?php }else{ 
                     echo '
                     <div class="login">
-                      <label for=""><a href="register.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
+                      <label for=""><a href="login.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
                     </div>';
                    } ?>
               </div>
@@ -219,8 +195,8 @@ if (isset($_POST['product_key'])) {
                                       " data-key="' . $key . '">';
                                       echo '<p id="conti">Giá: <span class="price" id="price-' . $key . '" style="color:#f81f1f;">' . 
                                               $product['Cost'] . '</span> đ</p>
-                                              <form method="post" action="index.php" id="btn-check123">
-                                                <input type="hidden" name="product_key" value="' . $key . '">
+                                              <form method="post" action="index1.php" id="btn-check123">
+                                                <input type="text" name="product_key" value="' . $key . '">
                                                 <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
                                               </form>
                                               </div>
@@ -271,43 +247,26 @@ if (isset($_POST['product_key'])) {
                                       
                                         }
                                       </style>'
-                                      .'<script>
-                                      document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".quantity").forEach(function(input) {
-        var cost = parseFloat(input.getAttribute("data-cost"));
-        var key = input.getAttribute("data-key");
-
-        input.addEventListener("input", function() {
-            var quantity = parseInt(this.value);
-            var totalCost = quantity * cost;
-            document.getElementById("price-" + key).innerText = totalCost.toLocaleString();
-            updateCart(key, quantity); // Function to update cart in session
-        });
-    });
-    // document.querySelector(".btn-success").addEventListener("click", function(event) {
-    //         event.preventDefault(); // Prevent default form submission
-    //         document.querySelector("form").submit(); // Submit the form
-    //     });
-});
-
-function updateCart(key, quantity) {
+                                      .'function updateQuantity(input) {
+    var key = input.getAttribute("data-key");
+    var quantity = input.value;
+    
+    // Gửi yêu cầu cập nhật số lượng lên server
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "index.php", true);
+    xhr.open("POST", "update_cart.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Xử lý phản hồi từ server nếu cần
+        }
+    };
     xhr.send("key=" + key + "&quantity=" + quantity);
-}
-   document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("cartLink").addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent default action
-        document.getElementById("cartForm").submit(); // Submit the form
-    })
-});
-                                      </script>'
+}'
                                       ;
                                       echo '</div>';
                                   }
                                   echo '<form method="post" action="cartproduct.php" style="float:right";>
-                                      <input type="hidden" name="product_key1" value="' . $key . '">
+                                      <input type="hidden" name="product_key" value="' . $key . '">
   <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;" value="Thanh Toán">
 </form>';
                                   
@@ -325,9 +284,9 @@ function updateCart(key, quantity) {
       <nav class="header-nav container">
       <h1>C L O S E T</h1>
         <ul class="nav-list">
-          <li><a href="index.php">TRANG CHỦ</a></li>
+          <li><a href="index1.php">TRANG CHỦ</a></li>
           <li><a href="change.php">CHÍNH SÁCH ĐỔI TRẢ</a></li>
-          <li><a href="index.php">
+          <li><a href="index1.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
             <li><a href="size.php">BẢNG SIZE</a></li>
             <li><a href="store.php">HỆ THỐNG CỬA HÀNG</a></li>
@@ -390,7 +349,7 @@ function updateCart(key, quantity) {
                       <?= $product['Discount'] ?>%</span>
                       <div class="btn-action">
                         <div class="action-cart" >
-                          <form action="index.php" method="post">
+                          <form action="index1.php" method="post">
                             <input type="hidden" name="idproduct[]" value="<?= $product['id_product']?>">
                             <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;">
                               <i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
@@ -435,11 +394,11 @@ function updateCart(key, quantity) {
                                   </div>
                   </div>
                   <div class="product">
-                    <form action="chitiet.php?idproduct=<?=$product['id_product']?>&productcost=<?=$product['Cost']?>
+                    <form action="cartproduct.php?idproduct=<?=$product['id_product']?>&productcost=<?=$product['Cost']?>
                     &productname=<?=$product['Name']?>;
                     " 
                     method="post" enctype="application/x-www-form-urlencoded">
-                      <button type="submit" name="thanhtoan" class="btn btn-primary btn-lg">Xem chi tiet san pham</button>
+                      <button type="submit" name="thanhtoan" class="btn btn-primary btn-lg">Mua ngay va luon</button>
                     </form>
                   </div>
                   </div>

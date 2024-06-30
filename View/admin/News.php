@@ -55,9 +55,9 @@ session_start();
                 </a>
             </li>
             <li>
-                <a href="vendors.php">
+            <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Cái này là cái gì?</span>
+                    <span class="link_name">Quay lai trang index</span>
                 </a>
             </li>
         </ul>

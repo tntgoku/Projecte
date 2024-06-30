@@ -119,19 +119,25 @@ if(isset($_POST['deleted'])){
         <div class="container" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
             <div class="col-6" style="display: flex;  justify-content: flex-start;">
     
-                <form class="d-flex" role="search" style="width: 100%;">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" role="search" style="width: 100%; " method="get">
+                    <input class="form-control me-2"  name="search" type="text" placeholder="Search" aria-label="Search" >
                     <button class="btn btn-outline-success" type="submit">Search</button>
                   </form>
     
             </div>
             <div class="col-6" style="display: flex; justify-content: space-around;">
-                <?php   $toltal=$data->query('select count(*) as tong from product ');
-                $result=$toltal->fetch_assoc();
-                        echo "<h5> Có " .$result["tong"] ." Sản phẩm</h5> ";
+            <?php   
+                if(isset($_GET['search'])&& ($_GET['search']!='')){
+                    $search = mysqli_real_escape_string($data->connect(), $_GET['search']);
+                    $toltal = $data->query("SELECT COUNT(*) AS tong FROM product WHERE product.Name LIKE '" . $search . "%'");
+                } else {
+                    $toltal = $data->query('SELECT COUNT(*) as tong FROM product');
+                }
+                
+                $result = $toltal->fetch_assoc();
+                echo "<h5> Có " . $result["tong"] . " Sản phẩm</h5>";
                 ?>
             </div>
-
         </div>
         <form action="add.php" method="post" style=" margin-top:10px;">
             <button type="submit" class="btn btn-success" name="btn-add">Thêm sản phẩm</button>
@@ -150,27 +156,42 @@ if(isset($_POST['deleted'])){
                 </tr></thead>
                 <tbody>
                     <?php 
-                    $i=1;
-                    $sql="select product.id_product ,product.img,product.Name,product_list.Type_name,product.Color,product.Size,product.Cost,
-                    product.Amount,product.Discount FROM product INner JOIN product_list ON product_list.Type_id=product.Type_id
-                    ORDER BY product.id_product DESC";
-                    $result=$data->query($sql);
-                        while($row =mysqli_fetch_assoc($result)){?>
-                            <tr>
-                                <td><?php echo $row['id_product']?></td>
-                                <td><img src="/Projecte/img/item/<?php echo $row['img']?>" alt="123" width="60" style="object-fit: cover;"></td>
-                                <td><?php echo $row['Name']?></td>
-                                <td><?php echo $row['Type_name']?></td>
-                                <td><?PHP echo $row['Color'] ?></td>
-                                <td><?PHP echo $row['Size'] ?></td>
-                                <td><?PHP echo $row['Cost'] ?></td>
-                                <td><?PHP echo $row['Amount'] ?></td>
-                                <td><?PHP echo $row['Discount'] ?></td>
-                                <td><a href="update.php?id_product=<?php echo $row["id_product"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
-                                <td><a href="deleted.php?id_product=<?php echo $row["id_product"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
-                            </tr>
-                        <?php
-                        }
+                        $i=1;
+                    if(isset($_GET['search'])&& ($_GET['search']!='')){
+                        $sql="select product.id_product ,product.img,product.Name,product_list.Type_name,product.Color,product.Size,product.Cost,
+                        product.Amount,product.Discount FROM product INner JOIN product_list ON product_list.Type_id=product.Type_id
+                        ORDER BY product.id_product DESC";
+                        $search1 = $_GET['search'];
+                        $search = mysqli_real_escape_string($data->connect(), $search1);
+                        $sql = "SELECT product.id_product, product.img, product.Name, product_list.Type_name, product.Color, product.Size, product.Cost,
+                                product.Amount, product.Discount 
+                                FROM product 
+                                INNER JOIN product_list ON product_list.Type_id = product.Type_id 
+                                WHERE product.Name LIKE '" . $search . "%' ORDER BY product.id_product DESC";
+                    }else{                    
+                        $sql="SELECT product.id_product, product.img, product.Name, product_list.Type_name, product.Color, product.Size, product.Cost,
+                                product.Amount, product.Discount 
+                                FROM product 
+                                INNER JOIN product_list ON product_list.Type_id = product.Type_id 
+                                ORDER BY product.id_product DESC";
+                    }
+                        $result=$data->query($sql);
+                            while($row =mysqli_fetch_assoc($result)){?>
+                                <tr>
+                                    <td><?php echo $row['id_product']?></td>
+                                    <td><img src="/Projecte/img/item/<?php echo $row['img']?>" alt="123" width="60" style="object-fit: cover;"></td>
+                                    <td><?php echo $row['Name']?></td>
+                                    <td><?php echo $row['Type_name']?></td>
+                                    <td><?PHP echo $row['Color'] ?></td>
+                                    <td><?PHP echo $row['Size'] ?></td>
+                                    <td><?PHP echo $row['Cost'] ?></td>
+                                    <td><?PHP echo $row['Amount'] ?></td>
+                                    <td><?PHP echo $row['Discount'] ?>%</td>
+                                    <td><a href="update.php?id_product=<?php echo $row["id_product"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
+                                    <td><a href="deleted.php?id_product=<?php echo $row["id_product"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
+                                </tr>
+                            <?php
+                            }
                     ?>
                 </tbody>
             </table>

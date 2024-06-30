@@ -4,29 +4,35 @@ session_start(); // Start the session at the beginning of the script
 include '../App/connect.php';
 $data = new Database();
 $data->connect();
-// Code nay no ko chay
+
 if (isset($_POST['login'])) {
-    $user = $_POST['username'];
-    $pwd = $_POST['password'];
-    // Truy vấn SQL để kiểm tra thông tin đăng nhập
-    $sql = "SELECT * FROM user WHERE Login_name = ? AND pass = ?";
-    $stmt = $data->query1($sql);
-    if ($stmt) {
-        $stmt->bind_param("ss", $user, $pwd);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $_SESSION['id_user']= $row['id_user'];
-            $_SESSION['Name'] = $row['Name']; // Lưu tên người dùng vào session
-            echo "success"; // Trả về kết quả thành công
-            header("Location:index.php");
-        } else {
-            echo "error"; // Trả về kết quả lỗi
+    $username = $_POST['us_name'];
+    $password = $_POST['us_pass'];
+    if ($username == 'Admin') 
+    {
+        if(md5($password) == '7488e331b8b64e5794da3fa4eb10ad5d')
+        {
+            header('Location:admin/dashboard.php');
+            $_SESSION["Login"]= true;
         }
-
-        $stmt->close();
+        else{
+            $_SESSION["Login"]= false;
+            header('Location:Login_Resign.php');
+        }
+    }
+    else{
+        $pass = md5($password);
+        $sql = "SELECT * from user WHERE Login_name = '$username' AND pass = '$pass'";
+        $result = $data->query($sql);
+        if (mysqli_num_rows($result) > 0)
+        {
+            header("Location:index.php");
+            $_SESSION["Login"]= true;
+        }
+        else{
+            $_SESSION["Login"]= false;
+            header("Location:register.php");
+        }
     }
 }
 

@@ -1,27 +1,61 @@
 <?php require_once("user_UI_index.php");
-
-
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+$currentDate = date("d/m/Y H:i:s");
+echo $currentDate;
 if (isset($_POST['payment'])) {
   // Lấy thông tin giỏ hàng từ session
   $cart = $_SESSION['cart'] ?? [];
   $cartshop=new Cart();
-  $currentDate = date("Y-m-d");
-  $total=0;
+  $total=0;$total1=0;
   $sum=0;
   // Hiển thị thông tin đơn hàng
   $id_bill=4;
   foreach ($cart as $key => $product) {
+    if($product['Quantity'] != 0){
       $amount = $product['Quantity'];
-      $total+=$amount*$product['Cost'];
-      $sum+=$amount;
+      $total1+=$amount*$product['Cost'];
+      $sum+=$amount;}
+      else{
+        $product['$Quantity']=1;
+      }
   }
+  $quantity = $_SESSION['cart'][$key]['Quantity'];
+  echo "<br>";
   echo $sum;
-  $cartshop->insertbilltong($id,2,$sum,$total,0,$currentDate);
-  // Ví dụ: Cập nhật vào CSDL, xử lý thanh toán, etc.
-  // Sau khi xử lý, có thể chuyển hướng hoặc hiển thị thông báo thành công
-  // header("Location: thanhcong.php");
-  // exit();
+  echo "<br>";
+  if($id!=''){
+    // $cartshop->insertbilltong($id,2,$sum,$total,0,$currentDate);
+  }else{
+    $id="6";
+    // $cartshop->insertbilltong($id,2,$sum,$total,0,$currentDate);
+  }
+
 }
+if (isset($_POST['product_key'])) {
+  $key = $_POST['product_key'];
+  unset($_SESSION['cart'][$key]);
+  header('Location: cartproduct.php');
+  exit();
+}
+
+  // Save the updated cart back to session
+  if(isset($_SESSION['cart'])==false){
+    echo "Bi xoa r";
+  }else{
+    print_r($cart);
+
+  }
+if(isset($_REQUEST['idproduct'])){
+  $dd12 =$_REQUEST['idproduct'];
+
+}
+if(isset($dd12)){
+  $sql1234="Select* FROM product WHERE id_product= $dd12";
+  $result=$data->query($sql1234);
+  $row=mysqli_fetch_assoc($result);
+  print_r($row);
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -36,10 +70,49 @@ if (isset($_POST['payment'])) {
     <link rel="stylesheet" href="../css/reponse.css">
     <title>CloSet</title>
     <style>
+      input.btn.btn-success {
+        font-weight: 700;
+        font-size: 19px;
+      } 
+      .price{
+        font-weight: 700;
+        font-size: 19px;
+        color:#f81f1f;
+      }                                                                              
+      .btn-paypal #btn-total123{
+        border: none;
+        width: 130px;
+        text-align: center;
+      }
+      #btn-total123:focus-visible{
+        border: none;
+      }
       .product-thumbnail{
+        width: 150px;
+      }
+      .img-item{
+        width:150px;
+        height: 150px;
+        object-fit: contain;
+      }
+      tbody,thead{
+        text-align: center;
+      }
+      .product-name{
         width: 250px;
       }
+      .product-quantity{
+        width: 150px;
+      }
+      .item-quantity{
+        width: 150px;
+      }
     </style>
+    <script>
+       function showConfirmation() {
+            alert("Bạn đã nhấp vào nút Thanh toán. Dữ liệu sẽ được chuyển đến trang thanhtoan.php.");
+        }
+    </script>
     </head>
     <body>
       <div class="header-top">
@@ -59,12 +132,11 @@ if (isset($_POST['payment'])) {
                   <div class="cart-shopping">
                     <a href="">
                       <i class="fa-solid fa-cart-shopping"></i>
-                      <span class="count_item_pr hidden-count" style="padding-left: 3px;"><?= $count_sp;?></span></a>
+                      <span class="count_item_pr hidden-count" style="padding-left: 3px;"><?= $sum?></span></a>
                       <div class="top-cart-content">
                           <div class="CartHeaderContainer" style="width: 340px;">
                             <div class="cart--empty--message" style="text-align: center;">
                             <?php   
-                                  // Them UI vao ho nha
                                   $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
                                   if($count == 0) 
                                   echo '<img src="../img/shopping-bag.png" alt="" width="80px">
@@ -88,9 +160,10 @@ if (isset($_POST['payment'])) {
 
                                       echo '<p id="cont" name="color">Màu sắc:<br> ' . $product['Color'] . "/".$product['Size'].'</p>';
                                       echo '<input type="hidden" value="'.$product['id_product'].'name="id">';
-                                      echo '';
+                                      echo '<input type="number" class="quantity" id="quantity-' . $key . '" name="quantity[' . $key . ']" min="1" max="55" value="'.$quantity.'" data-cost="' . $product['Cost'] . '
+                                      " data-key="' . $key . '">';
                                       echo '
-                                              <form method="post" action="index1.php">
+                                              <form method="post" action="cartproduct.php">
                                       <input type="hidden" name="product_key" value="' . $key . '">
   <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
 </form>
@@ -104,7 +177,6 @@ if (isset($_POST['payment'])) {
                                       .productcart {
                                         display:flex;
                                             align-items: center;
-
                                       } 
                                       .productcart img{
                                         object-fit:contain;
@@ -142,29 +214,29 @@ if (isset($_POST['payment'])) {
             updateCart(key, quantity); // Function to update cart in session
         });
     });
-    // document.querySelector(".btn-success").addEventListener("click", function(event) {
-    //         event.preventDefault(); // Prevent default form submission
-    //         document.querySelector("form").submit(); // Submit the form
-    //     });
+     document.querySelector(".btn-success").addEventListener("click", function(event) {
+             event.preventDefault(); // Prevent default form submission
+             document.querySelector("form").submit(); // Submit the form
+         });
 });
 
 function updateCart(key, quantity) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "index1.php", true);
+    xhr.open("POST", "cartproduct.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send("key=" + key + "&quantity=" + quantity);
 }
    document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("cartLink").addEventListener("click", function(event) {
         event.preventDefault(); // Prevent default action
-        document.getElementById("cartForm").submit(); // Submit the form
+        document.getElementById("cartForm").submit(); 
     })
 });
                                       </script>'
                                       ;
                                       echo '</div>';
                                   }
-                                  echo '<form method="post" action="cart1.php" style="float:right";>
+                                  echo '<form method="post" action="thanhtoan.php" style="float:right";>
                                       <input type="hidden" name="product_key" value="' . $key . '">
   <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;" value="Thanh Toán">
 </form>';
@@ -176,15 +248,14 @@ function updateCart(key, quantity) {
                                   </div>
                                   </div>
                                   </div>
-      </div>
-                                  
+      </div>                           
                                   <!-- header-nav -->
       <nav class="header-nav container">
       <h1>C L O S E T</h1>
         <ul class="nav-list">
-          <li><a href="index1.php">TRANG CHỦ</a></li>
+          <li><a href="index.php">TRANG CHỦ</a></li>
           <li><a href="change.html">CHÍNH SÁCH ĐỔI TRẢ</a></li>
-          <li><a href="index1.php">
+          <li><a href="index.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
             <li><a href="size.html">BẢNG SIZE</a></li>
             <li><a href="store.html">HỆ THỐNG CỬA HÀNG</a></li>
@@ -206,14 +277,16 @@ function updateCart(key, quantity) {
         
       </nav>
     <div class="container">
-      <div class="row md-5">
-      <form class="col-md-12" method="post" action="thanhtoan.php">
+      <div class="row md-5" style=" display: flex;
+    flex-direction: column;">
     <div class="site-blocks-table">
         <table class="table">
             <thead>
                 <tr>
                     <th class="product-thumbnail">Sản Phẩm</th>
                     <th class="product-name">Tên Sản Phẩm</th>
+                    <th class="product-size">Size</th>
+                    <th class="product-color">Màu sắc</th>
                     <th class="product-price">Giá</th>
                     <th class="product-quantity">Số Lượng</th>
                     <th class="product-total">Tổng</th>
@@ -230,61 +303,83 @@ function updateCart(key, quantity) {
                     $total=0;
 
                     foreach ($cart as $item) {
+
                     echo '<tr>';
-                    echo '<td class="product-thumbnail"><img src="../img/item/' . $item["img"] . '" alt="Image" class="img-fluid" style="max-width: 200px;"></td>';
-                    echo '<td class="product-name"><h2 class="h5 text-black">' . $item["Name"] . '</h2></td>';
-                    echo '<td>' . $item["Cost"] . '</td>';
+                    echo '<td class="img-item"><img src="../img/item/' . $item["img"] . '" alt="Image" class="img-fluid" style="max-width: 220px; height:100px;"></td>';
+                    echo '<td class=""><h2 class="h5 text-black">' . $item["Name"] . '</h2></td>';
+                    echo '
+                    <td>' . $item["Size"] . '</td>
+                    <td>' . $item["Color"] . '</td>
+                    <td>' . $item["Cost"] . '</td>
+                    ';
                     echo '<td>
-                            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-outline-black decrease" type="button">−</button>
                                 </div>
-                                <input type="text" class="form-control text-center quantity-amount" value="' . $item["Quantity"] . '" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                <input type="text" class="form-control text-center item-quantity" value="' . $item["Quantity"] . '" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-black increase" type="button">+</button>
                                 </div>
                             </div>
                           </td>';
-                          $total+= $item['Quantity']*$item['Cost'];
+                          $total= $item['Quantity']*$item['Cost'];
                           echo '<td>' . $total . '</td>';
-                    echo '<td><a href="#" class="btn btn-black btn-sm"><i class="fa fa-trash"></i></a></td>';
-                    echo '</tr>
-                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    // Giảm số lượng
-    $(".decrease").click(function() {
-        let $input = $(this).closest(".input-group-prepend").next(".quantity-amount");
-        let value = parseInt($input.val());
-        if (value > 1) { // Đảm bảo không giảm xuống dưới 1
-            $input.val(value - 1);
-        }
-    });
-
-    // Tăng số lượng
-    $(".increase").click(function() {
-        let $input = $(this).closest(".input-group-append").prev(".quantity-amount");
-        let value = parseInt($input.val());
-        $input.val(value + 1);
-    });
-});
-</script>';
+                    echo '<td>
+                    <form method="post" action="cartproduct.php">
+                    <button type="submit" class="btn btn-black btn-sm remove_item" name="remove_item" value="' . $item["id_product"] . '">
+                    <i class="fa fa-trash"></i></button></form></td>';
+                    echo '</tr>';
                 }
-              }}
-
+              }} else{
+                foreach ($_SESSION['cart'] as $key => $item) {
+                  $_SESSION['cart'][$key]['Quantity'] = 1; 
+                echo '<tr>';
+                echo '<td class="product-thumbnail"><img src="../img/item/' . $item["img"] . '" alt="Image" class="img-fluid" style="max-width: 200px;"></td>';
+                echo '<td class="product-name"><h2 class="h5 text-black">' . $item["Name"] . '</h2></td>';
+                echo '<td>' . $item["Cost"] . '</td>';
+                echo '<td>
+                        <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-black decrease" type="button">−</button>
+                            </div>
+                            <input type="text" class="form-control text-center quantity-amount" value="' . $item["Quantity"] . '" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-black increase" type="button">+</button>
+                            </div>
+                        </div>
+                      </td>';
+                      $total= $item['Quantity']*$item['Cost'];
+                      $tong122+=$total;
+                      echo '<td>' . $total . '</td>';
+                echo '<td>
+                <form method="post" action="cartproduct.php">
+                <input type="hidden" name="product_key" value="' . $key . '">
+                <button type="submit" class="btn btn-black btn-sm remove_item"  value="' . $item["id_product"] . '">
+                <i class="fa fa-trash"></i></button></form></td>';
+                echo '</tr>';
+            }
+              }
                 ?>
+                <script>
+                </script>
             </tbody>
         </table>
     </div>
-    <div class="btn-paypal" style="margin: auto; float: right;">
-      <input type="hidden" name="total" id="" value="<?= $total?>">
-            <input type="submit" name="thanhtoan" class="btn btn-success" value="Thanh toán">
-        </a>
+    <?php $tong12=(isset($total1)&& ($total1>0)) ? $total1 : $total1=0;
+          
+    ?>
+    <div class="btn-paypal" style=" display:flex;justify-content: flex-end; text-align:center;">
+      <form action="thanhtoan.php?sum=<?= $sum?>" method="post" enctype="application/x-www-form-urlencoded" style=" display:flex;">
+      <input type="hidden" name="total12" id="" value="<?= $tong12?>" readonly>
+        <div class="price"><?= $tong12?></div><div class="price" style="margin-left:5px;">VNĐ</div>
+            <input type="submit" name="thanhtoan" class="btn btn-success" value="Thanh toán" style="margin-left:15px;"
+              onclick="showConfirmation() "
+            >
+        </form>
     </div>
-</form>
       </div>
     </div>
-    
     <!-- FooTer  -->
     <footer>
         <div class="container-xl">
@@ -350,8 +445,13 @@ $(document).ready(function() {
                             <p>Sản phẩm này không phải là thuốc không có tác dụng thay thế thuốc chữa bệnh</p>
                             </div>
     </footer>
-<script src="../js/script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <script type="text/javascript" src="/ js/script.js" ></script>
+<script src="../js/jquery-3.5.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js">
 
-  </body>
+  
+</script>
+
+  
+</body>
 </html>

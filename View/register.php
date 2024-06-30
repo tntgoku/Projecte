@@ -1,5 +1,6 @@
-<?php 
+<?php
 
+use MicrosoftAzure\Storage\Common\Internal\Validate;
 
 include "../App/connect.php";
 $data = new Database();
@@ -27,8 +28,9 @@ if(isset($_POST['register'])) {
                 window.location.href = "register.php";
               </script>';
     } else {
-        $sql = "INSERT INTO user (Name, Address, Login_name, pass) 
-                VALUES ('$Name', '$Address', '$Login_name', '$pass')";
+        $passwordHash = password_hash($pass, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO user (Name, Address, Login_name, passhash,pass) 
+                VALUES ('$Name', '$Address', '$Login_name', '$passwordHash','$pass')";
         
         $result = $data->query($sql);
         
@@ -49,13 +51,12 @@ session_start();
 if(isset($_POST['login'])) {
     $Login_name = $_POST['account'];
     $pass = $_POST['pass2'];
-
     $sql = "SELECT * FROM user WHERE Login_name = '$Login_name'";
     $result = $data->query($sql);
     
     if($result->num_rows == 1) {
         $user = $result->fetch_assoc();
-        if($user['pass']=== $pass) {
+        if(($user['pass']== $pass) ) {
             // Password matches, set session variables and redirect to dashboard
             $_SESSION['id_user'] = $user['id_user']; // Example session variable, you can store any relevant user data
             $_SESSION['Login_name'] = $user['Login_name'];

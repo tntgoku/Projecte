@@ -31,7 +31,6 @@ $sql= "SELECT * FROM product";
           $row = $result->fetch_assoc();
           $cartProducts[] = $row;
       }
-      session_start();
     if(!isset($_SESSION['cartshoping']))
     $_SESSION['cartshopping']=[];
       if(isset($_POST['payment'])&& ($_POST['payment'])){
@@ -67,8 +66,14 @@ if (isset($_POST['product_key'])) {
   exit();
 }
 
+$idproduct1234 = $data->real_escape_string($_GET['id_produc']);
 
-  ?>
+$sql123 = "SELECT * FROM product WHERE id_product = '$idproduct1234'";
+$result = $data->query($sql123);
+$row=mysqli_fetch_array($result);
+print_r($row);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -313,7 +318,7 @@ function updateCart(key, quantity) {
         <div class="product-detail-left  col-12 col-md-12 col-lg-7">
           <!-- anh 9 -->
           <div class="single-product-img">
-            <img src="../img/item/f1.jpg" alt="" width="100%" class="img-fluid w-100">
+            <img src="../img/item/<?= $row['img']?>" alt="" width="100%" class="img-fluid w-100">
           </div>
           <!-- cac mau khac -->
           <div class="small-group-img">
@@ -334,14 +339,14 @@ function updateCart(key, quantity) {
         </div>
         <div class="col-12 col-md-12 col-lg-5 details-pro">
           <div class="wrapright-content" tabindex="boder-bottom: 1px solid #101010;">
-            <h1 class="title">Áo Thun Teelab Local Brand Unisex Rabbit on Animal Planet Tshirt TS258</h1>
+            <h1 class="title"><?= $row['Name']?></h1>
           </div>
           <!-- gia san  -->
           <div class="price-box">
             <span class="price-discount" style="font-size: 30px;
-    color: #F81F1F;">185.000đ</span>
-            <span class="price-old"> <span>350.000đ</span></span>
-            <span class="price-save">47%</span>
+    color: #F81F1F;"><?= $row['Cost'] -(($row['Cost']*$row['Discount'])/100)?>đ</span>
+            <span class="price-old"> <span><?= $row['Cost']?>đ</span></span>
+            <span class="price-save"><?= $row['Discount']?>%</span>
           </div>
           <div class="product-policy" style="display: flex;">
             <div class="item"><img src="../img/icon/icon.jpg" alt="">Doi tra de dang</div>
@@ -357,7 +362,7 @@ function updateCart(key, quantity) {
 - Thiết kế: Thêu.
             </div>
             </div>
-            <form action="" method="post" class="whishitem">
+            <form action="thanhtoan.php" method="post" class="whishitem">
                 <div class="selectn-size">
                   <label for="">Kích thước:</label>
                   <select name="size" id="" class="my-3">
@@ -386,9 +391,7 @@ function updateCart(key, quantity) {
                   <a href="cartproduct.php">
                     <button class="buy-btn"> Them vao gio</button>
                   </a>
-                  <a href="">
-                    <button type="button"> Thanh toan</button>
-                  </a>
+                    <button type="submit" class="btn btn-success" name="thanhtoan"> Thanh toan</button>
                 </div>
             </form>
           
