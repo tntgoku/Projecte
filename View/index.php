@@ -2,15 +2,39 @@
 <?php
 $data = new Database();
 $data->connect();
-$sql= "SELECT * FROM product";
- $result=$data->query($sql);
- $product=array();
+
+
+//Phần này hiển thị sản phẩm theo loại nhá
+if(isset($_REQUEST['id_type']))
+{
+  $id = $_REQUEST['id_type'];
+  $tittle = mysqli_fetch_assoc($data->query("SELECT * from product_list Where Type_id = '$id'"));
+  $product_type = array();
+  $result = $data->query("SELECT * from product where Type_id = '$id'");
+  if($result->num_rows > 0)
+  {
+    while ($row = $result->fetch_assoc())
+    {
+      $product_type[] = $row;
+    }
+  }
+  $_SESSION['products'] = $product_type;
+}
+else{
+  $sql= "SELECT * FROM product";
+  $result=$data->query($sql);
+  $product=array();
   if($result->num_rows>0){
     while($row=$result->fetch_assoc()){
       $products[] = $row;
     }
   }
   $_SESSION['products'] = $products;
+  $tittle['Type_name'] = 'Tất cả sản phẩm';
+}
+//
+
+ 
   $cartProducts = array();
   $totalQuantity = 0;
 
@@ -298,13 +322,13 @@ function updateCart(key, quantity) {
           <div class="title d-lg-none d-block">MENU</div>
           <div class="menu-slider">
               <ul>
-                <li><a href="allproducts.php">Tất cả sản phẩm</a></li>
-                <li><a href="allproducts.php">Áo Thun</a></li>
-                <li><a href="allproducts.php">Baby Tee</a></li>
-                <li><a href="allproducts.php">Áo Polo</a></li>
-                <li><a href="allproducts.php">Áo Sơ Mi</a></li>
-                <li><a href="allproducts.php">Áo Khoác</a></li>
-                <li><a href="allproducts.php">Hoodie</a></li>
+                <li><a href="index.php">Tất cả sản phẩm</a></li>
+                <li><a href="index.php?id_type=1">Áo Thun</a></li>
+                <li><a href="index.php?id_type=2">Baby Tee</a></li>
+                <li><a href="index.php?id_type=3">Áo Polo</a></li>
+                <li><a href="index.php?id_type=4">Áo Sơ Mi</a></li>
+                <li><a href="index.php?id_type=5">Áo Khoác</a></li>
+                <li><a href="index.php?id_type=6">Hoodie</a></li>
                 </ul>
           </div>
         </div>  
@@ -332,7 +356,7 @@ function updateCart(key, quantity) {
       <!-- Áo Thun -->
       <section class="section_products">
         <div class="container">
-          <h2 class="cata-title">Áo Thun</h2>
+          <h2 class="cata-title"><?php echo $tittle['Type_name'];?></h2>
           <div class="section-list">
             <!-- Items-1 -->
              <!-- doan nay la lay het thong tin san pham -->
@@ -356,7 +380,7 @@ function updateCart(key, quantity) {
                               <i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
                         </div>
                       </div>
-                      <a href="chitiet.php">
+                      <a href="chitiet.php?id_sp=<?php echo $product['id_product'];?>">
                         <!-- product.img -->
                         <img src="../img/item/<?= $product['img'] ?>" width="230px" alt="" class="main-img">
                     </a>
@@ -367,16 +391,16 @@ function updateCart(key, quantity) {
                               <div class="selectionColor">
                                 <ul>
                                   <li>
-                                    <a href="allproducts.php">
+                                    <a href="chitiet.php?id_sp=<?php echo $product['id_product'];?>">
                                       <img src="../img/item/f1.jpg" alt="" id="small-img"></a></li>
                                   <li>
-                                    <a href="allproducts.php">
+                                    <a href="chitiet.php?id_sp=<?php echo $product['id_product'];?>">
                                       <img src="../img/item/f2.jpg" alt="" id="small-img"></a></li>
                                       </ul>
                                       </div>
                                       <!-- Tên sản phẩm -->
                                       <div class="box-pro-detail">
-                                        <a href="allproducts.php" class="tp_product_name">
+                                        <a href="chitiet.php?id_sp=<?php echo $product['id_product'];?>" class="tp_product_name">
                                 <h5 class="pro-name">
                                     <!-- product.Name -->
                                     <?= $product['Name'] ?>
@@ -388,7 +412,7 @@ function updateCart(key, quantity) {
                                 <p class="pro-price highlight tp_product_price">
                                   <span>
                                   <!-- product.cost -->
-                                  <?= $product['Cost'] ?>
+                                  <?= $product['Cost']?>đ
                                   </span></p>
                                   </div>
                                   </div>

@@ -186,6 +186,9 @@ else{
                     </div>
                 <!-- Add other fields as needed -->
                 <button type="submit" class="btn btn-primary">Quay lại</button>
+                <a href="Export_xlsx.php?bill=<?php echo $id;?>" style = "display: inline-block;">
+                    <button class="btn btn-primary" type="button" style="width: 100%; display: inline-block;">Xuất file</button>
+                </a>
             </form>
             </div>
         </div>

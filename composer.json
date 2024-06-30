@@ -1,0 +1,13 @@
+{
+    "name": "unicode/phpspreadsheet",
+    "autoload": {
+    },
+    "authors": [
+        {
+            "name": "TheBeginer 24"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^2.1"
+    }
+}

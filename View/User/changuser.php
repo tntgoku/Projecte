@@ -2,7 +2,7 @@
 <?php 
 session_start();
 
-include '/xampp/htdocs/Projecte/App/connect.php';
+include '../../App/connect.php';
 $data=new Database();
 $data->connect();
 $sql='SELECT * FROM `user` WHERE id_user= '.$_SESSION['id_user'].'';
@@ -102,7 +102,7 @@ $user_data=array();
       <nav class="header-nav container">
       <h1>C L O S E T</h1>
         <ul class="nav-list">
-          <li><a href="index.php">TRANG CHỦ</a></li>
+          <li><a href="../index.php">TRANG CHỦ</a></li>
           <li><a href="change.php">CHÍNH SÁCH ĐỔI TRẢ</a></li>
           <li><a href="#">
             <img src="/projecte/img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>

@@ -95,6 +95,9 @@ $result=$data->query($sql);
         <div class="container">
             <form action="" method = "post">
                 <h2>Danh sách hóa đơn mua hàng</h2>
+                <a href="Export_xlsx.php?bill=-1" style = 'display: inline-block;'>
+                    <button class="btn btn-outline-success my-5 my-sm-0" type="button" style="width: 100%;">Xuất file</button>
+                </a>
                 <table class="table">
                     <thead>
                         <tr>

@@ -135,7 +135,7 @@ if (isset($_GET['id_us']) || isset($_SESSION['id_us'])) {
                     </div>
                     <div class="form-group">
                         <label for="">Mật khẩu</label>
-                        <input type="password" name="pass"  value="<?php echo $pass;?>">
+                        <input type="password" name="pass"  value="<?php echo $pass;?>" readonly>
                     </div>
                 <!-- Add other fields as needed -->
                 <button type="submit" class="btn btn-primary" name = "update">Lưu thay đổi</button>

@@ -71,13 +71,13 @@
           <div class="title d-lg-none d-block">MENU</div>
           <div class="menu-slider">
               <ul>
-                <li><a href="allproducts.php?show_id = *">Tất cả sản phẩm</a></li>
-                <li><a href="allproducts.php?show_id = 1">Áo Thun</a></li>
-                <li><a href="allproducts.php?show_id = 2">Baby Tee</a></li>
-                <li><a href="allproducts.php?show_id = 3">Áo Polo</a></li>
-                <li><a href="allproducts.php?show_id = 4">Áo Sơ Mi</a></li>
-                <li><a href="allproducts.php?show_id = 5">Áo Khoác</a></li>
-                <li><a href="allproducts.php?show_id = 6">Hoodie</a></li>
+                <li><a href="allproducts.php">Tất cả sản phẩm</a></li>
+                <li><a href="index_loai_sp.php?id_type=1">Áo Thun</a></li>
+                <li><a href="index_loai_sp.php?id_type=2">Baby Tee</a></li>
+                <li><a href="index_loai_sp.php?id_type=3">Áo Polo</a></li>
+                <li><a href="index_loai_sp.php?id_type=4">Áo Sơ Mi</a></li>
+                <li><a href="index_loai_sp.php?id_type=5">Áo Khoác</a></li>
+                <li><a href="index_loai_sp.php?id_type=6">Hoodie</a></li>
                 </ul>
           </div>
         </div>  

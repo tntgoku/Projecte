@@ -121,6 +121,9 @@ if(isset($_POST['deleted'])){
                 <form class="d-flex" role="search" style="width: 100%;">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
+                    <a href="Export_xlsx.php?prod=1">
+                        <button class="btn btn-outline-success my-5 my-sm-0" type="button" style="width: 100%;">Xuất file</button>
+                    </a>
                   </form>
     
             </div>

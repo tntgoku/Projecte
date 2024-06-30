@@ -22,8 +22,10 @@ if (isset($_POST['login'])) {
     }
     else{
         $pass = md5($password);
-        $sql = "SELECT * from user WHERE Login_name = '$username' AND pass = '$pass'";
+        $sql = "SELECT * from user WHERE Login_name = '$username' AND passhash = '$pass'";
         $result = $data->query($sql);
+        $row = $result->fetch_assoc();
+        $_SESSION['id_user'] = $row['id_user'];
         if (mysqli_num_rows($result) > 0)
         {
             header("Location:index.php");

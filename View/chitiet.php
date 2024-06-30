@@ -1,3 +1,19 @@
+<?php require_once("user_UI_index.php"); ?>
+<?php
+  session_start();
+  include '../App/connect.php';
+  $data = new Database();
+  $data->connect();
+  if($_REQUEST['id_sp'])
+  {
+    $id = $_REQUEST['id_sp'];
+    echo $id;
+    $sql = "SELECT * from product where id_product = $id";
+    $result =mysqli_fetch_assoc($data->query($sql));
+    $dis = $result['Discount']/100;
+    $cost = number_format(($result['Cost'] / $dis), 3, ',', ' ');
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -57,13 +73,13 @@
               <div class="title d-lg-none d-block">MENU</div>
               <div class="menu-slider">
                   <ul>
-                    <li><a href="allproducts.php">Tất cả sản phẩm</a></li>
-                    <li><a href="allproducts.php">Áo Thun</a></li>
-                    <li><a href="allproducts.php">Baby Tee</a></li>
-                    <li><a href="allproducts.php">Áo Polo</a></li>
-                    <li><a href="allproducts.php">Áo Sơ Mi</a></li>
-                    <li><a href="allproducts.php">Áo Khoác</a></li>
-                    <li><a href="allproducts.php">Hoodie</a></li>
+                  <li><a href="index.php">Tất cả sản phẩm</a></li>
+                <li><a href="index.php?id_type=1">Áo Thun</a></li>
+                <li><a href="index.php?id_type=2">Baby Tee</a></li>
+                <li><a href="index.php?id_type=3">Áo Polo</a></li>
+                <li><a href="index.php?id_type=4">Áo Sơ Mi</a></li>
+                <li><a href="index.php?id_type=5">Áo Khoác</a></li>
+                <li><a href="index.php?id_type=6">Hoodie</a></li>
                     </ul>
               </div>
             </div>  
@@ -76,7 +92,7 @@
         <div class="product-detail-left  col-12 col-md-12 col-lg-7">
           <!-- anh 9 -->
           <div class="single-product-img">
-            <img src="../img/item/f1.jpg" alt="" width="100%" class="img-fluid w-100">
+            <img src="../img/item/<?php echo $result['img']; ?>" alt="" width="100%" class="img-fluid w-100">
           </div>
           <!-- cac mau khac -->
           <div class="small-group-img">
@@ -97,14 +113,14 @@
         </div>
         <div class="col-12 col-md-12 col-lg-5 details-pro">
           <div class="wrapright-content" tabindex="boder-bottom: 1px solid #101010;">
-            <h1 class="title">Áo Thun Teelab Local Brand Unisex Rabbit on Animal Planet Tshirt TS258</h1>
+            <h1 class="title"><?php echo $result['Name'];?></h1>
           </div>
           <!-- gia san  -->
           <div class="price-box">
             <span class="price-discount" style="font-size: 30px;
-    color: #F81F1F;">185.000đ</span>
-            <span class="price-old"> <span>350.000đ</span></span>
-            <span class="price-save">47%</span>
+    color: #F81F1F;"><?php echo $result['Cost'];?>đ</span>
+            <span class="price-old"> <span><?php echo $cost;?>đ</span></span>
+            <span class="price-save"><?php echo $result['Discount'];?>%</span>
           </div>
           <div class="product-policy" style="display: flex;">
             <div class="item"><img src="../img/icon/icon.jpg" alt="">Doi tra de dang</div>
@@ -143,7 +159,7 @@
                 </div>
                 <div class="input-amount">
                   <label for="">Số lượng:</label>
-                  <input type="number" name="amount" id="" value="1" style="text-align: center; width: 70px;">
+                  <input type="number" name="amount" id="" value="<?php echo $result['Amount'];?>" style="text-align: center; width: 70px;">
                 </div>
                 <div class="box-btn">
                   <a href="cartproduct.php">

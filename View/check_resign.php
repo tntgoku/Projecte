@@ -23,7 +23,7 @@ if(isset($_POST['tdn']))
     $mk = $_POST['mk'];
     $cmk = $_POST['cmk'];
     $add = $_POST['add'];
-    if(!is_valid_string($tdn)) {
+    if(!is_valid_string($tdn) || $tdn = 'Admin') {
         echo '1';
     }
     else if($mk == "") 
@@ -57,7 +57,7 @@ if(isset($_POST['tdn']))
         else
         {
             $mhmk = md5($mk);
-            $sql = "INSERT INTO `user` (`id_user`, `Name`, `Address`, `Phone_Num`, `Login_name`, `pass`) VALUES (NULL,'$tnd','$add','$sdt','$tdn', '$mhmk');";
+            $sql = "INSERT INTO `user` (`id_user`, `Name`, `Address`, `Phone_Num`, `Login_name`, `pass`,`passhash`) VALUES (NULL,'$tnd','$add','$sdt','$tdn','$mk', '$mhmk');";
             $data->query($sql);
             $sql ="SELECT * from user where Login_name = '$tdn'";
             $result = $data->query($sql);

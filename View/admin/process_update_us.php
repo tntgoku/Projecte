@@ -18,7 +18,7 @@
               </script>'; 
         }
         else{
-        $sql = "UPDATE `user` SET `Name` = '$name', `Address` = '$address', `Phone_Num` = '$sdt', `Login_name` = '$account', `pass` = '$pass' WHERE `user`.`id_user` = '$id';";
+        $sql = "UPDATE `user` SET `Name` = '$name', `Address` = '$address', `Phone_Num` = '$sdt', `Login_name` = '$account' WHERE `user`.`id_user` = '$id';";
         if ($data->query($sql) == TRUE) {
             echo '<script>
                 alert("Cập nhật thông tin người dùng '.$name.' thành công");

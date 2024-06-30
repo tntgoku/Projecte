@@ -117,6 +117,7 @@ if(isset($_REQUEST["id_xoa"]) && $_REQUEST["id_xoa"])
                 <div class="form-group" style="width: 40%;">
                     <input type="text" name="" id="" class="form-control"  style="margin-right:20px;">
                     <button class="btn btn-outline-success my-5 my-sm-0" type="submit" style="width: 35%;">Tìm kiếm</button>
+                    <a href="Export_xlsx.php?us=1"><button class="btn btn-outline-success my-5 my-sm-0" type="button" style="width: 100%;">Xuất file</button></a>
               </form>
             </div>
         </div>
