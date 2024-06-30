@@ -18,7 +18,7 @@ session_start();
 <body>
 <form class="sidebar" method="post" style="transition: all 1s cubic-bezier(0.4, 0, 1, 1);">
         <div class="logo-details">
-            <img src="/Projecte/img/icon/LogoSecondP.jpg" alt="" width="100px">
+            <img src="../../img/icon/LogoSecondP.jpg" alt="" width="100px">
             <span class="logo_name">C L O S E T</span>
         </div>
         
@@ -44,7 +44,6 @@ session_start();
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="/Projecte/img/icon/customer.php" alt="">
                     <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
@@ -55,16 +54,16 @@ session_start();
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
             <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quay lai trang index</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
-                <a href="/Projecte/View/logout.php" style="text-decoration: none;">
+                <a href="../../View/logout.php" style="text-decoration: none;">
                     <i class="fa-solid fa-right-from-bracket" style="font-size: 30px; margin-left: 5px;"></i>
                     <span class="nav-text" style="margin-left: 45px;">Logout</span>
                 </a>
@@ -78,10 +77,10 @@ session_start();
                 <span style="font-size: 35px;">Dashboard</span>
             </div>
             <div class="profile-user">
-                <img src="/Projecte/img/item/a3.png" width="40px" alt="">
+                <img src="../../img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;"><?=$_SESSION['Name']?></span>
+                font-weight: 600;">Admin</span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -121,13 +120,8 @@ session_start();
 						<td><?php echo $row['Name']?></td>
 						<td><?php echo $row['Name_type']?></td>
 						<td><?php echo $row['Content']?></td>
-<<<<<<< HEAD
-						<td><a href="update.php?id_product=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
-                        <td><a href="deleted.php?id_product=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
-=======
 						<td><a href="addnews.php?id_News=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-success">Sua</button></a></td>
                         <td><a href="deleted_new.php?id_del=<?php echo $row["id_News"];?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
->>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
 					</tr>
 				<?php
 				}

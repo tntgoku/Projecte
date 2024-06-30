@@ -33,11 +33,7 @@ if (isset($_POST['login'])) {
         }
         else{
             $_SESSION["Login"]= false;
-<<<<<<< HEAD
-            header("Location:register.php");
-=======
             header("Location:Login_Resign.php");
->>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
         }
     }
 }

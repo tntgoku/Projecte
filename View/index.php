@@ -198,11 +198,7 @@ if (isset($_POST['product_key'])) {
                   <?php }else{ 
                     echo '
                     <div class="login">
-<<<<<<< HEAD
-                      <label for=""><a href="register.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
-=======
                       <label for=""><a href="Login_Resign.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
->>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
                     </div>';
                    } ?>
               </div>
@@ -424,11 +420,7 @@ function updateCart(key, quantity) {
                           </form>
                         </div>
                       </div>
-<<<<<<< HEAD
-                      <a href="chitiet.php?id_sp=<?php echo $product['id_product'];?>">
-=======
-                <a href="chitiet.php?id_produc=<?= $product['id_product'] ?>">
->>>>>>> 08b0bdfe1d2fa841d1813dff68d7642636fe24cf
+                <a href="chitiet.php?id_sp=<?= $product['id_product'] ?>">
                         <!-- product.img -->
                         <img src="../img/item/<?= $product['img'] ?>" width="230px" alt="" class="main-img">
                     </a>

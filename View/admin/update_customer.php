@@ -81,7 +81,7 @@ if(isset($_POST['update'])){
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="../../img/icon/people.png" alt="">
+                    <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
@@ -91,12 +91,12 @@ if(isset($_POST['update'])){
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
-            <li>
-                <a href="vendors.php">
+            <!-- <li>
+            <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Cái này là cái gì?</span>
+                    <span class="link_name">Quay lai trang index</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
@@ -153,18 +153,14 @@ if(isset($_POST['update'])){
                         <label for="">Tên đăng nhập</label>
                         <input type="text" name="Login_name"  value="<?=$customer12[4];?>" readonly>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="">Mật khẩu</label>
-<<<<<<< HEAD
-                        <input type="password" name="pass"  value="<?php echo $pass;?>" readonly>
-=======
                         <input type="password" name="pass"  value="<?=$customer12[5];?>">
                     </div>
                     <div class="form-group">
                         <label for="">Nhập lại mật khẩu</label>
                         <input type="password" name="pass1"  >
->>>>>>> 08b0bdfe1d2fa841d1813dff68d7642636fe24cf
-                    </div>
+                    </div> -->
                 <!-- Add other fields as needed -->
                 <button type="submit" class="btn btn-primary" name = "update">Lưu thay đổi</button>
             </form>

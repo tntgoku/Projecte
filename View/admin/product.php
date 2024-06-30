@@ -71,7 +71,7 @@ if(isset($_POST['deleted'])){
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="../../img/icon/people.png" alt="">
+                    <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
@@ -81,12 +81,12 @@ if(isset($_POST['deleted'])){
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
-            <li>
-                <a href="vendors.php">
+            <!-- <li>
+            <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Cái này là cái gì?</span>
+                    <span class="link_name">Quay lai trang index</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
@@ -107,7 +107,7 @@ if(isset($_POST['deleted'])){
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;"><?=$_SESSION['Name']?></span>
+                font-weight: 600;">Admin</span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">

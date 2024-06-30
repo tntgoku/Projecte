@@ -3,12 +3,8 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
-<<<<<<< HEAD
-$sql="SELECT bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,bill.date,bill.status FROM bill inner JOIN user ON bill.id_us=user.id_user;";
-=======
 $sql="select bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,
       bill.status FROM bill JOIN user ON user.id_user=bill.id_us;";
->>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
 $result=$data->query($sql);
 session_start();
 ?>
@@ -63,12 +59,12 @@ session_start();
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
             <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quay lai trang index</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
@@ -89,7 +85,7 @@ session_start();
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;"><?=$_SESSION['Name']?></span>
+                font-weight: 600;">Admin</span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -125,10 +121,6 @@ session_start();
                             <td><?=  $row['id_us']; ?></td>
                             <td><?=  $row['Name']; ?></td>
                             <td><?=  $row['count']; ?></td>
-<<<<<<< HEAD
-                            <td><?=  $row['date']; ?></td>
-=======
->>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
                             <td><?=  $row['Total']; ?>đ</td>
                             <td>
                                 <?php  

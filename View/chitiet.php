@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-<?php require_once("user_UI_index.php"); ?>
-<?php
-  session_start();
-  include '../App/connect.php';
-  $data = new Database();
-  $data->connect();
-  if($_REQUEST['id_sp'])
-  {
-    $id = $_REQUEST['id_sp'];
-    echo $id;
-    $sql = "SELECT * from product where id_product = $id";
-    $result =mysqli_fetch_assoc($data->query($sql));
-    $dis = $result['Discount']/100;
-    $cost = number_format(($result['Cost'] / $dis), 3, ',', ' ');
-  }
-=======
 <?php require_once("user_UI_index.php"); 
 $data = new Database();
 $data->connect();
@@ -83,14 +66,13 @@ if (isset($_POST['product_key'])) {
   exit();
 }
 
-$idproduct1234 = $data->real_escape_string($_GET['id_produc']);
+$idproduct1234 = $data->real_escape_string($_REQUEST['id_sp']);
 
 $sql123 = "SELECT * FROM product WHERE id_product = '$idproduct1234'";
 $result = $data->query($sql123);
 $row=mysqli_fetch_array($result);
 print_r($row);
 
->>>>>>> 08b0bdfe1d2fa841d1813dff68d7642636fe24cf
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -336,11 +318,7 @@ function updateCart(key, quantity) {
         <div class="product-detail-left  col-12 col-md-12 col-lg-7">
           <!-- anh 9 -->
           <div class="single-product-img">
-<<<<<<< HEAD
-            <img src="../img/item/<?php echo $result['img']; ?>" alt="" width="100%" class="img-fluid w-100">
-=======
             <img src="../img/item/<?= $row['img']?>" alt="" width="100%" class="img-fluid w-100">
->>>>>>> 08b0bdfe1d2fa841d1813dff68d7642636fe24cf
           </div>
           <!-- cac mau khac -->
           <div class="small-group-img">
@@ -361,24 +339,14 @@ function updateCart(key, quantity) {
         </div>
         <div class="col-12 col-md-12 col-lg-5 details-pro">
           <div class="wrapright-content" tabindex="boder-bottom: 1px solid #101010;">
-<<<<<<< HEAD
-            <h1 class="title"><?php echo $result['Name'];?></h1>
-=======
             <h1 class="title"><?= $row['Name']?></h1>
->>>>>>> 08b0bdfe1d2fa841d1813dff68d7642636fe24cf
           </div>
           <!-- gia san  -->
           <div class="price-box">
             <span class="price-discount" style="font-size: 30px;
-<<<<<<< HEAD
-    color: #F81F1F;"><?php echo $result['Cost'];?>đ</span>
-            <span class="price-old"> <span><?php echo $cost;?>đ</span></span>
-            <span class="price-save"><?php echo $result['Discount'];?>%</span>
-=======
     color: #F81F1F;"><?= $row['Cost'] -(($row['Cost']*$row['Discount'])/100)?>đ</span>
             <span class="price-old"> <span><?= $row['Cost']?>đ</span></span>
             <span class="price-save"><?= $row['Discount']?>%</span>
->>>>>>> 08b0bdfe1d2fa841d1813dff68d7642636fe24cf
           </div>
           <div class="product-policy" style="display: flex;">
             <div class="item"><img src="../img/icon/icon.jpg" alt="">Doi tra de dang</div>
@@ -388,10 +356,10 @@ function updateCart(key, quantity) {
           <div class="inf">
             <div class="content">
               Thông tin sản phẩm: <br>
-- Chất liệu: Vải Oxford <br>
-- Form: Oversize <br>
-- Màu sắc: Trắng/Đen/Xanh Than <br>
-- Thiết kế: Thêu.
+              - Chất liệu: Vải Oxford <br>
+              - Form: Oversize <br>
+              - Màu sắc: Trắng/Đen/Xanh Than <br>
+              - Thiết kế: Thêu.
             </div>
             </div>
             <form action="thanhtoan.php" method="post" class="whishitem">

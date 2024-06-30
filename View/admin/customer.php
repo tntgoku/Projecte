@@ -75,12 +75,12 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
             <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quay lai trang index</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
@@ -101,7 +101,7 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;"><?=$_SESSION['Name']?></span>
+                font-weight: 600;">Admin</span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -111,9 +111,9 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
         </nav>
 		<h2>Quản lý Khách hàng</h2>
         <div class="btn-add" >
-            <form class="form-inline" style="width: 100%;">
+            <form class="form-inline" style="width: 100%;" action="customer.php">
                 <div class="form-group" style="width: 40%;">
-                    <input type="text" name="" id="" class="form-control"  style="margin-right:20px;">
+                    <input type="text" name="search" id="" class="form-control"  style="margin-right:20px;">
                     <button class="btn btn-outline-success my-5 my-sm-0" type="submit" style="width: 35%;">Tìm kiếm</button>
                     <a href="Export_xlsx.php?us=1"><button class="btn btn-outline-success my-5 my-sm-0" type="button" style="width: 100%;">Xuất file</button></a>
               </form>
@@ -134,8 +134,14 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
 			</thead>
 			<tbody>
 				 <?php 
-    				$sql= "SELECT * from User";
-				$result=$data->query($sql);
+                 if(isset($_GET['search'])&& ($_GET['search']!='')){
+                    $search1 = $_GET['search'];
+                    $search = mysqli_real_escape_string($data->connect(), $search1);
+                    $sql = "SELECT * FROM user WHERE user.Name LIKE '" . $search . "%'";
+                }else{                    
+                    $sql="SELECT * from user";
+                }
+                 $result=$data->query($sql);
 				while($row=mysqli_fetch_assoc($result)){
 					?>
 					<tr>
@@ -149,15 +155,7 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
                         <input type="hidden" name="id_dele" value="<?=$row['id_user'] ?>">
                         <input type="hidden" name="name1" value="<?=$row['Name'] ?>">
                         <button type="submit" class="btn btn-danger" name="deleted">Xóa</button>
-                    </form></td>
-						<td><?= $row['id_user']?></td>
-						<td><?= $row['Name']?></td>
-						<td><?= $row['Phone_Num']?></td>
-						<td><?= $row['Address']?></td>
-						<td><?= $row['Login_name']?></td>
-						<td><a href="update_customer.php?id_us=<?= $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
-                        <td><a href="deleted_us.php?id_us=<?= $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
-					</tr>
+                    </tr>
 				<?php
 				}
 				?>
