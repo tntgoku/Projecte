@@ -1,5 +1,4 @@
-<?php require_once("user_UI_index.php"); 
-?>
+<?php require_once("user_UI_index.php");?>
 <?php
 $data = new Database();
 $data->connect();
@@ -175,7 +174,11 @@ if (isset($_POST['product_key'])) {
                   <?php }else{ 
                     echo '
                     <div class="login">
+<<<<<<< HEAD
                       <label for=""><a href="register.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
+=======
+                      <label for=""><a href="Login_Resign.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
+>>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
                     </div>';
                    } ?>
               </div>

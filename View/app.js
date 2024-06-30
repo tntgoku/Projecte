@@ -12,3 +12,57 @@ signInLink.addEventListener('click', ()=>{
     wrapper.classList.remove('animate-signIn')
 });
 
+src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
+
+function check_Resign()
+{
+    $.ajax({
+        url : 'check_resign.php',
+        method : 'post',
+        data :
+        {
+            tnd :$('#tnd').val(),
+            tdn :$('#tdn').val(),
+            sdt :$('#sdt').val(),
+            mk :$('#mk').val(),
+            cmk :$('#check_mk').val(),
+            add :$('#add').val(),
+        },
+        success :function(res)
+        {
+            if(res == '0')
+            {
+                window.location.href = 'user_UI_index.php';
+            }
+            if(res == '1')
+            {
+                alert('Tên đăng nhập không hợp lệ!!');
+            }
+            if(res == '2')
+            {
+                alert('Tên đăng nhập đã tồn tại!!');
+            }
+            if(res == '3')
+            {
+                alert('Chưa điền mật khẩu!!');
+            }
+            if(res == '4')
+            {
+                alert('Số điện thoại chứa kí tự không hợp lệ!!');
+            }
+            if(res == '5')
+            {
+                alert('Độ dài mật khẩu không được quá 10 kí tự!!');
+            }
+            if(res == '6')
+            {
+                alert('Xác nhận mật khẩu không khớp!!');
+            }
+            if(res == '7')
+            {
+                alert('Chưa chọn Tỉnh/Thành phố!!');
+            }
+        }
+    })
+}
+

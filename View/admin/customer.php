@@ -65,13 +65,13 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="/Projecte/img/icon/customer.php" alt="">
+                    <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="News.php">
-                    <img src="/Projecte/img/icon/News.php" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
@@ -149,6 +149,13 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
                         <input type="hidden" name="name1" value="<?=$row['Name'] ?>">
                         <button type="submit" class="btn btn-danger" name="deleted">Xóa</button>
                     </form></td>
+						<td><?= $row['id_user']?></td>
+						<td><?= $row['Name']?></td>
+						<td><?= $row['Phone_Num']?></td>
+						<td><?= $row['Address']?></td>
+						<td><?= $row['Login_name']?></td>
+						<td><a href="update_customer.php?id_us=<?= $row['id_user']?>"><button type="button" class="btn btn-success">Sua</button></a></td>
+                        <td><a href="deleted_us.php?id_us=<?= $row['id_user']?>"><button type="button" class="btn btn-danger" name="deleted">Xoa</button></a></td>
 					</tr>
 				<?php
 				}

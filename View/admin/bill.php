@@ -3,7 +3,12 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
+<<<<<<< HEAD
 $sql="SELECT bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,bill.date,bill.status FROM bill inner JOIN user ON bill.id_us=user.id_user;";
+=======
+$sql="select bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,
+      bill.status FROM bill JOIN user ON user.id_user=bill.id_us;";
+>>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
 $result=$data->query($sql);
 session_start();
 ?>
@@ -117,7 +122,10 @@ session_start();
                             <td><?=  $row['id_us']; ?></td>
                             <td><?=  $row['Name']; ?></td>
                             <td><?=  $row['count']; ?></td>
+<<<<<<< HEAD
                             <td><?=  $row['date']; ?></td>
+=======
+>>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
                             <td><?=  $row['Total']; ?>đ</td>
                             <td>
                                 <?php  

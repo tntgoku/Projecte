@@ -1,4 +1,3 @@
-
 <?php 
 include '../../App/connect.php';
 $data=new Database();
@@ -117,13 +116,13 @@ session_start();
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="/Projecte/img/icon/customer.php" alt="">
+                    <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="News.php">
-                    <img src="/Projecte/img/icon/News.php" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
@@ -169,6 +168,9 @@ session_start();
                     <?php 
                         $month=6;
                         $sql="select sum(Total) as tong from bill "; //where month(ngtao) ='$month'
+                        $date = getdate();
+                        $month=$date["mon"];
+                        $sql="select sum(Total) as tong from bill where month(date) ='$month' and status = 1";
                         $toltal=$data->query($sql);
                         $result1=$toltal->fetch_assoc();
                                 echo $result1['tong'];
@@ -185,7 +187,7 @@ session_start();
                     <div class="box_topic"><span>Hoa don</span></div>
                     <div class="number" style="font-size: 35px; font-weight: 500; margin-top: 5px;">
                         <?php
-                        $sql="select count(id_Bill) as tong from bill ";//where month(ngtao)= '$month'
+                        $sql="select count(id_Bill) as tong from bill where month(date) ='$month'";
                         $truyvan=$data->query($sql);
                         $result= $truyvan->fetch_assoc();
                         echo $result['tong'];
@@ -202,8 +204,8 @@ session_start();
                     <div class="box_topic"><span>Hoa don</span></div>
                     <div class="number" style="font-size: 35px; font-weight: 500; margin-top: 5px;">
                         <?php 
-                        $date="2024-6-17";
-                        $sql="select count(*) as tong from bill ";//where ngtao ='$date'
+                        $date_hn = $date["mday"] . '-' . $date['mon'] . '-' . $date['year'];
+                        $sql="select count(*) as tong from bill where date ='$date_hn'";
                         $toltal=$data->query($sql);
                         $result=$toltal->fetch_assoc();
                                 echo $result['tong'];
@@ -211,7 +213,7 @@ session_start();
                     </div>
                     <div class="indicator">
                         <i></i>
-                        <span>hoa don hom nay</span></div>
+                        <span>Hoa don hom nay</span></div>
                 </div>
                 <div style="display: flex; align-items: center;"><i class="fa-solid fa-cart-shopping cart" style="font-size:35px; height: 50px;  width: 50px; text-align: center;"></i></div>
             </div>

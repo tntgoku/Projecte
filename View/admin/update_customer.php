@@ -17,8 +17,23 @@ if ($_REQUEST['id_customer'] !== null) {
        } 
 } else {
     echo "Không có id_customer trong REQUEST.";
+session_start();
+if (isset($_GET['id_us']) || isset($_SESSION['id_us'])) {
+    if(isset($_GET['id_us'])) {
+    $_SESSION['id_us']= $_GET['id_us'];
+    }
+    $id = $_SESSION['id_us'];
+    $sql = "SELECT * from user where id_user = '$id'";
+    $result = mysqli_fetch_object($db->query($sql));
+    
+    $idus = $id;
+    $name = $result->Name; 
+    $address = $result->Address;
+    $Phone_Num = $result->Phone_Num;
+    $Login_name = $result->Login_name;
+    $pass = $result->pass;
 }
-
+}
 
 // doan nay la luu thong tin
 if(isset($_POST['update'])){
