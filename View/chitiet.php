@@ -13,6 +13,14 @@ $sql= "SELECT * FROM product";
   $cartProducts = array();
   $totalQuantity = 0;
 
+  //Thêm session['cart']
+    $sql = "SELECT product.Name, product.Size,product.Color,cart.amount from cart inner join product ON product.id_product = cart.id_sp where cart.id_us = '$id'";
+    $result = $data->query($sql);
+    while($row = $result->fetch_assoc())
+    {
+      $cartProducts[] = $row;
+    }
+    $_SESSION['cart'] = $cartProducts;
   // --- daon nay ne----
   foreach ($_SESSION['cart'] as $key => $product) {
     // Ensure Quantity is set and numeric

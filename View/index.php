@@ -3,7 +3,7 @@
 $data = new Database();
 $data->connect();
 
-echo $currentDate ;
+//echo $currentDate ;
 //Phần này hiển thị sản phẩm theo loại nhá
 if(isset($_REQUEST['id_type']))
 {
@@ -38,6 +38,16 @@ else{
   $cartProducts = array();
   $totalQuantity = 0;
 
+  //Thêm session['cart']
+  $id_us = $_SESSION['id_user'];
+  $sql = "SELECT cart.id_sp, product.Name, product.Size,product.Color,product.img,product.id_product,product.Cost,cart.amount from cart inner join product ON product.id_product = cart.id_sp where cart.id_us = '$id_us'";
+  $result = $data->query($sql);
+  while($row = $result->fetch_assoc())
+  {
+    $cartProducts[] = $row;
+  }
+  $_SESSION['cart'] = $cartProducts;
+
   // --- daon nay ne----
   foreach ($_SESSION['cart'] as $key => $product) {
     // Ensure Quantity is set and numeric
@@ -46,6 +56,7 @@ else{
     }
     $quantity = $_SESSION['cart'][$key]['Quantity'];
     $totalQuantity += $quantity; }
+
     function addToCart($productId, &$cartProducts) {
       global $data; // Assuming $data is your Database object
       
@@ -59,7 +70,7 @@ else{
           // Check if product already exists in cart
           $found = false;
           foreach ($cartProducts as $key => $product) {
-              if ($product['id_product'] == $row['id_product']) {
+              if ($product['id_sp'] == $row['id_sp']) {
                   // Product already exists in cart, increase quantity
                   $_SESSION['cart'][$key]['Quantity']++;
                   $found = true;
@@ -75,7 +86,7 @@ else{
       }
       
       // Initialize or process any additional session data related to cart shopping
-      session_start();
+      //session_start();
       if (!isset($_SESSION['cartshopping'])) {
           $_SESSION['cartshopping'] = []; // Initialize cartshopping if not set
       }

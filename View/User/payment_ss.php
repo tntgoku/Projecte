@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Kiểm tra xem có dữ liệu từ form gửi đi không
 
     }}
-    echo "id cua khac la". $row1;
+    //echo "id cua khac la". $row1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
