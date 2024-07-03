@@ -20,32 +20,30 @@ function execPostRequest($url, $data)
     return $result;
 }
 
+session_start();
+$nameUser = $_SESSION['name_user'];
+$tong = $_SESSION['tong'];
+$cart = $_SESSION['cart'];
+$nameCus = $_SESSION['name_cus'];
+$address = $_SESSION['address'];
 
 $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-if (isset($_POST['tong'])) {
-    $total = $_POST['tong'];
-    $idbill=$_POST['bill1'];
-    $nameuser=$_POST['name-user'];
-} else {
-    $total = 195000;
-    $idbill=2;
-    $nameuser='Hieu';
-}
+
 
 $partnerCode = 'MOMOBKUN20180529';
 $accessKey = 'klm05TvNBzhg7h7j';
 $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-$orderInfo = 'Thanh toán qua ATM MoMo '.$nameuser;
-$amount = $total;
+$orderInfo = $address ."Ten nguoi mua".$nameCus;
+$amount = $tong;
 $orderId = time() ."";
-$redirectUrl = "http://localhost/projecte/view/thanhtoan.php";
+$redirectUrl = "http://localhost/projecte/view/user/thanks.php";
 $ipnUrl = "http://localhost/projecte/view/thanhtoan.php";
 $extraData = "";
 
     $requestId = time() . "";
     $requestType = "payWithATM";
-    // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-    //before sign HMAC SHA256 signature
+    $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+    // before sign HMAC SHA256 signature
     
     $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" 
     . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" 
@@ -67,8 +65,6 @@ $extraData = "";
         'signature' => $signature);
     $result = execPostRequest($endpoint, json_encode($data));
     $jsonResult = json_decode($result, true);  // decode json
-
     //Just a example, please check more in there
-
     header('Location: ' . $jsonResult['payUrl']);
 ?>

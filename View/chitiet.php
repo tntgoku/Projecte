@@ -66,7 +66,7 @@ if (isset($_POST['product_key'])) {
   exit();
 }
 
-$idproduct1234 = $data->real_escape_string($_GET['id_produc']);
+$idproduct1234 = $data->real_escape_string($_REQUEST['id_sp']);
 
 $sql123 = "SELECT * FROM product WHERE id_product = '$idproduct1234'";
 $result = $data->query($sql123);
@@ -299,13 +299,13 @@ function updateCart(key, quantity) {
               <div class="title d-lg-none d-block">MENU</div>
               <div class="menu-slider">
                   <ul>
-                    <li><a href="allproducts.php">Tất cả sản phẩm</a></li>
-                    <li><a href="allproducts.php">Áo Thun</a></li>
-                    <li><a href="allproducts.php">Baby Tee</a></li>
-                    <li><a href="allproducts.php">Áo Polo</a></li>
-                    <li><a href="allproducts.php">Áo Sơ Mi</a></li>
-                    <li><a href="allproducts.php">Áo Khoác</a></li>
-                    <li><a href="allproducts.php">Hoodie</a></li>
+                  <li><a href="index.php">Tất cả sản phẩm</a></li>
+                <li><a href="index.php?id_type=1">Áo Thun</a></li>
+                <li><a href="index.php?id_type=2">Baby Tee</a></li>
+                <li><a href="index.php?id_type=3">Áo Polo</a></li>
+                <li><a href="index.php?id_type=4">Áo Sơ Mi</a></li>
+                <li><a href="index.php?id_type=5">Áo Khoác</a></li>
+                <li><a href="index.php?id_type=6">Hoodie</a></li>
                     </ul>
               </div>
             </div>  
@@ -356,10 +356,10 @@ function updateCart(key, quantity) {
           <div class="inf">
             <div class="content">
               Thông tin sản phẩm: <br>
-- Chất liệu: Vải Oxford <br>
-- Form: Oversize <br>
-- Màu sắc: Trắng/Đen/Xanh Than <br>
-- Thiết kế: Thêu.
+              - Chất liệu: Vải Oxford <br>
+              - Form: Oversize <br>
+              - Màu sắc: Trắng/Đen/Xanh Than <br>
+              - Thiết kế: Thêu.
             </div>
             </div>
             <form action="thanhtoan.php" method="post" class="whishitem">
@@ -385,7 +385,7 @@ function updateCart(key, quantity) {
                 </div>
                 <div class="input-amount">
                   <label for="">Số lượng:</label>
-                  <input type="number" name="amount" id="" value="1" style="text-align: center; width: 70px;">
+                  <input type="number" name="amount" id="" value="<?php ?>" style="text-align: center; width: 70px;">
                 </div>
                 <div class="box-btn">
                   <a href="cartproduct.php">

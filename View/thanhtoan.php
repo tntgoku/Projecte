@@ -27,12 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['thanhtoan'])) {
 
     // Thực hiện các thao tác xử lý thanh toán ở đây
     print_r($cart);
-    // Ví dụ: tính tổng số tiền cần thanh toán
-    $totalPayment = 0;
-    foreach ($cart as $item) {
-        $totalPayment += $item['Quantity'] * $item['Cost'];
-    }
-    echo '<p>Tổng số tiền cần thanh toán: ' . $totalPayment . '</p>';
 
     // Tiếp tục xử lý thanh toán, lưu vào cơ sở dữ liệu, ...
 }
@@ -40,7 +34,158 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $total =$_POST['total12'];
 echo $total;
 }
-
+$provinces = array(
+    "An Giang",
+    "Bà Rịa - Vũng Tàu",
+    "Bạc Liêu",
+    "Bắc Kạn",
+    "Bắc Giang",
+    "Bắc Ninh",
+    "Bến Tre",
+    "Bình Dương",
+    "Bình Định",
+    "Bình Phước",
+    "Bình Thuận",
+    "Cà Mau",
+    "Cao Bằng",
+    "Cần Thơ",
+    "Đà Nẵng",
+    "Đắk Lắk",
+    "Đắk Nông",
+    "Điện Biên",
+    "Đồng Nai",
+    "Đồng Tháp",
+    "Gia Lai",
+    "Hà Giang",
+    "Hà Nam",
+    "Hà Nội",
+    "Hà Tĩnh",
+    "Hải Dương",
+    "Hải Phòng",
+    "Hậu Giang",
+    "Hòa Bình",
+    "Hưng Yên",
+    "Khánh Hòa",
+    "Kiên Giang",
+    "Kon Tum",
+    "Lai Châu",
+    "Lâm Đồng",
+    "Lạng Sơn",
+    "Lào Cai",
+    "Long An",
+    "Nam Định",
+    "Nghệ An",
+    "Ninh Bình",
+    "Ninh Thuận",
+    "Phú Thọ",
+    "Phú Yên",
+    "Quảng Bình",
+    "Quảng Nam",
+    "Quảng Ngãi",
+    "Quảng Ninh",
+    "Quảng Trị",
+    "Sóc Trăng",
+    "Sơn La",
+    "Tây Ninh",
+    "Thái Bình",
+    "Thái Nguyên",
+    "Thanh Hóa",
+    "Thừa Thiên Huế",
+    "Tiền Giang",
+    "TP Hồ Chí Minh",
+    "Trà Vinh",
+    "Tuyên Quang",
+    "Vĩnh Long",
+    "Vĩnh Phúc",
+    "Yên Bái"
+);
+$provinces1 = array(
+    "An Giang",
+    "Bà Rịa - Vũng Tàu",
+    "Bạc Liêu",
+    "Bắc Kạn",
+    "Bắc Giang",
+    "Bắc Ninh",
+    "Bến Tre",
+    "Bình Dương",
+    "Bình Định",
+    "Bình Phước",
+    "Bình Thuận",
+    "Cà Mau",
+    "Cao Bằng",
+    "Cần Thơ",
+    "Đà Nẵng",
+    "Đắk Lắk",
+    "Đắk Nông",
+    "Điện Biên",
+    "Đồng Nai",
+    "Đồng Tháp",
+    "Gia Lai",
+    "Hà Giang",
+    "Hà Nam",
+    "Hà Nội",
+    "Hà Tĩnh",
+    "Hải Dương",
+    "Hải Phòng",
+    "Hậu Giang",
+    "Hòa Bình",
+    "Hưng Yên",
+    "Khánh Hòa",
+    "Kiên Giang",
+    "Kon Tum",
+    "Lai Châu",
+    "Lâm Đồng",
+    "Lạng Sơn",
+    "Lào Cai",
+    "Long An",
+    "Nam Định",
+    "Nghệ An",
+    "Ninh Bình",
+    "Ninh Thuận",
+    "Phú Thọ",
+    "Phú Yên",
+    "Quảng Bình",
+    "Quảng Nam",
+    "Quảng Ngãi",
+    "Quảng Ninh",
+    "Quảng Trị",
+    "Sóc Trăng",
+    "Sơn La",
+    "Tây Ninh",
+    "Thái Bình",
+    "Thái Nguyên",
+    "Thanh Hóa",
+    "Thừa Thiên Huế",
+    "Tiền Giang",
+    "TP Hồ Chí Minh",
+    "Trà Vinh",
+    "Tuyên Quang",
+    "Vĩnh Long",
+    "Vĩnh Phúc",
+    "Yên Bái"
+);
+if($id!=''){
+    echo $id;
+}
+else{
+    $id=0;
+   echo 'ko co id';
+   echo $id;
+}
+$_SESSION['idcus']=$id;
+if($id !=0){
+    $sqlget= "select* from user where id_user= $id";
+    $reusult1=$data->query($sqlget);
+    $row1=array();
+    while($row=mysqli_fetch_assoc($reusult1)){
+        $row1[]=$row;
+    }
+    echo "<br>";
+    $user_sdt=$row1[0]['Phone_Num'];
+}
+$messenger=$id==0 ?"Đăng nhập":$user_name;
+$messengersdt=$id==0 ?"":$user_sdt;
+$messengerurl=$id==0 ?"register.php":"User/changuser.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +214,7 @@ echo $total;
 </head>
 <body>
     <div class="container1 " style="">
-    <form class="btn-order" method="post" action="User/test123.php" >
+    <form class="btn-order" method="POST" action="User/payment_ss.php" >
         <div class="checkpaypal" style="border-right: 1px solid #333333; width:60%;">
                 <div class="wrap">
                 <div class="header">
@@ -80,7 +225,7 @@ echo $total;
                         <div class="content-user col-md-7">
                                 <div class="title-header">
                                     <h5 class="title-layour">Thông tin nhận hàng 
-                                        <a href="../View/register.php" class="login-user" style="float: right;"><i class="fa-regular fa-user"></i><?php echo  $user_name;?></a>
+                                        <a href="../View/<?=$messengerurl ?>" class="login-user" style="float: right;"><i class="fa-regular fa-user"></i><?= $messenger?></a>
                                     </h5>
                                 </div>
                                 <div class="user-infor">
@@ -97,19 +242,18 @@ echo $total;
                                     </div>
                                     <div class="form-group">
                                         <label for="" name="">Số điện thoại</label>
-                                        <input type="text" class="form-control" id="" aria-describedby="" value="<?php echo $user_sdt;?>">
+                                        <input type="text" class="form-control" id="" aria-describedby="" value="<?= $messengersdt?>" name="phone">
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Tỉnh/ Thành phố</label>
+                                        <label for="" name="city">Tỉnh/ Thành phố</label>
                                         <br>
                                         <div class="input-group ">
-                                            <select class="custom-select" id="inputGroupSelect02">
-                                                <option selected>Choose...</option>
-                                                <option value="1">Hà Nội</option>
-                                                <option value="2">Vĩnh Phúc</option>
-                                                <option value="3">Hải Phòng</option>
-                                                <option value="4">Yên Bái</option>
-                                                <option value="5">Lạng Sơn</option>
+                                            <select class="custom-select" id="inputGroupSelect02" name="city">
+                                            <?php 
+                                                            foreach($provinces as $province){
+                                                            echo "<option value=\"$province\">$province</option>";
+                                                          }
+                                                        ?>
                                             </select>
                                             <div class="input-group-append">
                                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa-solid fa-chevron-down"></i></label>
@@ -120,13 +264,14 @@ echo $total;
                                         <label for="">Quận/Huyện</label>
                                         <br>
                                         <div class="input-group ">
-                                            <select class="custom-select" id="inputGroupSelect02">
-                                                <option selected>Choose...</option>
-                                                <option value="1">Hà Nội</option>
-                                                <option value="2">Vĩnh Phúc</option>
-                                                <option value="3">Hải Phòng</option>
-                                                <option value="4">Yên Bái</option>
-                                                <option value="5">Lạng Sơn</option>
+                                            <select class="custom-select" id="inputGroupSelect02" name="distric">
+                                                        <?php 
+                                                            foreach($provinces1 as $province1){
+                                                        ?>
+                                                            <option value="<?php echo $province1;?>"><?php echo $province1;?></option>
+                                                          <?php  
+                                                          }
+                                                        ?>
                                             </select>
                                             <div class="input-group-append">
                                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa-solid fa-chevron-down"></i></label>
@@ -137,13 +282,13 @@ echo $total;
                                         <label for="">Phường/xã</label>
                                         <br>
                                         <div class="input-group ">
-                                            <select class="custom-select" id="inputGroupSelect02">
+                                            <select class="custom-select" id="inputGroupSelect02" name="village">
                                                 <option selected>Choose...</option>
-                                                <option value="1">Hà Nội</option>
-                                                <option value="2">Vĩnh Phúc</option>
-                                                <option value="3">Hải Phòng</option>
-                                                <option value="4">Yên Bái</option>
-                                                <option value="5">Lạng Sơn</option>
+                                                <option value="Hà Nội">Hà Nội</option>
+                                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                                <option value="Hải Phòng">Hải Phòng</option>
+                                                <option value="Yên Bái">Yên Bái</option>
+                                                <option value="Lạng Sơn">Lạng Sơn</option>
                                             </select>
                                             <div class="input-group-append">
                                             <label class="input-group-text" for="inputGroupSelect02"><i class="fa-solid fa-chevron-down"></i></label>
@@ -153,7 +298,7 @@ echo $total;
                                     <div class="form-group">
                                         <label for="">Ghi chú/Tùy chọn</label>
                                         <br>
-                                        <textarea name="" id="" style="width: 100%;">
+                                        <textarea id="" style="width: 100%;" name="mytextarea">
                                         </textarea>
                                         </div>
                                 </div>
@@ -168,16 +313,16 @@ echo $total;
                             <div class="box-choosen">
                                     <div class="form-check" style=" ">
                                         <div class="form-check1">
-                                            <input type="radio" id="html" name="payment-1" value="COL">
+                                            <input type="radio" id="html" name="payment-1" value="COD">
                                             <label for="html">Thanh toán khi nhận hàng (COD)<i class="fa-solid fa-money-bill"></i></label><br>
                                         </div> <div class="form-check1">
 
-                                            <input type="radio" id="css" name="payment-1" value="qr-momo">
+                                            <input type="radio" id="css" name="payment-1" value="QR-MOMO">
                                             <label for="css">Thanh toán bằng QR-MOMO<img src="../img/icon/momo.png" alt="" width="35px"></label><br>
                                         </div>
                                         <div class="form-check1">
 
-                                            <input type="radio" id="javascript" name="payment-1" value="atm-momo">
+                                            <input type="radio" id="javascript" name="payment-1" value="ATM-MOMO">
                                             <label for="javascript">Thanh toán bằng thẻ ngân hàng<img src="../img/icon/momo.png" alt="" width="35px"></label>
                                         </div>
                                     </div>
@@ -189,7 +334,6 @@ echo $total;
                         </div>
                     </div>
         </div>
-        <form class="btn-order" method="post" action="User/test123.php">
         <div class="cartshopping">
             <div class="title" style="display: flex;"><h3 class="header" >Đơn hàng của bạn </h3>
             </div>
@@ -209,9 +353,11 @@ echo $total;
 								// $sql = "SELECT cart.id_sp, product.Name, product.Color, product.Size, product.Cost,cart.amount, product.img from product inner join cart on product.id_product = cart.id_sp where cart.id_us = '$id'";
 								// $sp = $data->query($sql);
 								$total = 0;
+                                $tonghd=0;
                                 if(!isset($cart)){
                                     echo "Khong co";
                                 }else{
+                                    $i=0;
 									foreach($cart as $itemcart){
 										$total += ($itemcart["Cost"] * $itemcart["Quantity"]);
                                         
@@ -223,7 +369,7 @@ echo $total;
                                         ?>" alt="" width="50px"></div>
                                         <span>
                                             <?php
-                                             echo $itemcart["Quantity"];
+                                             echo $_POST["item-$i"];
                                              ?>
                                         </span>
                                     </div>
@@ -245,12 +391,14 @@ echo $total;
                                 </td>
                                 <?php  ?>
                                 <td><span class="cost">
-                                    <?= 
-                                 $itemcart["Quantity"] * $itemcart["Cost"];
+                                 <?php  $tonghd+=($_POST["item-$i"] * $itemcart["Cost"])?>
+                                 <?= 
+                                 $_POST["item-$i"] * $itemcart["Cost"];
                                 ?></span><span>VNĐ</span></td>
                             </tr>
 							<?php
-									}}
+									$i++;
+                                }}
 								?>
                         </tbody>
                     </table>
@@ -265,34 +413,32 @@ echo $total;
                     <div class="form-group1">
                         <div class="cost1">
                             <span>Tạm phí</span>
-                            <span><?= $total?> đ</span>
+                            <span><?= $tonghd?> đ</span>
                         </div>
                         <div class="cost1">
                             <span>Phí vận chuyển</span>
-                            <span>30.000</span>
+                            <span>30.000đ</span>
                         </div>
                     </div>
-                    <div class="form-group1">
+                    <div class="form-group1" style="margin-top:15px;">
                         <div class="cost1">
                             <span>Tổng cộng</span>
-                            <input type="text" name="tong" id="" style="font-weight: bold;" readonly value="<?= $total+30000 ?>"> 
-                        </div>
-                            
+                            <input type="text" name="tong" id="" style="font-weight: bold; border:none; text-align:right;" readonly value="<?= $tonghd+30000 ?>"> 
+                        </div>                 
                             <a href="cartproduct.php">
                             <i class="fa-solid fa-chevron-left"></i>Quay lại giỏ hàng
                             </a>
-                            <input type="text" name="name-user" value="<?= $id?>">
-                            <input type="text" name="bill1" value="<?= 5?>">
-                            <div class="paypal1" >
+                            <input type="hidden" name="name-user" value="<?= $id?>">
+                            <input type="hidden" name="sum" value="<?= $_REQUEST['sum']?>">
+                            <div class="paypal1"  style="">
                                 <button type="submit" class="btn btn-success" style="margin-right: 20px; float:right;" name="thanhtoan123"> Đặt hàng</button>
-
                             </div>
-                                </form>
+                        </div>
                     </div>
                 </div>
             </div>
+        </form>
         </div>
-    </div>
     
 </body>
 </html>

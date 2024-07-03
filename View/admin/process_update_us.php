@@ -11,7 +11,6 @@
         $account = $_REQUEST["Login_name"];
         $pass = $_REQUEST["pass"];
         $pass1 = $_REQUEST["pass1"];
-
-            $customer->updateCustomer($id,$name,$sdt,$address,$pass,$pass1,$account);
+        $customer->updateCustomer($id,$name,$sdt,$address,$pass,$pass1,$account);
     }
 ?>

@@ -48,41 +48,41 @@ else
         <ul class="nav-link">
             <li>
                 <a href="dashboard.php">
-                    <img src="../../img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="product.php">
-                    <img src="../../img/icon/product-page.png">
+                    <img src="/Projecte/img/icon/product-page.png">
                     <span class="link_name">Sản phẩm</span>
                 </a>
                 
             </li>
             <li>
-                <a href="dashboard.php">
-                    <img src="../../img/icon/dashboard.png" alt="">
+                <a href="bill.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Hóa đơn</span>
                 </a>
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="../../img/icon/dashboard.png" alt="">
+                    <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
             <li>
-                <a href="dashboard.php">
-                    <img src="../../img/icon/dashboard.png" alt="">
+                <a href="News.php">
+                    <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
-            <li>
-                <a href="dashboard.php">
+            <!-- <li>
+            <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Cái này là cái gì?</span>
+                    <span class="link_name">Quay lai trang index</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>

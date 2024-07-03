@@ -126,12 +126,12 @@ session_start();
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
-            <li>
-                <a href="/Projecte/View/index.php">
+            <!-- <li>
+            <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
                     <span class="link_name">Quay lai trang index</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
@@ -152,7 +152,7 @@ session_start();
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;"><?=$_SESSION['Name']?></span>
+                font-weight: 600;">Admin</span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -220,6 +220,11 @@ session_start();
         </div>
         <div class="bieudo" style="margin-left:30px;">
         <div id="chart_div" style="width: 450px; height: 400px;"></div>
+        </div>
+        <div class="bieudo" style=" background:blue;">
+            <div id="myChart123" style="width: 500px; height:500px; background:peru;">
+
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

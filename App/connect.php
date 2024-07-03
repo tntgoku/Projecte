@@ -37,13 +37,16 @@ class Database{
     public function closedDB(){
         mysqli_close($this->conn);
     }
-    public function query($sql){
-        $query=mysqli_query($this->conn,$sql);
-        if (!$query) {
-            die('Query Error: ' . mysqli_error($this->conn));
+        public function query($sql){
+            if (!$this->conn) {
+                $this->connect();
+            }
+            $query=mysqli_query($this->conn,$sql);
+            if (!$query) {
+                die('Query Error: ' . mysqli_error($this->conn));
+            }
+            return $query;
         }
-        return $query;
-    }
     public function query1($sql) {
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
@@ -66,19 +69,35 @@ class Product extends Database{
         $this->data = new Database();
         $this->data->connect();
     }
-    public function getinforProduct($id){
-       $sql123="select * from product where id_product= $id";
-       $result=$this->data->query($sql123);
+    public function getinforQuantity($id){
+       $sql123="SELECT * FROM product WHERE id_product ='".$id."'";
+       $result = $this->query($sql123);
        if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $data[] = $row; // Thêm dòng dữ liệu vào mảng $data
+           $data = array();
+           while ($row = $result->fetch_assoc()) {
+               $data[] = $row;
+           }
+           return $data[0]['Amount'];
+       } else {
+           return null;
+       }
+    }
+    public function updateQuantity($id,$quantity){
+        $product=new Product();
+        $amountpro= $product->getinforQuantity($id);
+        if($amountpro <=0){
+            echo " <script>alert('id ".$id." nay co san = 0 nen khong the update');</script>";
+        }else{
+            $quantity=$amountpro-$quantity;
+            $sql="UPDATE `product` SET `Amount` = '$quantity' WHERE `product`.`id_product` = '".$id."'";
+            $result=$this->query($sql);
+            // cai nay xoa cung dc
+            // if($result==TRUE){
+            //     echo "<script>alert('Sua thanh cong ".$id."');</script>";
+            // }else{
+            //     echo " Ko sua dc";
+            // }
         }
-        print($data);
-        }
-        else{
-            return null;
-        }
-
     }
 }
 class Cart{
@@ -102,34 +121,37 @@ class Cart{
         return $dummyProduct;
     }
     public function insertBill($id_bill,$id_sp,$amount,$cost,$ngtao){
-        $sql="INSERT INTO billall(id_bill,id_sp,amount,cost,ngtao)
+        $sql="INSERT INTO bill_detail(id_billl,id_sp,amount,cost,date)
                 VALUES ($id_bill,$id_sp,$amount,$cost,'$ngtao');
         ";
         $data =new Database();
         $data->connect();
         $result=$data->query($sql);
-        if($result===TRUE){
-            echo '
-            <script>
-                    alert("Bill inserted successfully!");
-                </script>
-                        ';
-        }
+        // cai nay xoa cung dc
+        // if($result===TRUE){
+        //     echo '
+        //     <script>
+        //             alert("Bill inserted successfully!");
+        //         </script>
+        //                 ';
+        // }
     }
-    public function insertbilltong($idcus,$id_sp,$amount,$total,$status,$ngtao){
-        $sql="INSERT INTO bill(id_us,id_sp,count,Total,status,date)
-        VALUES ($idcus,$id_sp,$amount,$total,$status,'$ngtao');
-";
-$data =new Database();
-$data->connect();
-$result=$data->query($sql);
-if($result===TRUE){
-    echo '
-    <script>
-            alert("Thanh toan  cong");
-        </script>
-                ';
-}
+
+    public function insertbilltong($idbill,$idcus,$id_sp,$amount,$total,$status,$ngtao,$address,$description){
+        $sql="INSERT INTO bill(id_Bill,id_us,id_sp,count,Total,status,date,address,note)
+            VALUES ($idbill,$idcus,$id_sp,$amount,$total,$status,'$ngtao','$address','$description')";
+        $data =new Database();
+        $data->connect();
+        $result=$data->query($sql);
+        // cai nay xoa cung dc
+        // if($result===TRUE){
+        //     echo '
+        //     <script>
+        //             alert("Thanh toan  cong");
+        //         </script>
+        //                 ';
+        //     // header ("Location: projecte/view/User/thanks.php");
+        // }
     }
     public function updatethanhtoan($idcus,$amount,$total,$status,$ngtao){
         $sql ="Update bill set count = '$amount',Total= '$total',";
@@ -139,6 +161,9 @@ class Customer{
     private $idcus;
     private $name;
     private $data;
+    private $phone;
+    private $address;
+    private $email;
     public function __construct() {
         $this->data = new Database();
         $this->data->connect();
@@ -148,6 +173,26 @@ class Customer{
         $result=$this->data->query( $sql);
         if ($result->num_rows > 0) {
             return $result->fetch_assoc();
+        }
+        return null;
+    }
+    public function getinforcusname($name,$address,$phone){
+        $sql= "select * from user where Name = '$name' and Address = '$address'";
+        $result=$this->data->query( $sql);
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        }
+        return null;
+    }
+    public function getIDcus($name,$address,$phone){
+        $sql= "select id_user from user where Name = '$name' and Address = '$address'";
+        $result=$this->data->query( $sql);
+        if ($result->num_rows > 0) {
+            $user1=[];
+            while($row=$result->fetch_assoc()){
+                $user1[]=$row;
+            }
+            return $user1;
         }
         return null;
     }

@@ -104,7 +104,7 @@ session_start();
                             <option value="<?php echo $value;?>"><?php echo $value;?></option>
                         <?php } ?>
                     </select>
-                    <label for="">Địa chỉ (Tỉnh/Thành phố)</label>
+                    <!-- <label for="">Địa chỉ (Tỉnh/Thành phố)</label> -->
                 </div>
                 <div class="input-form">
                     <input type="text" id ="tdn" required>

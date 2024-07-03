@@ -3,9 +3,9 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
-$sql="SELECT bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,bill.date,bill.status FROM bill inner JOIN user ON bill.id_us=user.id_user;";
-$sql="select bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,
-      bill.status FROM bill JOIN user ON user.id_user=bill.id_us;";
+$sql="SELECT bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,bill.date,bill.status 
+FROM bill inner JOIN user ON bill.id_us=user.id_user order by bill.date DESC;";
+
 $result=$data->query($sql);
 session_start();
 ?>
@@ -60,12 +60,7 @@ session_start();
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
-            <li>
-            <a href="/Projecte/View/index.php">
-                    <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Quay lai trang index</span>
-                </a>
-            </li>
+    
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
@@ -86,7 +81,7 @@ session_start();
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;"><?=$_SESSION['Name']?></span>
+                font-weight: 600;">Admin</span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
                     <div class="box-user">
@@ -97,6 +92,9 @@ session_start();
         <div class="container">
             <form action="" method = "post">
                 <h2>Danh sách hóa đơn mua hàng</h2>
+                <a href="Export_xlsx.php?bill=-1" style = 'display: inline-block;'>
+                    <button class="btn btn-outline-success my-5 my-sm-0" type="button" style="width: 100%;">Xuất file</button>
+                </a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -119,11 +117,9 @@ session_start();
                             <td><?=  $row['id_us']; ?></td>
                             <td><?=  $row['Name']; ?></td>
                             <td><?=  $row['count']; ?></td>
-<<<<<<< HEAD
                             <td><?=  $row['date']; ?></td>
-=======
->>>>>>> 165175c3b8bb4bd7ad890fbf9cf924be55f1f946
                             <td><?=  $row['Total']; ?>đ</td>
+
                             <td>
                                 <?php  
                                     if($row['status']==1){
@@ -133,10 +129,10 @@ session_start();
                                     }
                             ?></td>
                             <td><a href="chitietbill.php?id=<?php echo $row["id_Bill"];?>">
-                                <button type="button" class="btn btn-info">Xem chi tiết</button>
+                                <button type="button" class="btn btn-info" style=" font-size: 13px;">Xem chi tiết</button>
                             </a>
                         </td>
-                            <td><button type="button" class="btn btn-danger">Xóa hóa đơn</button></td>
+                            <td><button type="button" class="btn btn-danger" style=" font-size: 13px;">Xóa hóa đơn</button></td>
                         </tr> <?php }?>
                     </tbody>
                 </table>

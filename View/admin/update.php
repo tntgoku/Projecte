@@ -62,7 +62,7 @@ if (isset($_GET['id_product'])) {
             </li>
             <li>
                 <a href="customer.php">
-                    <img src="../../img/icon/people.png" alt="">
+                    <img src="/Projecte/img/icon/people.png" alt="">
                     <span class="link_name">Khách hàng</span>
                 </a>
             </li>
@@ -72,12 +72,12 @@ if (isset($_GET['id_product'])) {
                     <span class="link_name">Quản lý bài viết(news)</span>
                 </a>
             </li>
-            <li>
-                <a href="vendors.php">
+            <!-- <li>
+            <a href="/Projecte/View/index.php">
                     <img src="/Projecte/img/icon/dashboard.png" alt="">
-                    <span class="link_name">Cái này là cái gì?</span>
+                    <span class="link_name">Quay lai trang index</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
@@ -122,7 +122,7 @@ if (isset($_GET['id_product'])) {
                 </div>
             </div>
             <div class="card-body " style="">
-            <form action="process_update.php" method="post" style="background :#e4e9f7;">
+            <form action="process_update.php" method="post" style="background :#e4e9f7;" enctype="multipart/form-data">
                     <div class="form-group" style="margin-top: 10px;">
                         <label for="">Mã sản phẩm</label>
                         <input type="text" name="id_product" value="<?php echo $idpr;?>" readonly>

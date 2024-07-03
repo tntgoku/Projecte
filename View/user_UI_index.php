@@ -20,8 +20,8 @@ $data->connect();
 	else 
 	{
 		$_SESSION['id_user']=null;
-		$user_name = "Đăng Nhập";
+		$user_name = "";
 		$count_sp = "0";
-		$id="6";
+		$id="";
 	}
 ?>

@@ -107,6 +107,14 @@ if(isset($dd12)){
       .item-quantity{
         width: 150px;
       }
+      .quantityy{
+        text-align: center;
+        width: 70px;
+      }
+      .product-i{
+        font-size: 17px;
+        font-weight: bold;
+      }
     </style>
     <script>
        function showConfirmation() {
@@ -243,6 +251,7 @@ function updateCart(key, quantity) {
                                   
                                   }   
 									  ?>
+                    
                                   </div>  
                                   </div>
                                   </div>
@@ -281,27 +290,28 @@ function updateCart(key, quantity) {
     flex-direction: column;">
     <div class="site-blocks-table">
         <table class="table">
-            <thead>
-                <tr>
-                    <th class="product-thumbnail">Sản Phẩm</th>
-                    <th class="product-name">Tên Sản Phẩm</th>
-                    <th class="product-size">Size</th>
-                    <th class="product-color">Màu sắc</th>
-                    <th class="product-price">Giá</th>
-                    <th class="product-quantity">Số Lượng</th>
-                    <th class="product-total">Tổng</th>
-                    <th class="product-remove">Thao tác</th>
+            <thead style=" font-size:14px; font-weight: 500; ">
+                <tr >
+                    <th class="product-thumbnail product-i">Sản Phẩm</th>
+                    <th class="product-name product-i">Tên Sản Phẩm</th>
+                    <th class="product-size product-i">Size</th>
+                    <th class="product-color product-i">Màu sắc</th>
+                    <th class="product-price product-i">Giá</th>
+                    <th class="product-quantity product-i">Số Lượng</th>
+                    <th class="product-total product-i">Tổng</th>
+                    <th class="product-remove product-i">Thao tác</th>
                   </th>
                 </tr>
             </thead>
             <tbody>
+            <form action="thanhtoan.php?sum=<?= $sum?>" method="post" enctype="application/x-www-form-urlencoded" style=" display:flex;">
                 <?php
                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['payment'])) {
                    // Lấy dữ liệu giỏ hàng từ session
                    $cart = $_SESSION['cart'] ?? [];
                    if (!empty($cart)) {
                     $total=0;
-
+                    $i=0;
                     foreach ($cart as $item) {
 
                     echo '<tr>';
@@ -313,54 +323,21 @@ function updateCart(key, quantity) {
                     <td>' . $item["Cost"] . '</td>
                     ';
                     echo '<td>
-                            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-black decrease" type="button">−</button>
-                                </div>
-                                <input type="text" class="form-control text-center item-quantity" value="' . $item["Quantity"] . '" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-black increase" type="button">+</button>
-                                </div>
-                            </div>
+                                <input type="number" class="quantityy" name="item-'.$i.'" value="' . $item["Quantity"] . '" placeholder="" >
                           </td>';
                           $total= $item['Quantity']*$item['Cost'];
                           echo '<td>' . $total . '</td>';
                     echo '<td>
-                    <form method="post" action="cartproduct.php">
+                    
                     <button type="submit" class="btn btn-black btn-sm remove_item" name="remove_item" value="' . $item["id_product"] . '">
-                    <i class="fa fa-trash"></i></button></form></td>';
+                    <i class="fa fa-trash"></i></button>
+                    </td>';
                     echo '</tr>';
-                }
-              }} else{
-                foreach ($_SESSION['cart'] as $key => $item) {
-                  $_SESSION['cart'][$key]['Quantity'] = 1; 
-                echo '<tr>';
-                echo '<td class="product-thumbnail"><img src="../img/item/' . $item["img"] . '" alt="Image" class="img-fluid" style="max-width: 200px;"></td>';
-                echo '<td class="product-name"><h2 class="h5 text-black">' . $item["Name"] . '</h2></td>';
-                echo '<td>' . $item["Cost"] . '</td>';
-                echo '<td>
-                        <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-black decrease" type="button">−</button>
-                            </div>
-                            <input type="text" class="form-control text-center quantity-amount" value="' . $item["Quantity"] . '" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-black increase" type="button">+</button>
-                            </div>
-                        </div>
-                      </td>';
-                      $total= $item['Quantity']*$item['Cost'];
-                      $tong122+=$total;
-                      echo '<td>' . $total . '</td>';
-                echo '<td>
-                <form method="post" action="cartproduct.php">
-                <input type="hidden" name="product_key" value="' . $key . '">
-                <button type="submit" class="btn btn-black btn-sm remove_item"  value="' . $item["id_product"] . '">
-                <i class="fa fa-trash"></i></button></form></td>';
-                echo '</tr>';
-            }
-              }
-                ?>
+                    $i++;
+                  }
+                }} 
+               
+                  ?>
                 <script>
                 </script>
             </tbody>
@@ -370,7 +347,6 @@ function updateCart(key, quantity) {
           
     ?>
     <div class="btn-paypal" style=" display:flex;justify-content: flex-end; text-align:center;">
-      <form action="thanhtoan.php?sum=<?= $sum?>" method="post" enctype="application/x-www-form-urlencoded" style=" display:flex;">
       <input type="hidden" name="total12" id="" value="<?= $tong12?>" readonly>
         <div class="price"><?= $tong12?></div><div class="price" style="margin-left:5px;">VNĐ</div>
             <input type="submit" name="thanhtoan" class="btn btn-success" value="Thanh toán" style="margin-left:15px;"

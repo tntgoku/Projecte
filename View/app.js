@@ -32,7 +32,7 @@ function check_Resign()
         {
             if(res == '0')
             {
-                window.location.href = 'user_UI_index.php';
+                window.location.href = 'index.php';
             }
             if(res == '1')
             {
