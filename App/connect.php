@@ -81,7 +81,19 @@ class Product extends Database{
        } else {
            return null;
        }
-    }
+    }public function getinforProduct($id){
+        $sql123="SELECT * FROM product WHERE id_product ='".$id."'";
+        $result = $this->query($sql123);
+        if ($result->num_rows > 0) {
+            $data = array();
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return null;
+        }
+     }
     public function updateQuantity($id,$quantity){
         $product=new Product();
         $amountpro= $product->getinforQuantity($id);
@@ -100,8 +112,8 @@ class Product extends Database{
         }
     }
 }
-class Cart{
-    private $cartItems; 
+class Cart extends Database{
+    private $cartItems;
     public function addToCart($productId) {
         // Example: In a real scenario, you would fetch product details from the database
         // Replace with your actual database query
@@ -155,6 +167,19 @@ class Cart{
     }
     public function updatethanhtoan($idcus,$amount,$total,$status,$ngtao){
         $sql ="Update bill set count = '$amount',Total= '$total',";
+    }
+    public function getbillDetail($idcus){
+        $data=new Database();
+        $sqlgetbil="SELECT user.id_user,user.Name,bill.id_Bill,bill.count,bill_detail.id_sp,bill_detail.amount,bill_detail.cost,bill.status,bill.date 
+        FROM bill inner JOIN user  ON user.id_user=bill.id_us inner JOIN bill_detail
+        ON bill.id_Bill = bill_detail.id_billl WHERE bill.id_us='".$idcus."' GROUP BY bill.id_Bill;";
+        $data->connect();
+        $result=$data->query($sqlgetbil);
+        $data = array();
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            return $data;
     }
 }
 class Customer{
@@ -252,6 +277,7 @@ class Customer{
         }
     }
 }
+
 
 
 ?>

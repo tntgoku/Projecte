@@ -9,7 +9,6 @@ if (isset($_POST['payment'])) {
   $total=0;$total1=0;
   $sum=0;
   // Hiển thị thông tin đơn hàng
-  $id_bill=4;
   foreach ($cart as $key => $product) {
     if($product['Quantity'] != 0){
       $amount = $product['Quantity'];
@@ -23,13 +22,7 @@ if (isset($_POST['payment'])) {
   echo "<br>";
   echo $sum;
   echo "<br>";
-  if($id!=''){
-    // $cartshop->insertbilltong($id,2,$sum,$total,0,$currentDate);
-  }else{
-    $id="6";
-    // $cartshop->insertbilltong($id,2,$sum,$total,0,$currentDate);
-  }
-
+  echo "quantyti $quantity <br>";
 }
 if (isset($_POST['product_key'])) {
   $key = $_POST['product_key'];

@@ -35,6 +35,40 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="admin.css">
+    <style>.icondown{
+        position: relative;
+    }
+    .icondown .box-user{
+        display: none;
+            visibility: hidden;
+            z-index: 99;
+            top: 30px;
+        left: -50%;       
+        width: 400px;
+        background-color:#f5f6fa; 
+        }
+    .icondown:hover .box-user{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 20px;
+        left: -150px;       
+        width: 200px;
+        visibility: visible;
+        position: absolute;
+    }
+
+    #list-itema{
+        float: right;
+        margin-left: 17px;
+        list-style: none;
+    }
+    #list-itema #itema{
+        margin-top: 9px;
+    }
+    #list-itema #itema:hover a{
+        color: #126964;
+    }</style>
 </head>
 <body>
 <form class="sidebar" method="post" style="transition: all 1s cubic-bezier(0.4, 0, 1, 1);">
@@ -104,7 +138,14 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
                 font-weight: 600;">Admin</span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
-                    <div class="box-user">
+                    <div class="box-user"><?php 
+                            if(isset($_SESSION['Name']) && ($_SESSION['Name'] !='') ) echo'<div class="login">
+                      <div id="box">
+                          <ul id="list-itema">
+                              <li id="itema"><a href="../User/changuser.php">Tài khoản của tôi</a></li>
+                              <li id="itema"><a href="logout.php">Đăng xuất</a></li> <!-- Thêm link đăng xuất -->
+                          </ul>
+                      </div></div>';?>
                     </div>
                 </div>
             </div>

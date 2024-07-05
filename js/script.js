@@ -1,4 +1,5 @@
 src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
+src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
 document.addEventListener("DOMContentLoaded", function() {
     const tabs = document.querySelectorAll('.tab-link');
     tabs.forEach(tab => {
@@ -85,3 +86,8 @@ function updateCart(key, quantity) {
         document.getElementById("cartForm").submit(); // Submit the form
     })
 });
+
+$('.quickly-buy').submit(function (event){
+    event.preventDefault();
+    alert("Thong thadwa");
+})

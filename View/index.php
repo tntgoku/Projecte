@@ -2,7 +2,7 @@
 <?php
 $data = new Database();
 $data->connect();
-
+$productdb=new Product();
 //echo $currentDate ;
 //Phần này hiển thị sản phẩm theo loại nhá
 if(isset($_REQUEST['id_type']))
@@ -59,25 +59,20 @@ else{
 
     function addToCart($productId, &$cartProducts) {
       global $data; // Assuming $data is your Database object
-      
+      $productdb=new Product();
       // Query the database for the product
-      $sql = "SELECT * FROM product WHERE id_product = $productId";
-      $result = $data->query($sql);
-      
-      if ($result->num_rows > 0) {
-          $row = $result->fetch_assoc();
+      $cartProducts=$productdb->getinforProduct($productId);
           
           // Check if product already exists in cart
           $found = false;
           foreach ($cartProducts as $key => $product) {
-              if ($product['id_sp'] == $row['id_sp']) {
+              if ($product['id_product'] == $productId) {
                   // Product already exists in cart, increase quantity
                   $_SESSION['cart'][$key]['Quantity']++;
                   $found = true;
                   break;
               }
           }
-          
           // If not found, add new product to cart with initial quantity 1
           if (!$found) {
               $row['Quantity'] = 1; // Set initial quantity
@@ -96,7 +91,6 @@ else{
           // Your payment handling logic goes here
           // This block will execute if the 'payment' form field is submitted
       }
-  }
   
   
   if (isset($_REQUEST['idproduct'])) {
@@ -118,17 +112,54 @@ else{
         $_SESSION['cart'][$key]['Quantity'] = $quantity;
     }
 }
-echo "<br><br>";
-print_r($_SESSION['cart']);
 if (isset($_POST['product_key'])) {
   $key = $_POST['product_key'];
   unset($_SESSION['cart'][$key]);
   header('Location: index.php');
   exit();
 }
+//dua vao gio hang
+  // if($_SERVER['REQUEST_METHOD']=='POST'){
+  //   $quantity12=1;
+  //   $result=$productdb->getinforProduct($_POST['idproduct']);
+  //   $new_product=array(array('id'=>$result[0]['id_product'],
+  //                             'Name'=>$result[0]['Name'],'Type_id'=>$result[0]['Type_id'],'Color'=>$result[0]['Color'],
+  //                             'Size'=>$result[0]['Size'],'Cost'=>$result[0]['Cost'],'Amount1'=>$quantity12,
+  //                             'Amount'=>$result[0]['Amount'],'Discount'=>$result[0]['Discount'],'img'=>$result[0]['img']
+  // ));
+  // if(isset($_SESSION['cart'])){
+  //   $found=false;
+  //   foreach($_SESSION['cart'] as $item){
+  //     if($item['id']==$_POST['idproduct']){
+  //       $productnew[]=array('id'=>$result[0]['id_product'],
+  //                             'Name'=>$result[0]['Name'],'Type_id'=>$result[0]['Type_id'],'Color'=>$result[0]['Color'],
+  //                             'Size'=>$result[0]['Size'],'Cost'=>$result[0]['Cost'],'Amount1'=>$quantity12+1,
+  //                             'Amount'=>$result[0]['Amount'],'Discount'=>$result[0]['Discount'],'img'=>$result[0]['img']);
+  //                             $found=true;
+  //     }else{
+  //       $productnew[]=array('id'=>$result[0]['id_product'],
+  //                             'Name'=>$result[0]['Name'],'Type_id'=>$result[0]['Type_id'],'Color'=>$result[0]['Color'],
+  //                             'Size'=>$result[0]['Size'],'Cost'=>$result[0]['Cost'],'Amount1'=>$quantity12,
+  //                             'Amount'=>$result[0]['Amount'],'Discount'=>$result[0]['Discount'],'img'=>$result[0]['img']);
+  //     }
+  //   }
+  //   if($found==false){
+  //     $_SESSION['cart']=array_merge($product,$new_product);
+  //   }else{
+  //     $_SESSION['cart']=$product;
+  //   }
+  // }
+  //                           }
+  //                           echo "<pre>";
+  //                           var_dump($new_product);
+  //                           echo "</pre>";
+  //                           if(isset($_POST['buy-cart12'])){
+  //                             echo "<br> addd; <br>";
+  //                           }else{
+  //                             echo "<br> addd;111212 <br>";
 
-
-  ?>
+  //                           }
+                            ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -228,9 +259,13 @@ if (isset($_POST['product_key'])) {
                                   $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
                                   if($count == 0) 
                                   echo '<img src="../img/shopping-bag.png" alt="" width="80px">
-                                  <p>Không có sản phẩm nào trong giỏ hàng</p>';        
+                                  <p>Không có sản phẩm nào trong giỏ hàng</p>
+                                  <form method="post" action="index.php" id="btn-check123">';        
                                   else{
                                     foreach ($_SESSION['cart'] as $key => $product) {
+                                      if(empty($quantity)){
+                                        $quantity=1;
+                                      }
                                       if (!isset($product['Quantity'])) {
                                         $_SESSION['cart'][$key]['Quantity'] = 0;
                                         $quantity = $_SESSION['cart'][$key]['Quantity'];
@@ -248,15 +283,15 @@ if (isset($_POST['product_key'])) {
                                       <div class="body-cart">';
 
                                       echo '<p id="cont" name="color">Màu sắc:<br> ' . $product['Color'] . "/".$product['Size'].'</p>';
-                                      echo '<input type="hidden" value="'.$product['id_product'].'name="id">';
                                       echo '<input type="number" class="quantity" id="quantity-' . $key . '" name="quantity[' . $key . ']" min="1" max="55" value="'.$quantity.'" data-cost="' . $product['Cost'] . '
                                       " data-key="' . $key . '">';
                                       echo '<p id="conti">Giá: <span class="price" id="price-' . $key . '" style="color:#f81f1f;">' . 
                                               $product['Cost'] . '</span> đ</p>
-                                              <form method="post" action="index.php" id="btn-check123">
+                                              
+                                              
                                                 <input type="hidden" name="product_key" value="' . $key . '">
                                                 <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
-                                              </form>
+                                              
                                               </div>
                                               ';
                                       echo '
@@ -338,7 +373,8 @@ function updateCart(key, quantity) {
 });
                                       </script>'
                                       ;
-                                      echo '</div>';
+                                      echo '</div>
+                                      </form>';
                                   }
                                   echo '<form method="post" action="cartproduct.php" style="float:right";>
                                       <input type="hidden" name="product_key1" value="' . $key . '">
@@ -423,9 +459,14 @@ function updateCart(key, quantity) {
                       <?= $product['Discount'] ?>%</span>
                       <div class="btn-action">
                         <div class="action-cart" >
-                          <form action="index.php" method="post">
-                            <input type="hidden" name="idproduct[]" value="<?= $product['id_product']?>">
-                            <button type="submit" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;">
+                          <form action="" method="post" class="quickly-1">
+                            <input type="hidden" name="idproduct" value="<?= $product['id_product']?>">
+                                        <input type="hidden" name="discount" value="<?= $product['Discount'] ?>">
+                                        <input type="hidden" name="name" value="<?= $product['Name'] ?>">
+                                        <input type="hidden" name="cost" value="<?= $product['Cost'] ?>">
+                                        <input type="hidden" name="img" value="<?= $product['img'] ?>">
+
+                            <button type="submit" name="buy-cart12" title="Thêm vào giỏ hàng" style="background: #101010; width: 40px; height: 40px;">
                               <i class="fa-solid fa-cart-shopping" style="font-size: 24px; color: #fff;"></i></button>
                           </form>
                         </div>
@@ -559,6 +600,17 @@ function updateCart(key, quantity) {
                             </div>
     </footer>
 <script src="./js/script.js"></script>
+<script type="text/javascript" src="../js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+            $('.quickly-1').submit(function(event) {
+                event.preventDefault();
+                alert("Thong thas");
+                // You can add more code here if needed, e.g., to submit the form via AJAX
+                this.submit(); // To allow the form to submit after the alert
+            });
+        });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 
   </body>

@@ -164,9 +164,8 @@ if (isset($_POST['product_key'])) {
     margin-bottom: 20px;
 }
 .header-top .login{
-    width: 110px;
     margin-left: 3%;
-    margin-top: 19%;
+    margin-top: 4%;
     position: relative;
 }
 
@@ -395,35 +394,24 @@ function updateCart(key, quantity) {
                 <div class="bar-infor">
                     <h5>Thông tin tài khoản</h5>
                     <ul class="user-item">
-                        
-                        <?php 
-                        if($user_data[0]['role']==1){
-                                echo "<li class='item infor-user'><a href='../admin/dashboard.php'><span>Tới trang admin</span></a><i class='fa-solid fa-chevron-right'></i></li>";
-                            
-                        }
-                        ?>
                         <li class="item infor-user"><a href="changuser.php"><span>Thông tin cá nhân</span></a><i class="fa-solid fa-chevron-right"></i></li>
                         <li class="item loc-user"><a href="cart-user.php"><span>Lịch sử mua hàng</span></a><i class="fa-solid fa-chevron-right"></i></li>
                         <li class="item"><span>Thẻ thành viên</span><i class="fa-solid fa-chevron-right"></i></li>
                         <li class="item"><span><a href="/Projecte/View/logout.php">Đăng xuất</a></span><i class="fa-solid fa-chevron-right"></i></li>
-                    
-                    
                     </ul>
                 </div>
             </div>
             <div class="information">
                 <div class="title-header">
-                    <h2>THÔNG TIN CỦA TÔI</h2>
-                    <h5>Hãy chỉnh sửa bất kỳ thông tin chi tiết nào bên dưới để tài khoản của bạn luôn được cập nhật.</h5>
+                    <h2>LỊCH SỬ MUA HÀNG</h2>
                 </div>
                 <br>
-                <form action="">
+                <form action="" style="display: flex; justify-content:center;">
                     <div class="content-user">
-                        <h2 class="header-content">THÔNG TIN CHI TIẾT</h2><br>
-                        <?php  foreach ($user_data as $user) {?>
+                        <h2 class="header-content">THÔNG TIN HÓA ĐƠN BẠN ĐÃ MUA</h2><br>
                             <h5>
                             <?php 
-                            if($user['role'] ==1){
+                            if($user_data[0]['role'] ==1){
                                 echo 'Admin';
                             }else{
                                 echo 'Khách hàng thân thiết';
@@ -431,102 +419,44 @@ function updateCart(key, quantity) {
                             ?>
                             </h5>
                             <br>
-                        <div class="form-group">
-                             <label for="">Họ tên</label>
-                            <br>
-                            <input type="text" class="form-control" id="" name="Name" aria-describedby="" value="<?= $user['Name']?>">
-                        </div>
-                        <div class="form-group">
-                             <label for="">Giới tính</label>
-                            <br>
-                            <input type="text" class="form-control" name="addres" id="" aria-describedby="" value="<?= $user['Address']?>">
-                        </div>
-                        <div class="form-group" style="display: none;">
-                             <label for="">Giới tính</label>
-                            <br>
-                            <input type="text" class="form-control" name="addres" id="" aria-describedby="" value="<?= $user['Address']?>">
-                        </div>
-                        <div class="form-group">
-                             <label for="">Số điện thoại</label>
-                            <br>
-                            <input type="text" class="form-control" name="number" id="" aria-describedby="" value="<?= $user['Phone_Num']?>">
-                        </div>
-                    </div>
-                    <div class="content-user">
-                        <h2 class="header-content">CHI TIẾT ĐĂNG NHẬP</h2>
-                        <div class="form-group">
-                             <label for="">Tên đăng nhập</label>
-                            <br>
-                            <input type="text" name="account" class="form-control" id="" aria-describedby="" value="<?= $user['Login_name']?>">
-                        </div>
-                        <div class="form-group">
-                             <label for="">mật khẩu</label>
-                            <br>
-                            <input type="password" name="pwd" class="form-control" id="" aria-describedby="" value="<?= $user['pass']?>">
-                                <br>
-                                <label for="">Nhap lai mat khau</label>
-                                <br>
-                            <input type="password" name="pwd1" class="form-control" id="" aria-describedby="" value="Nam">
-                        </div>
-                    </div>
-                    <div class="content-user-address">
-                        <h2 class="header-content">THÔNG TIN ĐỊA CHỈ</h2>
-                        <h5>Địa chỉ đặt hàng</h5>
-                        <div class="form-group">
-                                            <label for="">Tỉnh/ Thành phố</label>
-                                            <br>
-                                            <div class="input-group ">
-                                                <select class="custom-select" id="inputGroupSelect02">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1"><?= $user['Address']?></option>
-                                                    <option value="2">Vĩnh Phúc</option>
-                                                    <option value="3">Hải Phòng</option>
-                                                    <option value="4">Yên Bái</option>
-                                                    <option value="5">Lạng Sơn</option>
-                                                </select>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Quận/Huyện</label>
-                                            <br>
-                                            <div class="input-group ">
-                                                <select class="custom-select" id="inputGroupSelect02">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">Hà Nội</option>
-                                                    <option value="2">Vĩnh Phúc</option>
-                                                    <option value="3">Hải Phòng</option>
-                                                    <option value="4">Yên Bái</option>
-                                                    <option value="5">Lạng Sơn</option>
-                                                </select>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Phường/xã</label>
-                                            <br>
-                                            <div class="input-group ">
-                                                <select class="custom-select" id="inputGroupSelect02">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">Hà Nội</option>
-                                                    <option value="2">Vĩnh Phúc</option>
-                                                    <option value="3">Hải Phòng</option>
-                                                    <option value="4">Yên Bái</option>
-                                                    <option value="5">Lạng Sơn</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Ghi chú/Tùy chọn</label>
-                                            <br>
-                                            <textarea name="" id="" style="width: 100%;">
-                                            </textarea>
-                                            </div>
-                    </div>
-                    <?php }?>
-                    <div class="save-btn">
-                        <input type="hidden" name="idu" id="" value="<?= $user['id_user']?>">
-                        <button type="submit" name="save" class="btn btn-success" id="save">Lưu</button>
+                            <table class="table">
+                                <thead class="thead-dark" style="width: 100%;">
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Mã hóa đơn</th>
+                                    <th scope="col">Họ tên</th>
+                                    <th scope="col">Số lượng </th>
+                                    <th scope="col">Thành tiền </th>
+                                    <th scope="col">Trạng thái </th>
+                                    <th scope="col">Ngày mua </th>
+                                    <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $cartDB= new Cart();
+                                        $ketqua=$cartDB->getbillDetail($user_data[0]['id_user']);
+                                    // echo "<pre>";
+                                    // var_dump($ketqua);
+                                    // echo "</pre>";
+                                        $i=0;
+                                        foreach($ketqua as $item){?>
+                                        <tr style="text-align: center;">
+                                            <th scope="row"><?=$i ?></th>
+                                            <td><?=$item['id_Bill'] ?></td>
+                                            <td><?=$item['Name'] ?></td>
+                                            <td><?=$item['count'] ?></td>
+                                            <td><?=$item['cost'] ?></td>
+                                            <td><?=$item['status'] ?></td>
+                                            <td><?=$item['date'] ?></td>
+                                            <td><button type="submit" class="btn btn-success">Mua lại</button></td>
+                                        </tr>
+
+                                    <?php
+                                        }
+                                    
+                                    ?>
+                                </tbody>
+                            </table>
                     </div>
                 </form>
             </div>
@@ -548,6 +478,7 @@ function updateCart(key, quantity) {
     width: 100px;
     }
 .user-card{
+    width: 25%;
     margin-top: 20px;
     margin-right: 40px;
 }
@@ -562,6 +493,10 @@ function updateCart(key, quantity) {
         justify-content: space-between;
         font-size: 16px;
 
+    }
+    .item i.fa-solid.fa-chevron-right {
+    margin-top: 6px;
+    margin-right: 10px;
     }
     .user-item .item:hover{
         background: #333333;

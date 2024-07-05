@@ -86,6 +86,43 @@ session_start();
     };
     </script>
     <link rel="stylesheet" href="admin.css">
+    <style>
+        .icondown{
+        position: relative;
+    }
+    .icondown .box-user{
+        display: none;
+            visibility: hidden;
+            z-index: 99;
+            top: 30px;
+        left: -50%;       
+        width: 400px;
+        background-color:#f5f6fa; 
+        }
+    .icondown:hover .box-user{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 20px;
+        left: -150px;       
+        width: 200px;
+        visibility: visible;
+        position: absolute;
+    }
+
+    #list-itema{
+        float: right;
+        margin-left: 17px;
+        list-style: none;
+    }
+    #list-itema #itema{
+        margin-top: 9px;
+    }
+    #list-itema #itema:hover a{
+        color: #126964;
+    }
+    
+    </style>
 </head>
 <body>
     <form class="sidebar" method="post" style="transition: all 1s cubic-bezier(0.4, 0, 1, 1);">
@@ -152,10 +189,18 @@ session_start();
                 <img src="/Projecte/img/item/a3.png" width="40px" alt="">
                 <span class="name-user" style="
                 font-size: 16px;
-                font-weight: 600;">Admin</span>
+                font-weight: 600;"><?= $_SESSION['Name'] ?></span>
                 <div class="icondown" style="cursor: pointer;">
                     <i class="fa-solid fa-chevron-down"></i>
-                    <div class="box-user">
+                    <div class="box-user">     
+                        <?php 
+                            if(isset($_SESSION['Name']) && ($_SESSION['Name'] !='') ) echo'<div class="login">
+                      <div id="box">
+                          <ul id="list-itema">
+                              <li id="itema"><a href="../User/changuser.php">Tài khoản của tôi</a></li>
+                              <li id="itema"><a href="logout.php">Đăng xuất</a></li> <!-- Thêm link đăng xuất -->
+                          </ul>
+                      </div></div>';?>
                     </div>
                 </div>
             </div>
@@ -178,13 +223,13 @@ session_start();
                     </div>
                     <div class="indicator">
                         <i></i>
-                        Doanh thu thang <?php echo $month ;?></div>
+                        Doanh thu tháng <?php echo $month ;?></div>
                 </div>
                 <div style="display: flex; align-items: center;"><i class="fa-solid fa-cart-shopping cart" style="font-size:35px; height: 50px;  width: 50px; text-align: center;"></i></div>
             </div>
             <div class="overview" style="display: flex;">
                 <div class="box">
-                    <div class="box_topic"><span>Hoa don</span></div>
+                    <div class="box_topic"><span>Hóa đơn</span></div>
                     <div class="number" style="font-size: 35px; font-weight: 500; margin-top: 5px;">
                         <?php
                         $sql="select count(id_Bill) as tong from bill where month(date) ='$month'";
@@ -195,13 +240,13 @@ session_start();
                     </div>
                     <div class="indicator">
                         <i></i>
-                        <span>Tong hoa don <?php $month?></span></div>
+                        <span>Tổng hóa đơn trong tháng <?php $month?></span></div>
                 </div>
                 <div style="display: flex; align-items: center;"><i class="fa-solid fa-cart-shopping cart" style="font-size:35px; height: 50px;  width: 50px; text-align: center;"></i></div>
             </div>
             <div class="overview" style="display: flex;">
                 <div class="box">
-                    <div class="box_topic"><span>Hoa don</span></div>
+                    <div class="box_topic"><span>Hóa đơn</span></div>
                     <div class="number" style="font-size: 35px; font-weight: 500; margin-top: 5px;">
                         <?php 
                         $date_hn = $date["mday"] . '-' . $date['mon'] . '-' . $date['year'];
@@ -213,7 +258,7 @@ session_start();
                     </div>
                     <div class="indicator">
                         <i></i>
-                        <span>Hoa don hom nay</span></div>
+                        <span>Hóa đơn hôm nay hôm nay</span></div>
                 </div>
                 <div style="display: flex; align-items: center;"><i class="fa-solid fa-cart-shopping cart" style="font-size:35px; height: 50px;  width: 50px; text-align: center;"></i></div>
             </div>
@@ -221,36 +266,6 @@ session_start();
         <div class="bieudo" style="margin-left:30px;">
         <div id="chart_div" style="width: 450px; height: 400px;"></div>
         </div>
-        <div class="bieudo" style=" background:blue;">
-            <div id="myChart123" style="width: 500px; height:500px; background:peru;">
-
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            const ctx = document.getElementById('myChart123');
-
-new Chart(ctx, {
-type: 'bar',
-data: {
-labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-datasets: [{
-  label: '# of Votes',
-  data: [12, 19, 3, 5, 2, 3],
-  borderWidth: 1
-}]
-},
-options: {
-scales: {
-  y: {
-    beginAtZero: true
-  }
-}
-}
-});
-
-        </script>
     </div>
 <script src="scriptad.js">
 </script>

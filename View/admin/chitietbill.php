@@ -147,44 +147,46 @@ else{
                         <input type="text" name="size"  value="<?php echo $result["us_sdt"];?>">
                     </div>
                     <div class="form-group" style="margin-top: 10px;">
-                        <label for="">Mã sản phẩm</label>
-                        <input type="text" name="id_product" value="<?php echo $result["prod_id"];?>" readonly>
+                        <label for="">Mã hóa đơn</label>
+                        <label for=""><?= $id?></label>
                     </div>
-                    <div class="form-group">
-                        <label for="">Chi tiết sản phẩm</label>
-                        <input type="text" width="80px" name="img" value = "<?php echo $result["prod_name"] .'\\'. $result["prod_size"] .'\\'. $result["prod_color"];?>">
-                        <img src="../../img/item/<?php echo $result["prod_img"];?>" alt="" width="150px">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Số lượng</label>
-                        <input type="text" name="name"  value="<?php echo $result["count"];?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Giảm giá</label>
-                        <input type="text" name="discount"  value="<?php echo $result["prod_discount"];?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Note</label>
-                        <input type="text" name="discount"  value="<?php echo $result["note"];?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Ngày tạo</label>
-                        <input type="text" name="discount"  value="<?php echo $result["date"];?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Thanh toán</label>
-                        <input type="text" name="cost"  value="<?php echo $result["Total"];?>đ">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Trạng thái</label>
-                        <input type="text" name="name"  value="<?php 
-                            if ($result["status"] == 1)
-                            {
-                                echo "Đã thanh toán";
-                            }
-                            else echo "Chưa thanh toán";
-                        ?>">
-                    </div>
+                    <table class="table">
+                        <thead class="thead-dark">    
+                            <tr style="text-align: center;">
+                                <th scope="col">#</th>
+                                <th scope="col">Mã hóa đơn</th>
+                                <th scope="col" style="width: 150px;">Hình ảnh</th>
+                                <th scope="col">Tên Sản phẩm</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Loại áo</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Giá bán</th>
+
+                    </tr></thead>
+                        <tbody>
+                            <?php 
+                            $sql="SELECT bill_detail.id_billl,bill_detail.id_sp,bill_detail.amount,bill_detail.cost,
+                            bill_detail.date,product.Name,product.Size,product.img,product_list.Type_name FROM
+                                bill_detail inner join product ON bill_detail.id_sp=product.id_product
+                                inner join product_list ON product_list.Type_id=product.Type_id WHERE bill_detail.id_billl='$id'";
+                                $result=$data->query($sql);
+                                $i=0;
+                                while($row=mysqli_fetch_assoc($result)){
+                            ?>
+                                <tr>
+                                    <td><?= $i ?></td>
+                                    
+                                    <td><?= $row['id_billl'] ?></td>
+                                    <td><img src="../../img/item/<?= $row['img'] ?>" alt="" width="150px" height="150px"></td>
+                                    <td><?= $row['Name'] ?></td>
+                                    <td><?= $row['Size'] ?></td>
+                                    <td><?= $row['Type_name'] ?></td>
+                                    <td><?= $row['amount'] ?></td>
+                                    <td><?= $row['cost'] ?></td>
+                                </tr>
+                            <?php $i++;}?>
+                        </tbody>    
+                </table>
                 <!-- Add other fields as needed -->
                 <button type="submit" class="btn btn-primary">Quay lại</button>
                 <a href="Export_xlsx.php?bill=<?php echo $id;?>" style = "display: inline-block;">
