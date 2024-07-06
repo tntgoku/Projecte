@@ -439,7 +439,8 @@ function updateCart(key, quantity) {
                         <div class="form-group">
                              <label for="">Giới tính</label>
                             <br>
-                            <input type="text" class="form-control" name="addres" id="" aria-describedby="" value="<?= $user['Address']?>">
+                            <input type="text" class="form-control" name="addres" id="" aria-describedby="" value="<?php if($user['Gt'] == 0) echo "Nữ";
+                                                                                                                         else echo "Nam";?>">
                         </div>
                         <div class="form-group" style="display: none;">
                              <label for="">Giới tính</label>

@@ -1,4 +1,11 @@
 <?php require_once("user_UI_index.php");
+if(!isset($_SESSION['id_user']))
+{
+    echo '<script>
+                alert("Bạn cần đăng nhập để thực hiện chức năng này");
+                window.location.href = "index.php";
+              </script>';
+}
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 $currentDate = date("d/m/Y H:i:s");
 echo $currentDate ."<br>";
@@ -30,8 +37,6 @@ if (isset($_POST['payment'])) {
   // Lấy thông tin giỏ hàng từ session
   $cart = $_SESSION['cart'] ?? [];
 }
-
-
 else{
   $cart = $_SESSION['cart'] ?? [];
 }
@@ -41,9 +46,9 @@ $cartshop=new Cart();
   // Hiển thị thông tin đơn hàng
   foreach ($cart as $key => $product) {
     if($product['Quantity'] != 0){
-      $amount = $product['Quantity'];
+      $amount = $product['amount'];//Thay quantity bang amount
       $total1+=$amount*$product['Cost'];
-      $sum+=$amount;}
+      $sum+=$product['Quantity'];}
       else{
         $product['Quantity']=1;
       }
@@ -55,9 +60,12 @@ $cartshop=new Cart();
   // echo "quantyti $quantity <br>";
 
   // cai nay la xoa ne
-if (isset($_POST['product_key'])) {
-  $key = $_POST['product_key'];
+if (isset($_POST['product_key']) || isset($_GET['product_key'])) {
+  $key = isset($_POST['product_key']) ? $_POST['product_key'] :$_GET['product_key'];
+  $id_sp = $_SESSION['cart'][$key]['id_sp'];
   unset($_SESSION['cart'][$key]);
+  $sql = "DELETE FROM cart WHERE id_us = '$id' AND id_sp = '$id_sp'";
+  $data->query($sql);
   header('Location: cartproduct.php');
   exit();
 }
@@ -237,8 +245,7 @@ if (isset($_POST['product_key'])) {
                                                 <div class="header-cart">
                                                   <img src="../img/item/' . $product['img'] . '"name="img" alt="'.'>
                                                 "<p id="cont" name="namepro" style="font-size:10px;">' . $product['Name'] . '</p>'.
-                                                  '</div>'
-                                      ;
+                                                  '</div>';
                                       echo '
                                       <div class="gop" style="display:flex; flex-direction: column;">
                                       <div class="body-cart">';
@@ -247,9 +254,9 @@ if (isset($_POST['product_key'])) {
                                       <br> ' . $product['Color'] . "/".$product['Size'].'</p>';
                                       echo '<input type="hidden" value="'.$product['id_product'].'name="id">';
                                       echo '<input type="number" class="quantity" id="quantity-' . $key . '"
-                                       name="quantity[' . $key . ']" min="1" max="55" value="'.$quantity.'" data-cost="
+                                       name="quantity[' . $key . ']" min="1" max="55" value="'.$product['amount'].'" data-cost="
                                        ' . $product['Cost'] . '
-                                      " data-key="' . $key . '">';
+                                      " data-key="' . $key . '">'; //Thay $quantity bang $product['amount']
                                       echo '
                                               <form method="post" action="cartproduct.php">
                                                 <input type="hidden" name="product_key" value="' . $key . '">
@@ -324,7 +331,7 @@ function updateCart(key, quantity) {
                                   }
                                   echo '<form method="post" action="cartproduct.php" style="float:right";>
                                       <input type="hidden" name="product_key" value="' . $key . '">
-  <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;" value="Thanh Toán">
+  <input type="submit" class="btn btn-success" name="payment" style="width:120px;float:right;display:none;" value="Thanh Toán">
 </form>';
                                   
                                   }   
@@ -385,7 +392,7 @@ function updateCart(key, quantity) {
                    $cart = $_SESSION['cart'] ?? [];
                     $total=0;
                     $i=0;
-                    foreach ($cart as $item) {
+                    foreach ($cart as $key => $item) {
                     echo '<tr>';
                       echo '<td class="img-item"><img src="../img/item/' . 
                       $item["img"] . '" alt="Image" class="img-fluid" style="max-width: 220px; height:100px;">
@@ -397,16 +404,18 @@ function updateCart(key, quantity) {
                             <td>' . $item["Color"] . '</td>
                             <td>' . $item["Cost"] . '</td>';
                       echo '<td>
-                                  <input type="number" class="quantityy" name="item-'.$i.'" value="'. $item["Quantity"].'
-                                  " placeholder="" >
+                                  <input type="number" class="quantityy" name="item-'.$i.'" value="'. $item["amount"].'
+                                  " placeholder="'.$item["amount"].'" >
                             </td>';
-                            $total= $item['Quantity']*$item['Cost'];
+                            $total= $item['amount']*$item['Cost'];
                             echo '<td>' . $total . '</td>';
                       echo '<td style="border:1px solid #333333;">
+                                <a href = "cartproduct.php?product_key='.$key.'">
                                 <button type="button" class="btn btn-black btn-sm remove_item" name="remove_item" value="
                                 ' . $item["id_product"] . '">
                                   <i class="fa fa-trash"></i>
                                 </button>
+                                </a>
                             </td>';
                     echo '</tr>';
                     $i++;

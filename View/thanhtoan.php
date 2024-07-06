@@ -1,5 +1,13 @@
 <?php require_once("user_UI_index.php");
 
+if(!isset($_SESSION['id_user']))
+{
+    echo '<script>
+                alert("Bạn cần đăng nhập để thực hiện chức năng này");
+                window.location.href = "Login_Resign.php";
+              </script>';
+}
+
 if (isset($_POST['total1'])) {
     $total = $_POST['total1'];
 } else {
@@ -22,7 +30,7 @@ if (isset($_POST['thanhtoan']) && $_POST['thanhtoan'] == 'thanhtoan') {
 // echo "</pre>";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$total =$_POST['total12'];
+$total = isset($_POST['total12']) ? $_POST['total12'] : 0;
 echo "arara".$total;
 }
 $provinces = array(
@@ -177,6 +185,13 @@ if($id !=0){
 $messenger=$id==0 ?"Đăng nhập":$user_name;
 $messengersdt=$id==0 ?"":$user_sdt;
 $messengerurl=$id==0 ?"register.php":"User/changuser.php";
+if(isset($_POST['thanhtoan_sp']))
+{
+    $id_sp = $_POST['id_sp'];
+    $id_us = $_SESSION['id_user'];
+    $result = $data->query("SELECT cart.id_sp, product.Name, product.Size,product.Color,product.img,product.id_product,product.Cost,cart.amount from cart inner join product ON product.id_product = cart.id_sp where cart.id_us = '$id_us' AND cart.id_sp = '$id_sp'");
+    $itemcart = $result->fetch_assoc();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -346,14 +361,9 @@ $messengerurl=$id==0 ?"register.php":"User/changuser.php";
 								$total = 0;
                                 $tonghd=0;
                                 $quantitysum=0;
-                                if(!isset($_SESSION['cart'])){
-                                    echo "Khong co";
-                                }else{
-                                    $i=0;
-									foreach($_SESSION['cart'] as $itemcart){
-										$total += ($itemcart["Cost"] * $itemcart["Quantity"]);
-                                        
-								?><tr class="product">
+                                if(isset($_POST['thanhtoan_sp'])){
+                                ?>
+                                <tr class="product">
                                 <td class="item-pro">
                                     <div class="img-pro" >
                                         <div class="img-tile"><img src="../img/item/<?php 
@@ -361,7 +371,7 @@ $messengerurl=$id==0 ?"register.php":"User/changuser.php";
                                         ?>" alt="" width="50px"></div>
                                         <span>
                                             <?php
-                                             echo $itemcart["Quantity"];
+                                             echo $itemcart["amount"];//thay quantity bang amount
                                              ?>
                                         </span>
                                     </div>
@@ -383,13 +393,55 @@ $messengerurl=$id==0 ?"register.php":"User/changuser.php";
                                 </td>
                                 <?php  ?>
                                 <td><span class="cost">
-                                 <?php  $tonghd+=($itemcart['Quantity'] * $itemcart["Cost"])?>
+                                 <?php  $tonghd+=($itemcart['amount'] * $itemcart["Cost"]); //thay quantity bang amount?> 
                                  <?= 
-                                 $itemcart['Quantity']* $itemcart["Cost"];
+                                 $itemcart['amount']* $itemcart["Cost"]; //thay quantity bang amount
+                                ?></span><span>VNĐ</span></td>
+                                <?php
+                                }
+                                else
+                                {
+                                    $i=0;
+									foreach($_SESSION['cart'] as $itemcart){
+										$total += ($itemcart["Cost"] * $itemcart["amount"]);//thay quantity bang amount
+                                        
+								?><tr class="product">
+                                <td class="item-pro">
+                                    <div class="img-pro" >
+                                        <div class="img-tile"><img src="../img/item/<?php 
+                                        echo $itemcart["img"];
+                                        ?>" alt="" width="50px"></div>
+                                        <span>
+                                            <?php
+                                             echo $itemcart["amount"];//thay quantity bang amount
+                                             ?>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td colspan="2" style="text-align: center; margin:0 4px;" id="name-item" >
+                                    <span class="product_name">
+									<?php
+                                     echo $itemcart["Name"];
+                                     ?>
+									</span>
+                                    <br>
+                                    <span class="property" style="font-size: 13px;">
+                                        <?php 
+                                        echo $itemcart["Color"];
+                                        ?>/<?php 
+                                        echo $itemcart["Size"];
+                                        ?>
+                                    </span>
+                                </td>
+                                <?php  ?>
+                                <td><span class="cost">
+                                 <?php  $tonghd+=($itemcart['amount'] * $itemcart["Cost"]); //thay quantity bang amount?> 
+                                 <?= 
+                                 $itemcart['amount']* $itemcart["Cost"]; //thay quantity bang amount
                                 ?></span><span>VNĐ</span></td>
                             </tr>
 							<?php
-                            $quantitysum+=$itemcart['Quantity'];
+                            $quantitysum+=$itemcart['amount']; //thay quantity bang amount
 									$i++;
                                 }}
 								?>

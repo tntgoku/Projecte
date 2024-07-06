@@ -204,8 +204,8 @@ print_r($row);
                                       <div class="body-cart">';
 
                                       echo '<p id="cont" name="color">Màu sắc:<br> ' . $product['Color'] . "/".$product['Size'].'</p>';
-                                      echo '<input type="number" class="quantity" id="quantity-' . $key . '" name="quantity[' . $key . ']" min="1" max="55" value="'.$quantity.'" data-cost="' . $product['Cost'] . '
-                                      " data-key="' . $key . '">';
+                                      echo '<input type="number" class="quantity" id="quantity-' . $key . '" name="quantity[' . $key . ']" min="1" max="55" 
+                                      value="'.$product['amount'].'" data-cost="' . $product['Cost'] . '" data-key="' . $key . '">';//Thay $quantity bang $product['amount']
                                       echo '<p id="conti">Giá: <span class="price" id="price-' . $key . '" style="color:#f81f1f;">' . 
                                               $product['Cost'] . '</span> đ</p>
                                               
@@ -417,7 +417,8 @@ function updateCart(key, quantity) {
                   <a href="cartproduct.php">
                     <button class="buy-btn"> Them vao gio</button>
                   </a>
-                    <button type="submit" class="btn btn-success" name="thanhtoan">Thanh toán</button>
+                  <input type="text" value ="<?php echo $row['id_product'];?>" name = "id_sp" style = "display:none;">
+                    <button type="submit" class="btn btn-success" name="thanhtoan_sp">Thanh toán</button>
                 </div>
             </form>
           
