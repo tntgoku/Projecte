@@ -117,7 +117,7 @@ else{
           addToCart($productId, $_SESSION['cart']);
       }
   }
-  echo "du lieu cart <br>";
+//   echo "du lieu cart <br>";
   if (isset($_POST['key']) && isset($_POST['quantity'])) {
     $key = $_POST['key'];
     $quantity = $_POST['quantity'];

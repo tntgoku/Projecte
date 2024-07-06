@@ -14,7 +14,7 @@ $sql= "SELECT * FROM product";
   $totalQuantity = 0;
 
   //Thêm session['cart']
-    $sql = "SELECT product.Name, product.Size,product.Color,cart.amount from cart inner join product ON product.id_product = cart.id_sp where cart.id_us = '$id'";
+    $sql = "SELECT product.Name, product.Size,product.Color,cart.amount,product.id_product,product.img,product.Cost from cart inner join product ON product.id_product = cart.id_sp where cart.id_us = '$id'";
     $result = $data->query($sql);
     while($row = $result->fetch_assoc())
     {
@@ -56,7 +56,7 @@ $sql= "SELECT * FROM product";
           addToCart($productId, $_SESSION['cart']);
       }
   }
-  echo "du lieu cart <br>";
+  // echo "du lieu cart <br>";
   print_r($_SESSION['cart'] );
   if (isset($_POST['key']) && isset($_POST['quantity'])) {
     $key = $_POST['key'];
@@ -161,7 +161,7 @@ print_r($row);
                   <?php }else{ 
                     echo '
                     <div class="login">
-                      <label for=""><a href="login.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
+                      <label for=""><a href="Login_Resign.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
                     </div>';
                    } ?>
               </div>
@@ -180,9 +180,13 @@ print_r($row);
                                   $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
                                   if($count == 0) 
                                   echo '<img src="../img/shopping-bag.png" alt="" width="80px">
-                                  <p>Không có sản phẩm nào trong giỏ hàng</p>';        
+                                  <p>Không có sản phẩm nào trong giỏ hàng</p>
+                                  <form method="post" action="index.php" id="btn-check123">';        
                                   else{
                                     foreach ($_SESSION['cart'] as $key => $product) {
+                                      if(empty($quantity)){
+                                        $quantity=1;
+                                      }
                                       if (!isset($product['Quantity'])) {
                                         $_SESSION['cart'][$key]['Quantity'] = 0;
                                         $quantity = $_SESSION['cart'][$key]['Quantity'];
@@ -190,9 +194,9 @@ print_r($row);
                                     }
                                       echo '<div class="productcart">
                                                 <div class="header-cart">
-                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="'.'>
-                                                  <input type="text"
-                                                "<p id="cont" name="namepro" style="font-size:10px;">' . $product['Name'] . '</p>'.
+                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="'.'>';
+                                                  echo '
+                                                  <p id="cont" >'.$product['Name'].'</p>'.
                                                   '</div>'
                                       ;
                                       echo '
@@ -200,15 +204,15 @@ print_r($row);
                                       <div class="body-cart">';
 
                                       echo '<p id="cont" name="color">Màu sắc:<br> ' . $product['Color'] . "/".$product['Size'].'</p>';
-                                      echo '<input type="hidden" value="'.$product['id_product'].'name="id">';
                                       echo '<input type="number" class="quantity" id="quantity-' . $key . '" name="quantity[' . $key . ']" min="1" max="55" value="'.$quantity.'" data-cost="' . $product['Cost'] . '
                                       " data-key="' . $key . '">';
                                       echo '<p id="conti">Giá: <span class="price" id="price-' . $key . '" style="color:#f81f1f;">' . 
                                               $product['Cost'] . '</span> đ</p>
-                                              <form method="post" action="index.php">
+                                              
+                                              
                                                 <input type="hidden" name="product_key" value="' . $key . '">
                                                 <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
-                                              </form>
+                                              
                                               </div>
                                               ';
                                       echo '
@@ -216,9 +220,16 @@ print_r($row);
 ';
                                       // Thêm các thông tin khác của sản phẩm nếu cần
                                       echo '<style>
+                                      .header-cart{
+                                          width: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+                                      }
                                       .productcart {
                                         display:flex;
                                             align-items: center;
+                                            justify-content: space-between;
 
                                       } 
                                       .productcart img{
@@ -236,13 +247,19 @@ print_r($row);
                                       font-size:10px;
                                       }
                                       .productcart #conti{
-                                      font-size:10px;
+                                      margin: 0 5px;
+                                      font-size: 15px;
                                       color: #f81f1f;
                                       }
                                       input#quantity-'. $key.'{
+                                        margin: 0 3px;
+                                        text-align: center;
                                         height: 25px;
                                         width: 55px;
                                       }
+                                        #btn123{
+                                      
+                                        }
                                       </style>'
                                       .'<script>
                                       document.addEventListener("DOMContentLoaded", function() {
@@ -277,13 +294,13 @@ function updateCart(key, quantity) {
 });
                                       </script>'
                                       ;
-                                      echo '</div>';
+                                      echo '</div>
+                                      </form>';
                                   }
                                   echo '<form method="post" action="cartproduct.php" style="float:right";>
-                                      <input type="hidden" name="product_key" value="' . $key . '">
+                                      <input type="hidden" name="product_key1" value="' . $key . '">
   <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;" value="Thanh Toán">
 </form>';
-                                  
                                   }   
 									  ?>
                                   </div>  
@@ -292,6 +309,7 @@ function updateCart(key, quantity) {
                                   
                                   </div>
                                   </div>
+      </div>
                                       <!-- header-nav -->
           <nav class="header-nav container">
           <h1>C L O S E T</h1>
@@ -316,7 +334,7 @@ function updateCart(key, quantity) {
                 <li><a href="index.php?id_type=6">Hoodie</a></li>
                     </ul>
               </div>
-            </div>  
+            </div>
           </nav>
 
             <!-- ---main--- -->
@@ -393,13 +411,13 @@ function updateCart(key, quantity) {
                 </div>
                 <div class="input-amount">
                   <label for="">Số lượng:</label>
-                  <input type="number" name="amount" id="" value="<?php ?>" style="text-align: center; width: 70px;">
+                  <input type="number" name="amount" id="" value="1" style="text-align: center; width: 70px;">
                 </div>
                 <div class="box-btn">
                   <a href="cartproduct.php">
                     <button class="buy-btn"> Them vao gio</button>
                   </a>
-                    <button type="submit" class="btn btn-success" name="thanhtoan"> Thanh toan</button>
+                    <button type="submit" class="btn btn-success" name="thanhtoan">Thanh toán</button>
                 </div>
             </form>
           

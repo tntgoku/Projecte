@@ -60,7 +60,7 @@ $_SESSION['cart'] = $cartProducts;
           addToCart($productId, $_SESSION['cart']);
       }
   }
-  echo "du lieu cart <br>";
+  // echo "du lieu cart <br>";
   print_r($_SESSION['cart'] );
   if (isset($_POST['key']) && isset($_POST['quantity'])) {
     $key = $_POST['key'];

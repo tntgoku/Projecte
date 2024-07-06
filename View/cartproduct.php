@@ -2,10 +2,38 @@
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 $currentDate = date("d/m/Y H:i:s");
 echo $currentDate;
-if (isset($_POST['payment'])) {
+
+//Tu trang xoa mot san pham
+if(isset($_SESSION['del_cart']) && $_SESSION['del_cart'] == true)
+{
+  $_SESSION['del_cart'] = false;
+  $id_user = $_SESSION['id_user'];
+  $sql = "SELECT cart.id_sp, product.Name, product.Size,product.Color,product.img,product.id_product,product.Cost,cart.amount from cart inner join product ON product.id_product = cart.id_sp where cart.id_us = '$id_user'";
+  $result = $data->query("$sql");
+  $del_cart = array();
+  while($row = $result->fetch_assoc())
+  {
+    $del_cart[] = $row;
+  }
+  $_SESSION['cart'] = $del_cart;
+  foreach ($_SESSION['cart'] as $key => $product) {
+    // Ensure Quantity is set and numeric
+    if (!isset($product['Quantity']) || !is_numeric($product['Quantity'])) {
+        $_SESSION['cart'][$key]['Quantity'] = 1; 
+    }
+    $quantity = $_SESSION['cart'][$key]['Quantity'];
+  }
+  $cart = $_SESSION['cart'];
+}
+//Hien thi tu trang khac
+elseif (isset($_POST['payment'])) {
   // Lấy thông tin giỏ hàng từ session
   $cart = $_SESSION['cart'] ?? [];
-  $cartshop=new Cart();
+}
+else{
+  $cart = $_SESSION['cart'] ?? [];
+}
+$cartshop=new Cart();
   $total=0;$total1=0;
   $sum=0;
   // Hiển thị thông tin đơn hàng
@@ -15,7 +43,7 @@ if (isset($_POST['payment'])) {
       $total1+=$amount*$product['Cost'];
       $sum+=$amount;}
       else{
-        $product['$Quantity']=1;
+        $product['Quantity']=1;
       }
   }
   $quantity = $_SESSION['cart'][$key]['Quantity'];
@@ -23,7 +51,7 @@ if (isset($_POST['payment'])) {
   echo $sum;
   echo "<br>";
   echo "quantyti $quantity <br>";
-}
+
 if (isset($_POST['product_key'])) {
   $key = $_POST['product_key'];
   unset($_SESSION['cart'][$key]);
@@ -43,7 +71,7 @@ if(isset($_REQUEST['idproduct'])){
 
 }
 if(isset($dd12)){
-  $sql1234="Select* FROM product WHERE id_product= $dd12";
+  $sql1234="SELECT * FROM product WHERE id_product= $dd12";
   $result=$data->query($sql1234);
   $row=mysqli_fetch_assoc($result);
   print_r($row);
@@ -63,6 +91,39 @@ if(isset($dd12)){
     <link rel="stylesheet" href="../css/reponse.css">
     <title>CloSet</title>
     <style>
+      #box {
+    width: 160px;
+    height: 120px;
+    position: absolute;
+    border: 1px solid #9ae6e2;
+    display: none;
+    border-radius: 5px;
+    z-index: 456;
+    background-color: #9dd8d5;
+}
+.login:hover #box{
+    display: block;
+}
+.login {
+    margin-bottom: 20px;
+}
+.header-top .login{
+    margin-left: 3%;
+    margin-top: 16%;
+    width: 100%;
+    position: relative;
+}
+
+#list-itema{
+    margin-left: 17px;
+    list-style: none;
+}
+#list-itema #itema{
+    margin-top: 9px;
+}
+#list-itema #itema:hover a{
+    color: #126964;
+}
       input.btn.btn-success {
         font-weight: 700;
         font-size: 19px;
@@ -126,8 +187,27 @@ if(isset($dd12)){
                 </form>
                 </div>
                 <!-- ---LOGIN--- -->
-                <div class="login">
-                  <a href="login.php" ><label for=""><?=$user_name;?></label> </label><i class="fa-regular fa-user"></i></a>
+                <div class="./View/" style="margin-top: 6px;">
+                    <?php 
+                            if(isset($_SESSION['Name']) && ($_SESSION['Name'] !='') ){ echo'<div class="login">
+                      <label for="">'.$_SESSION['Name'].'<a href="Projecte/View/User/changuser.php"> 
+                          <i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a>
+                      </label>
+                      <div id="box">
+                          <ul id="list-itema">
+                              <li id="itema"><a href="../View/User/changuser.php">Tài khoản của tôi</a></li>
+                              <li id="itema"><a href="">Lịch sử đơn hàng</a></li>
+                              <li id="itema"><a href="logout.php">Đăng xuất</a></li> <!-- Thêm link đăng xuất -->
+                          </ul>
+                      </div></div>';?>
+                  <?php }else{ 
+                    echo '
+                    <div class="login">
+                      <label for=""><a href="Login_Resign.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
+                    </div>';
+                   } ?>
+              </div>
+                  </a>
                   </div>
                   <!-- ---cart-shopping--- -->
                   <div class="cart-shopping">
@@ -237,10 +317,10 @@ function updateCart(key, quantity) {
                                       ;
                                       echo '</div>';
                                   }
-                                  echo '<form method="post" action="thanhtoan.php" style="float:right";>
-                                      <input type="hidden" name="product_key" value="' . $key . '">
-  <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;" value="Thanh Toán">
-</form>';
+//                                   echo '<form method="post" action="cartproduct.php" style="float:right";>
+//                                       <input type="hidden" name="product_key" value="' . $key . '">
+//   <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;" value="Thanh Toán">
+// </form>';
                                   
                                   }   
 									  ?>
@@ -256,23 +336,23 @@ function updateCart(key, quantity) {
       <h1>C L O S E T</h1>
         <ul class="nav-list">
           <li><a href="index.php">TRANG CHỦ</a></li>
-          <li><a href="change.html">CHÍNH SÁCH ĐỔI TRẢ</a></li>
+          <li><a href="change.php">CHÍNH SÁCH ĐỔI TRẢ</a></li>
           <li><a href="index.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
-            <li><a href="size.html">BẢNG SIZE</a></li>
-            <li><a href="store.html">HỆ THỐNG CỬA HÀNG</a></li>
+            <li><a href="size.php">BẢNG SIZE</a></li>
+            <li><a href="store.php">HỆ THỐNG CỬA HÀNG</a></li>
         </ul>
         <div class="close-menu ">
           <div class="title d-lg-none d-block">MENU</div>
           <div class="menu-slider">
               <ul>
-                <li><a href="allproducts.php">Tất cả sản phẩm</a></li>
-                <li><a href="">Áo Thun</a></li>
-                <li><a href="">Baby Tee</a></li>
-                <li><a href="">Áo Polo</a></li>
-                <li><a href="">Áo Sơ Mi</a></li>
-                <li><a href="">Áo Khoác</a></li>
-                <li><a href="">Hoodie</a></li>
+              <li><a href="index.php">Tất cả sản phẩm</a></li>
+                <li><a href="index.php?id_type=1">Áo Thun</a></li>
+                <li><a href="index.php?id_type=2">Baby Tee</a></li>
+                <li><a href="index.php?id_type=3">Áo Polo</a></li>
+                <li><a href="index.php?id_type=4">Áo Sơ Mi</a></li>
+                <li><a href="index.php?id_type=5">Áo Khoác</a></li>
+                <li><a href="index.php?id_type=6">Hoodie</a></li>
                 </ul>
           </div>
         </div>  
@@ -282,6 +362,7 @@ function updateCart(key, quantity) {
       <div class="row md-5" style=" display: flex;
     flex-direction: column;">
     <div class="site-blocks-table">
+    <form action="thanhtoan.php?sum=<?= $sum?>" method="post" enctype="application/x-www-form-urlencoded" style=" display:flex;">
         <table class="table">
             <thead style=" font-size:14px; font-weight: 500; ">
                 <tr >
@@ -297,9 +378,8 @@ function updateCart(key, quantity) {
                 </tr>
             </thead>
             <tbody>
-            <form action="thanhtoan.php?sum=<?= $sum?>" method="post" enctype="application/x-www-form-urlencoded" style=" display:flex;">
                 <?php
-               if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['payment'])) {
+               if (($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['payment'])) || (isset($_SESSION['del_cart']))) {
                    // Lấy dữ liệu giỏ hàng từ session
                    $cart = $_SESSION['cart'] ?? [];
                    if (!empty($cart)) {
@@ -321,9 +401,10 @@ function updateCart(key, quantity) {
                           $total= $item['Quantity']*$item['Cost'];
                           echo '<td>' . $total . '</td>';
                     echo '<td>
-                    
-                    <button type="submit" class="btn btn-black btn-sm remove_item" name="remove_item" value="' . $item["id_product"] . '">
+                    <a href = "delete_cart.php?id_sp='.$item['id_product'].'">
+                      <button type="button" class="btn btn-black btn-sm remove_item" name="remove_item" value="' . $item["id_product"] . '">
                     <i class="fa fa-trash"></i></button>
+                    </a>
                     </td>';
                     echo '</tr>';
                     $i++;
@@ -343,8 +424,7 @@ function updateCart(key, quantity) {
       <input type="hidden" name="total12" id="" value="<?= $tong12?>" readonly>
         <div class="price"><?= $tong12?></div><div class="price" style="margin-left:5px;">VNĐ</div>
             <input type="submit" name="thanhtoan" class="btn btn-success" value="Thanh toán" style="margin-left:15px;"
-              onclick="showConfirmation() "
-            >
+              onclick="showConfirmation()">
         </form>
     </div>
       </div>

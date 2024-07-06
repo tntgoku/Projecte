@@ -4,6 +4,16 @@ $data = new Database();
 $data->connect();
 $productdb=new Product();
 //echo $currentDate ;
+
+//Lay duong dan 
+// Lấy URL của trang hiện tại
+$current_url = $_SERVER['REQUEST_URI'];
+// Giữ nguyên tham số `id_type` nếu có
+if (isset($_GET['id_type'])) {
+    $id_type = $_GET['id_type'];
+    $_SESSION['previous_url'] = $current_url;//. '?id_type=='. urlencode($id_type);
+}
+
 //Phần này hiển thị sản phẩm theo loại nhá
 if(isset($_REQUEST['id_type']))
 {
@@ -57,28 +67,28 @@ else{
     $quantity = $_SESSION['cart'][$key]['Quantity'];
     $totalQuantity += $quantity; }
 
-    function addToCart($productId, &$cartProducts) {
-      global $data; // Assuming $data is your Database object
-      $productdb=new Product();
-      // Query the database for the product
-      $cartProducts=$productdb->getinforProduct($productId);
+    // function addToCart($productId, &$cartProducts) {
+    //   global $data; // Assuming $data is your Database object
+    //   $productdb=new Product();
+    //   // Query the database for the product
+    //   $cartProducts=$productdb->getinforProduct($productId);
           
-          // Check if product already exists in cart
-          $found = false;
-          foreach ($cartProducts as $key => $product) {
-              if ($product['id_product'] == $productId) {
-                  // Product already exists in cart, increase quantity
-                  $_SESSION['cart'][$key]['Quantity']++;
-                  $found = true;
-                  break;
-              }
-          }
-          // If not found, add new product to cart with initial quantity 1
-          if (!$found) {
-              $row['Quantity'] = 1; // Set initial quantity
-              $cartProducts[] = $row; // Add product to cart
-          }
-      }
+    //       // Check if product already exists in cart
+    //       $found = false;
+    //       foreach ($cartProducts as $key => $product) {
+    //           if ($product['id_product'] == $productId) {
+    //               // Product already exists in cart, increase quantity
+    //               $_SESSION['cart'][$key]['Quantity']++;
+    //               $found = true;
+    //               break;
+    //           }
+    //       }
+    //       // If not found, add new product to cart with initial quantity 1
+    //       if (!$found) {
+    //           $row['Quantity'] = 1; // Set initial quantity
+    //           $cartProducts[] = $row; // Add product to cart
+    //       }
+    //   }
       
       // Initialize or process any additional session data related to cart shopping
       //session_start();
@@ -103,7 +113,7 @@ else{
           addToCart($productId, $_SESSION['cart']);
       }
   }
-  echo "du lieu cart <br>";
+  // echo "du lieu cart <br>";
   if (isset($_POST['key']) && isset($_POST['quantity'])) {
     $key = $_POST['key'];
     $quantity = $_POST['quantity'];
@@ -459,8 +469,8 @@ function updateCart(key, quantity) {
                       <?= $product['Discount'] ?>%</span>
                       <div class="btn-action">
                         <div class="action-cart" >
-                          <form action="" method="post" class="quickly-1">
-                            <input type="hidden" name="idproduct" value="<?= $product['id_product']?>">
+                          <form action="add_cart.php" method="post" class="quickly-1">
+                            <input id = 'id_product' type="hidden" name="idproduct" value="<?= $product['id_product']?>">
                                         <input type="hidden" name="discount" value="<?= $product['Discount'] ?>">
                                         <input type="hidden" name="name" value="<?= $product['Name'] ?>">
                                         <input type="hidden" name="cost" value="<?= $product['Cost'] ?>">
@@ -602,14 +612,15 @@ function updateCart(key, quantity) {
 <script src="./js/script.js"></script>
 <script type="text/javascript" src="../js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(function() {
-            $('.quickly-1').submit(function(event) {
-                event.preventDefault();
-                alert("Thong thas");
-                // You can add more code here if needed, e.g., to submit the form via AJAX
-                this.submit(); // To allow the form to submit after the alert
-            });
-        });
+  // $(document).ready(function() {
+  //           $('.quickly-1').submit(function(event) {
+  //               event.preventDefault();
+  //               alert("Thong thas");
+  //               // You can add more code here if needed, e.g., to submit the form via AJAX
+  //               this.submit(); // To allow the form to submit after the alert
+  //           });
+  //       });
+  
 </script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 

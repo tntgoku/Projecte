@@ -1,52 +1,97 @@
-<?php require_once("user_UI_index.php"); 
+<?php require_once("user_UI_index.php");?>
+<?php
 $data = new Database();
 $data->connect();
-$sql= "SELECT * FROM product";
- $result=$data->query($sql);
- $product=array();
+$productdb=new Product();
+//echo $currentDate ;
+//Phần này hiển thị sản phẩm theo loại nhá
+if(isset($_REQUEST['id_type']))
+{
+  $id = $_REQUEST['id_type'];
+  $tittle = mysqli_fetch_assoc($data->query("SELECT * from product_list Where Type_id = '$id'"));
+  $product_type = array();
+  $result = $data->query("SELECT * from product where Type_id = '$id'");
+  if($result->num_rows > 0)
+  {
+    while ($row = $result->fetch_assoc())
+    {
+      $product_type[] = $row;
+    }
+  }
+  $_SESSION['products'] = $product_type;
+}
+else{
+  $sql= "SELECT * FROM product";
+  $result=$data->query($sql);
+  $product=array();
   if($result->num_rows>0){
     while($row=$result->fetch_assoc()){
       $products[] = $row;
     }
   }
   $_SESSION['products'] = $products;
+  $tittle['Type_name'] = 'Tất cả sản phẩm';
+}
+//
+
+ 
   $cartProducts = array();
   $totalQuantity = 0;
 
   //Thêm session['cart']
-  $sql = "SELECT product.Name, product.Size,product.Color,cart.amount from cart inner join product ON product.id_product = cart.id_sp where cart.id_us = '$id'";
+  $id_us = $_SESSION['id_user'];
+  $sql = "SELECT cart.id_sp, product.Name, product.Size,product.Color,product.img,product.id_product,product.Cost,cart.amount from cart inner join product ON product.id_product = cart.id_sp where cart.id_us = '$id_us'";
   $result = $data->query($sql);
   while($row = $result->fetch_assoc())
   {
     $cartProducts[] = $row;
   }
   $_SESSION['cart'] = $cartProducts;
-  
+
   // --- daon nay ne----
   foreach ($_SESSION['cart'] as $key => $product) {
     // Ensure Quantity is set and numeric
     if (!isset($product['Quantity']) || !is_numeric($product['Quantity'])) {
-        $_SESSION['cart'][$key]['Quantity'] = 1; // Default to 1 if not set or not numeric
+        $_SESSION['cart'][$key]['Quantity'] = 1; 
     }
     $quantity = $_SESSION['cart'][$key]['Quantity'];
     $totalQuantity += $quantity; }
-  function addToCart($productId, &$cartProducts) {
+
+    function addToCart($productId, &$cartProducts) {
       global $data; // Assuming $data is your Database object
-      
-      $sql = "SELECT * FROM product WHERE id_product = $productId";
-      $result = $data->query($sql);
-      
-      if ($result->num_rows > 0) {
-          $row = $result->fetch_assoc();
-          $cartProducts[] = $row;
+      $productdb=new Product();
+      // Query the database for the product
+      $cartProducts=$productdb->getinforProduct($productId);
+          
+          // Check if product already exists in cart
+          $found = false;
+          foreach ($cartProducts as $key => $product) {
+              if ($product['id_product'] == $productId) {
+                  // Product already exists in cart, increase quantity
+                  $_SESSION['cart'][$key]['Quantity']++;
+                  $found = true;
+                  break;
+              }
+          }
+          // If not found, add new product to cart with initial quantity 1
+          if (!$found) {
+              $row['Quantity'] = 1; // Set initial quantity
+              $cartProducts[] = $row; // Add product to cart
+          }
       }
-      session_start();
-    if(!isset($_SESSION['cartshoping']))
-    $_SESSION['cartshopping']=[];
-      if(isset($_POST['payment'])&& ($_POST['payment'])){
-        $img1=$_POST[''];
+      
+      // Initialize or process any additional session data related to cart shopping
+      //session_start();
+      if (!isset($_SESSION['cartshopping'])) {
+          $_SESSION['cartshopping'] = []; // Initialize cartshopping if not set
       }
-  }
+      
+      // Handle payment processing if triggered by a form submission
+      if (isset($_POST['payment']) && ($_POST['payment'])) {
+          // Your payment handling logic goes here
+          // This block will execute if the 'payment' form field is submitted
+      }
+  
   
   if (isset($_REQUEST['idproduct'])) {
       if (is_array($_REQUEST['idproduct'])) {
@@ -58,8 +103,7 @@ $sql= "SELECT * FROM product";
           addToCart($productId, $_SESSION['cart']);
       }
   }
-  echo "du lieu cart <br>";
-  print_r($_SESSION['cart'] );
+  // echo "du lieu cart <br>";
   if (isset($_POST['key']) && isset($_POST['quantity'])) {
     $key = $_POST['key'];
     $quantity = $_POST['quantity'];
@@ -68,27 +112,67 @@ $sql= "SELECT * FROM product";
         $_SESSION['cart'][$key]['Quantity'] = $quantity;
     }
 }
-
 if (isset($_POST['product_key'])) {
   $key = $_POST['product_key'];
   unset($_SESSION['cart'][$key]);
-  header('Location: index.php'); // Redirect back to the cart page
+  header('Location: index.php');
   exit();
 }
+//dua vao gio hang
+  // if($_SERVER['REQUEST_METHOD']=='POST'){
+  //   $quantity12=1;
+  //   $result=$productdb->getinforProduct($_POST['idproduct']);
+  //   $new_product=array(array('id'=>$result[0]['id_product'],
+  //                             'Name'=>$result[0]['Name'],'Type_id'=>$result[0]['Type_id'],'Color'=>$result[0]['Color'],
+  //                             'Size'=>$result[0]['Size'],'Cost'=>$result[0]['Cost'],'Amount1'=>$quantity12,
+  //                             'Amount'=>$result[0]['Amount'],'Discount'=>$result[0]['Discount'],'img'=>$result[0]['img']
+  // ));
+  // if(isset($_SESSION['cart'])){
+  //   $found=false;
+  //   foreach($_SESSION['cart'] as $item){
+  //     if($item['id']==$_POST['idproduct']){
+  //       $productnew[]=array('id'=>$result[0]['id_product'],
+  //                             'Name'=>$result[0]['Name'],'Type_id'=>$result[0]['Type_id'],'Color'=>$result[0]['Color'],
+  //                             'Size'=>$result[0]['Size'],'Cost'=>$result[0]['Cost'],'Amount1'=>$quantity12+1,
+  //                             'Amount'=>$result[0]['Amount'],'Discount'=>$result[0]['Discount'],'img'=>$result[0]['img']);
+  //                             $found=true;
+  //     }else{
+  //       $productnew[]=array('id'=>$result[0]['id_product'],
+  //                             'Name'=>$result[0]['Name'],'Type_id'=>$result[0]['Type_id'],'Color'=>$result[0]['Color'],
+  //                             'Size'=>$result[0]['Size'],'Cost'=>$result[0]['Cost'],'Amount1'=>$quantity12,
+  //                             'Amount'=>$result[0]['Amount'],'Discount'=>$result[0]['Discount'],'img'=>$result[0]['img']);
+  //     }
+  //   }
+  //   if($found==false){
+  //     $_SESSION['cart']=array_merge($product,$new_product);
+  //   }else{
+  //     $_SESSION['cart']=$product;
+  //   }
+  // }
+  //                           }
+  //                           echo "<pre>";
+  //                           var_dump($new_product);
+  //                           echo "</pre>";
+  //                           if(isset($_POST['buy-cart12'])){
+  //                             echo "<br> addd; <br>";
+  //                           }else{
+  //                             echo "<br> addd;111212 <br>";
 
+  //                           }
+                            ?>
 
-  ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/style.css">
-        <script src="../js/script.js"></script>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/reponse.css">
+    <title>CloSet</title>
+    <style>
       .hidden {
     display: none;
 }
@@ -126,12 +210,11 @@ if (isset($_POST['product_key'])) {
 #list-itema #itema:hover a{
     color: #126964;
 }
-</style>
-        <title>CloSet123</title>
-        
-        </head>
-        <body>
-        <div class="header-top">
+
+    </style>
+    </head>
+    <body>
+      <div class="header-top">
         <div class="topbar-right">
           <!-- ----SEARCH-BOX--- -->
           <div class="search-box">
@@ -157,7 +240,7 @@ if (isset($_POST['product_key'])) {
                   <?php }else{ 
                     echo '
                     <div class="login">
-                      <label for=""><a href="login.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
+                      <label for=""><a href="Login_Resign.php">Đăng nhập<i class="fa-regular fa-user" style="margin-top: 5px; margin-left:8px;"></i></a></label>
                     </div>';
                    } ?>
               </div>
@@ -176,9 +259,13 @@ if (isset($_POST['product_key'])) {
                                   $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
                                   if($count == 0) 
                                   echo '<img src="../img/shopping-bag.png" alt="" width="80px">
-                                  <p>Không có sản phẩm nào trong giỏ hàng</p>';        
+                                  <p>Không có sản phẩm nào trong giỏ hàng</p>
+                                  <form method="post" action="index.php" id="btn-check123">';        
                                   else{
                                     foreach ($_SESSION['cart'] as $key => $product) {
+                                      if(empty($quantity)){
+                                        $quantity=1;
+                                      }
                                       if (!isset($product['Quantity'])) {
                                         $_SESSION['cart'][$key]['Quantity'] = 0;
                                         $quantity = $_SESSION['cart'][$key]['Quantity'];
@@ -186,9 +273,9 @@ if (isset($_POST['product_key'])) {
                                     }
                                       echo '<div class="productcart">
                                                 <div class="header-cart">
-                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="'.'>
-                                                  <input type="text"
-                                                "<p id="cont" name="namepro" style="font-size:10px;">' . $product['Name'] . '</p>'.
+                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="'.'>';
+                                                  echo '
+                                                  <p id="cont" >'.$product['Name'].'</p>'.
                                                   '</div>'
                                       ;
                                       echo '
@@ -196,15 +283,15 @@ if (isset($_POST['product_key'])) {
                                       <div class="body-cart">';
 
                                       echo '<p id="cont" name="color">Màu sắc:<br> ' . $product['Color'] . "/".$product['Size'].'</p>';
-                                      echo '<input type="hidden" value="'.$product['id_product'].'name="id">';
                                       echo '<input type="number" class="quantity" id="quantity-' . $key . '" name="quantity[' . $key . ']" min="1" max="55" value="'.$quantity.'" data-cost="' . $product['Cost'] . '
                                       " data-key="' . $key . '">';
                                       echo '<p id="conti">Giá: <span class="price" id="price-' . $key . '" style="color:#f81f1f;">' . 
                                               $product['Cost'] . '</span> đ</p>
-                                              <form method="post" action="index.php">
+                                              
+                                              
                                                 <input type="hidden" name="product_key" value="' . $key . '">
                                                 <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
-                                              </form>
+                                              
                                               </div>
                                               ';
                                       echo '
@@ -212,9 +299,16 @@ if (isset($_POST['product_key'])) {
 ';
                                       // Thêm các thông tin khác của sản phẩm nếu cần
                                       echo '<style>
+                                      .header-cart{
+                                          width: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+                                      }
                                       .productcart {
                                         display:flex;
                                             align-items: center;
+                                            justify-content: space-between;
 
                                       } 
                                       .productcart img{
@@ -232,13 +326,19 @@ if (isset($_POST['product_key'])) {
                                       font-size:10px;
                                       }
                                       .productcart #conti{
-                                      font-size:10px;
+                                      margin: 0 5px;
+                                      font-size: 15px;
                                       color: #f81f1f;
                                       }
                                       input#quantity-'. $key.'{
+                                        margin: 0 3px;
+                                        text-align: center;
                                         height: 25px;
                                         width: 55px;
                                       }
+                                        #btn123{
+                                      
+                                        }
                                       </style>'
                                       .'<script>
                                       document.addEventListener("DOMContentLoaded", function() {
@@ -273,13 +373,13 @@ function updateCart(key, quantity) {
 });
                                       </script>'
                                       ;
-                                      echo '</div>';
+                                      echo '</div>
+                                      </form>';
                                   }
                                   echo '<form method="post" action="cartproduct.php" style="float:right";>
-                                      <input type="hidden" name="product_key" value="' . $key . '">
+                                      <input type="hidden" name="product_key1" value="' . $key . '">
   <input type="submit" class="btn btn-success" name="payment"style="width:120px;float:right;" value="Thanh Toán">
 </form>';
-                                  
                                   }   
 									  ?>
                                   </div>  
@@ -288,6 +388,7 @@ function updateCart(key, quantity) {
                                   
                                   </div>
                                   </div>
+      </div>
                                   
                                   <!-- header-nav -->
       <nav class="header-nav container">
@@ -304,13 +405,13 @@ function updateCart(key, quantity) {
           <div class="title d-lg-none d-block">MENU</div>
           <div class="menu-slider">
               <ul>
-                <li><a href="allproducts.php">Tất cả sản phẩm</a></li>
-                <li><a href="allproducts.php">Áo Thun</a></li>
-                <li><a href="allproducts.php">Baby Tee</a></li>
-                <li><a href="allproducts.php">Áo Polo</a></li>
-                <li><a href="allproducts.php">Áo Sơ Mi</a></li>
-                <li><a href="allproducts.php">Áo Khoác</a></li>
-                <li><a href="allproducts.php">Hoodie</a></li>
+              <li><a href="index.php">Tất cả sản phẩm</a></li>
+                <li><a href="index.php?id_type=1">Áo Thun</a></li>
+                <li><a href="index.php?id_type=2">Baby Tee</a></li>
+                <li><a href="index.php?id_type=3">Áo Polo</a></li>
+                <li><a href="index.php?id_type=4">Áo Sơ Mi</a></li>
+                <li><a href="index.php?id_type=5">Áo Khoác</a></li>
+                <li><a href="index.php?id_type=6">Hoodie</a></li>
                 </ul>
           </div>
         </div>  
