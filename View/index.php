@@ -7,11 +7,12 @@ $productdb=new Product();
 
 //Lay duong dan 
 // Lấy URL của trang hiện tại
-$current_url = $_SERVER['REQUEST_URI'];
+// echo $_SERVER['REQUEST_URI'];
+// $current_url = $_SERVER['REQUEST_URI'];
 // Giữ nguyên tham số `id_type` nếu có
 if (isset($_GET['id_type'])) {
     $id_type = $_GET['id_type'];
-    $_SESSION['previous_url'] = $current_url;//. '?id_type=='. urlencode($id_type);
+    // $_SESSION['previous_url'] = $current_url;//. '?id_type=='. urlencode($id_type);
 }
 
 //Phần này hiển thị sản phẩm theo loại nhá

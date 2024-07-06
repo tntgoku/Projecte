@@ -10,7 +10,12 @@ $currentDate=date("Y-m-d");
 $currentDate1=date("Y-m-d H:i:s");
 $thanhthoan=0;
 echo $currentDate ."<br>";
+
 $cart=$_SESSION['cart'];
+echo "<pre>";
+print_r($cart);
+echo "</pre>";
+echo $_POST['tong']."<br>".$_POST['sum'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Lấy giá trị của input radio
 

@@ -18,7 +18,7 @@ if(isset($_REQUEST['idproduct']))
         $sql = "INSERT INTO `cart` (`id_us`, `id_sp`, `amount`) VALUES ('$id_us', '$id_prod', '1');";
     }
     $data->query($sql);
-    $priv_url = $_SESSION['previous_url'];
-    header("Location: $priv_url");
+    header("Location: index.php");
+    exit();
 }
 ?>

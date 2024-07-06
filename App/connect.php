@@ -155,15 +155,7 @@ class Cart extends Database{
         $data =new Database();
         $data->connect();
         $result=$data->query($sql);
-        // cai nay xoa cung dc
-        // if($result===TRUE){
-        //     echo '
-        //     <script>
-        //             alert("Thanh toan  cong");
-        //         </script>
-        //                 ';
-        //     // header ("Location: projecte/view/User/thanks.php");
-        // }
+            return $result;
     }
     public function updatethanhtoan($idcus,$amount,$total,$status,$ngtao){
         $sql ="Update bill set count = '$amount',Total= '$total',";

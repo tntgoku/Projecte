@@ -6,7 +6,7 @@ if (isset($_POST['total1'])) {
     // Fallback if no total amount is received
     $total = 0;
 }
-if (isset($_POST['action']) && $_POST['action'] == 'thanhtoan') {
+if (isset($_POST['thanhtoan']) && $_POST['thanhtoan'] == 'thanhtoan') {
     // Lưu lại thông tin số lượng sản phẩm vào session
     if (isset($_POST['quantity']) && is_array($_POST['quantity'])) {
         foreach ($_POST['quantity'] as $key => $quantity) {
@@ -16,23 +16,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'thanhtoan') {
             }
         }
     }
-    echo $_POST['Name'];
-    echo "<pre>";
-    print_r($_SESSION['cart']);
-    echo "</pre>";
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['thanhtoan'])) {
-    // Lấy dữ liệu giỏ hàng từ session
-    $cart = $_SESSION['cart'] ?? [];
+// echo "<pre>";
+// print_r($_SESSION['cart']);
+// echo "</pre>";
 
-    // Thực hiện các thao tác xử lý thanh toán ở đây
-    print_r($cart);
-
-    // Tiếp tục xử lý thanh toán, lưu vào cơ sở dữ liệu, ...
-}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $total =$_POST['total12'];
-echo $total;
+echo "arara".$total;
 }
 $provinces = array(
     "An Giang",
@@ -354,11 +345,12 @@ $messengerurl=$id==0 ?"register.php":"User/changuser.php";
 								// $sp = $data->query($sql);
 								$total = 0;
                                 $tonghd=0;
-                                if(!isset($cart)){
+                                $quantitysum=0;
+                                if(!isset($_SESSION['cart'])){
                                     echo "Khong co";
                                 }else{
                                     $i=0;
-									foreach($cart as $itemcart){
+									foreach($_SESSION['cart'] as $itemcart){
 										$total += ($itemcart["Cost"] * $itemcart["Quantity"]);
                                         
 								?><tr class="product">
@@ -369,7 +361,7 @@ $messengerurl=$id==0 ?"register.php":"User/changuser.php";
                                         ?>" alt="" width="50px"></div>
                                         <span>
                                             <?php
-                                             echo $_POST["item-$i"];
+                                             echo $itemcart["Quantity"];
                                              ?>
                                         </span>
                                     </div>
@@ -391,12 +383,13 @@ $messengerurl=$id==0 ?"register.php":"User/changuser.php";
                                 </td>
                                 <?php  ?>
                                 <td><span class="cost">
-                                 <?php  $tonghd+=($_POST["item-$i"] * $itemcart["Cost"])?>
+                                 <?php  $tonghd+=($itemcart['Quantity'] * $itemcart["Cost"])?>
                                  <?= 
-                                 $_POST["item-$i"] * $itemcart["Cost"];
+                                 $itemcart['Quantity']* $itemcart["Cost"];
                                 ?></span><span>VNĐ</span></td>
                             </tr>
 							<?php
+                            $quantitysum+=$itemcart['Quantity'];
 									$i++;
                                 }}
 								?>
@@ -429,7 +422,7 @@ $messengerurl=$id==0 ?"register.php":"User/changuser.php";
                             <i class="fa-solid fa-chevron-left"></i>Quay lại giỏ hàng
                             </a>
                             <input type="hidden" name="name-user" value="<?= $id?>">
-                            <input type="hidden" name="sum" value="<?= $_REQUEST['sum']?>">
+                            <input type="hidden" name="sum" value="<?= $quantitysum?>">
                             <div class="paypal1"  style="">
                                 <button type="submit" class="btn btn-success" style="margin-right: 20px; float:right;" name="thanhtoan123"> Đặt hàng</button>
                             </div>
