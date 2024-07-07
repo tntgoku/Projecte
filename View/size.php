@@ -353,7 +353,7 @@ function updateCart(key, quantity) {
       <nav class="header-nav container">
       <h1>C L O S E T</h1>
         <ul class="nav-list">
-          <li><a href="index1.php">TRANG CHỦ</a></li>
+          <li><a href="index.php">TRANG CHỦ</a></li>
           <li><a href="change.php">CHÍNH SÁCH ĐỔI TRẢ</a></li>
           <li><a href="index1.php">
             <img src="../img/icon/LogoSecondP.jpg" alt="" width="100px"></a></li>
@@ -479,7 +479,7 @@ function updateCart(key, quantity) {
 
           <div class="product-item1">
             <div class="single-img col-3">
-              <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+              <div class="title" style="text-align: center;"><h3>Baby Tee</h3></div>
               <div class="img-fluid">
                 <img src="../img/item/a1.jpg" alt="" width="100%">
               </div>
@@ -531,7 +531,7 @@ function updateCart(key, quantity) {
           </div>
           <div class="product-item1">
             <div class="single-img col-3">
-            <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+            <div class="title" style="text-align: center;"><h3>Áo Polo</h3></div>
             <div class="img-fluid">
               <img src="../img/item/a1.jpg" alt="" width="100%">
             </div>
@@ -584,7 +584,7 @@ function updateCart(key, quantity) {
 
           <div class="product-item1">
             <div class="single-img col-3">
-              <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+              <div class="title" style="text-align: center;"><h3>Áo Sơ Mi</h3></div>
               <div class="img-fluid">
                 <img src="../img/item/a1.jpg" alt="" width="100%">
               </div>
@@ -637,7 +637,7 @@ function updateCart(key, quantity) {
 
           <div class="product-item1">
             <div class="single-img col-3">
-            <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+            <div class="title" style="text-align: center;"><h3>Áo Khoác</h3></div>
             <div class="img-fluid">
               <img src="../img/item/a1.jpg" alt="" width="100%">
             </div>
@@ -690,7 +690,7 @@ function updateCart(key, quantity) {
 
           <div class="product-item1">
             <div class="single-img col-3">
-              <div class="title" style="text-align: center;"><h3>Áo Thun</h3></div>
+              <div class="title" style="text-align: center;"><h3>Hoddie</h3></div>
               <div class="img-fluid">
                 <img src="../img/item/a1.jpg" alt="" width="100%">
               </div>

@@ -122,6 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script> 
             alert('Bạn đã chọn thanh toán Thanh toán khi nhận hàng. Dữ liệu sẽ được chuyển đến trang thanh toán Khi nhận hàng.);
             </script>";
+            
             header("Location:thanks.php");
         }
     } else {

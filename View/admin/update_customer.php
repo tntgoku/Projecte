@@ -100,7 +100,7 @@ if(isset($_POST['update'])){
         </ul>
         <div class="bottom-content" style="list-style: none;">
             <li>
-                <a href="" style="text-decoration: none;">
+                <a href="../logout.php" style="text-decoration: none;">
                     <i class="fa-solid fa-right-from-bracket" style="font-size: 30px; margin-left: 5px;"></i>
                     <span class="nav-text" style="margin-left: 45px;">Logout</span>
                 </a>
