@@ -154,7 +154,7 @@ print_r($row);
                       <div id="box">
                           <ul id="list-itema">
                               <li id="itema"><a href="../View/User/changuser.php">Tài khoản của tôi</a></li>
-                              <li id="itema"><a href="">Lịch sử đơn hàng</a></li>
+                              <li id="itema"><a href="../View/User/cart-user.php">Lịch sử đơn hàng</a></li>
                               <li id="itema"><a href="logout.php">Đăng xuất</a></li> <!-- Thêm link đăng xuất -->
                           </ul>
                       </div></div>';?>

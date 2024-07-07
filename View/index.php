@@ -123,10 +123,14 @@ else{
         $_SESSION['cart'][$key]['Quantity'] = $quantity;
     }
 }
-if (isset($_POST['product_key'])) {
-  $key = $_POST['product_key'];
+
+if (isset($_POST['product_key']) || isset($_GET['product_key'])) {
+  $key = isset($_POST['product_key']) ? $_POST['product_key'] :$_GET['product_key'];
+  $id_sp = $_SESSION['cart'][$key]['id_sp'];
   unset($_SESSION['cart'][$key]);
-  header('Location: index.php');
+  $sql = "DELETE FROM cart WHERE id_us = '$id' AND id_sp = '$id_sp'";
+  $data->query($sql);
+  header('Location:index.php');
   exit();
 }
 //dua vao gio hang
@@ -244,7 +248,7 @@ if (isset($_POST['product_key'])) {
                       <div id="box">
                           <ul id="list-itema">
                               <li id="itema"><a href="../View/User/changuser.php">Tài khoản của tôi</a></li>
-                              <li id="itema"><a href="">Lịch sử đơn hàng</a></li>
+                              <li id="itema"><a href="../View/User/cart-user.php">Lịch sử đơn hàng</a></li>
                               <li id="itema"><a href="logout.php">Đăng xuất</a></li> <!-- Thêm link đăng xuất -->
                           </ul>
                       </div></div>';?>
@@ -270,8 +274,7 @@ if (isset($_POST['product_key'])) {
                                   $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
                                   if($count == 0) 
                                   echo '<img src="../img/shopping-bag.png" alt="" width="80px">
-                                  <p>Không có sản phẩm nào trong giỏ hàng</p>
-                                  <form method="post" action="index.php" id="btn-check123">';        
+                                  <p>Không có sản phẩm nào trong giỏ hàng</p>';        
                                   else{
                                     foreach ($_SESSION['cart'] as $key => $product) {
                                       if(empty($quantity)){
@@ -282,10 +285,11 @@ if (isset($_POST['product_key'])) {
                                         $quantity = $_SESSION['cart'][$key]['Quantity'];
                                         $key=1;
                                     }
-                                      echo '<div class="productcart">
+                                      echo '
+                                       <form method="POST" action="index.php" id="btn-check123">
+                                        <div class="productcart">
                                                 <div class="header-cart">
-                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="'.'>';
-                                                  echo '
+                                                  <img src="../img/item/' . $product['img'] . '"name="img" alt="'.'">
                                                   <p id="cont" >'.$product['Name'].'</p>'.
                                                   '</div>'
                                       ;
@@ -294,14 +298,20 @@ if (isset($_POST['product_key'])) {
                                       <div class="body-cart">';
 
                                       echo '<p id="cont" name="color">Màu sắc:<br> ' . $product['Color'] . "/".$product['Size'].'</p>';
-                                      echo '<input type="number" class="quantity" id="quantity-' . $key . '" name="quantity[' . $key . ']" min="1" max="55" 
+                                      echo '<input type="number" class="quantity" id="quantity-' . $key . '" 
+                                      name="quantity-' . $key . '" min="1" max="55" 
                                       value="'.$product['amount'].'" data-cost="' . $product['Cost'] . '" data-key="' . $key . '">';//Thay $quantity bang $product['amount']
                                       echo '<p id="conti">Giá: <span class="price" id="price-' . $key . '" style="color:#f81f1f;">' . 
                                               $product['Cost'] . '</span> đ</p>
                                               
                                               
                                                 <input type="hidden" name="product_key" value="' . $key . '">
-                                                <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
+                                                <a href = "index.php?product_key='.$key.'">
+                                                <button type="submit" class="btn btn-primary"
+                                                name="remove_item" value="
+                                                  ' . $product["id_product"] . '"
+                                                style="width:70px;">Xóa</button>
+                                                </a>
                                               
                                               </div>
                                               ';

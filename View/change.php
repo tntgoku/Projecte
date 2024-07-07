@@ -118,47 +118,6 @@ if (isset($_POST['product_key'])) {
   header('Location: index.php');
   exit();
 }
-//dua vao gio hang
-  // if($_SERVER['REQUEST_METHOD']=='POST'){
-  //   $quantity12=1;
-  //   $result=$productdb->getinforProduct($_POST['idproduct']);
-  //   $new_product=array(array('id'=>$result[0]['id_product'],
-  //                             'Name'=>$result[0]['Name'],'Type_id'=>$result[0]['Type_id'],'Color'=>$result[0]['Color'],
-  //                             'Size'=>$result[0]['Size'],'Cost'=>$result[0]['Cost'],'Amount1'=>$quantity12,
-  //                             'Amount'=>$result[0]['Amount'],'Discount'=>$result[0]['Discount'],'img'=>$result[0]['img']
-  // ));
-  // if(isset($_SESSION['cart'])){
-  //   $found=false;
-  //   foreach($_SESSION['cart'] as $item){
-  //     if($item['id']==$_POST['idproduct']){
-  //       $productnew[]=array('id'=>$result[0]['id_product'],
-  //                             'Name'=>$result[0]['Name'],'Type_id'=>$result[0]['Type_id'],'Color'=>$result[0]['Color'],
-  //                             'Size'=>$result[0]['Size'],'Cost'=>$result[0]['Cost'],'Amount1'=>$quantity12+1,
-  //                             'Amount'=>$result[0]['Amount'],'Discount'=>$result[0]['Discount'],'img'=>$result[0]['img']);
-  //                             $found=true;
-  //     }else{
-  //       $productnew[]=array('id'=>$result[0]['id_product'],
-  //                             'Name'=>$result[0]['Name'],'Type_id'=>$result[0]['Type_id'],'Color'=>$result[0]['Color'],
-  //                             'Size'=>$result[0]['Size'],'Cost'=>$result[0]['Cost'],'Amount1'=>$quantity12,
-  //                             'Amount'=>$result[0]['Amount'],'Discount'=>$result[0]['Discount'],'img'=>$result[0]['img']);
-  //     }
-  //   }
-  //   if($found==false){
-  //     $_SESSION['cart']=array_merge($product,$new_product);
-  //   }else{
-  //     $_SESSION['cart']=$product;
-  //   }
-  // }
-  //                           }
-  //                           echo "<pre>";
-  //                           var_dump($new_product);
-  //                           echo "</pre>";
-  //                           if(isset($_POST['buy-cart12'])){
-  //                             echo "<br> addd; <br>";
-  //                           }else{
-  //                             echo "<br> addd;111212 <br>";
-
-  //                           }
                             ?>
 
 <!DOCTYPE html>
@@ -233,7 +192,7 @@ if (isset($_POST['product_key'])) {
                       <div id="box">
                           <ul id="list-itema">
                               <li id="itema"><a href="../View/User/changuser.php">Tài khoản của tôi</a></li>
-                              <li id="itema"><a href="">Lịch sử đơn hàng</a></li>
+                              <li id="itema"><a href="../View/User/cart-user.php">Lịch sử đơn hàng</a></li>
                               <li id="itema"><a href="logout.php">Đăng xuất</a></li> <!-- Thêm link đăng xuất -->
                           </ul>
                       </div></div>';?>

@@ -9,29 +9,6 @@ if(!isset($_SESSION['id_user']))
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 $currentDate = date("d/m/Y H:i:s");
 echo $currentDate ."<br>";
-
-//Tu trang xoa mot san pham
-// if(isset($_SESSION['del_cart']) && $_SESSION['del_cart'] == true)
-// {
-//   $_SESSION['del_cart'] = false;
-//   $id_user = $_SESSION['id_user'];
-//   $sql = "SELECT cart.id_sp, product.Name, product.Size,product.Color,product.img,product.id_product,product.Cost,cart.amount from cart inner join product ON product.id_product = cart.id_sp where cart.id_us = '$id_user'";
-//   $result = $data->query("$sql");
-//   $del_cart = array();
-//   while($row = $result->fetch_assoc())
-//   {
-//     $del_cart[] = $row;
-//   }
-//   $_SESSION['cart'] = $del_cart;
-//   foreach ($_SESSION['cart'] as $key => $product) {
-//     // Ensure Quantity is set and numeric
-//     if (!isset($product['Quantity']) || !is_numeric($product['Quantity'])) {
-//         $_SESSION['cart'][$key]['Quantity'] = 1; 
-//     }
-//     $quantity = $_SESSION['cart'][$key]['Quantity'];
-//   }
-//   $cart = $_SESSION['cart'];
-// }
 //Hien thi tu trang khac
 if (isset($_POST['payment'])) {
   // Lấy thông tin giỏ hàng từ session
@@ -74,20 +51,8 @@ if (isset($_POST['product_key']) || isset($_GET['product_key'])) {
   if(isset($_SESSION['cart'])==false){
     echo "Bi xoa r";
   }else{
-    print_r($cart);
-  }
-// if(isset($_REQUEST['idproduct'])){
-//   $dd12 =$_REQUEST['idproduct'];
-
-// }
-// if(isset($dd12)){
-//   $sql1234="SELECT * FROM product WHERE id_product= $dd12";
-//   $result=$data->query($sql1234);
-//   $row=mysqli_fetch_assoc($result);
-//   // print_r($row);
-// }
-
-
+      
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -207,9 +172,9 @@ if (isset($_POST['product_key']) || isset($_GET['product_key'])) {
                         <div id="box">
                             <ul id="list-itema">
                               <li id="itema"><a href="../View/User/changuser.php">Tài khoản của tôi</a></li>
-                              <li id="itema"><a href="">Lịch sử đơn hàng</a></li>
+                              <li id="itema"><a href="../View/User/cart-user.php">Lịch sử đơn hàng</a></li>
                               <li id="itema"><a href="logout.php">Đăng xuất</a></li> <!-- Thêm link đăng xuất -->
-                            </ul>
+                          </ul>
                           </div>
                       </div>';?>
                   <?php }else{ 
@@ -258,7 +223,7 @@ if (isset($_POST['product_key']) || isset($_GET['product_key'])) {
                                        ' . $product['Cost'] . '
                                       " data-key="' . $key . '">'; //Thay $quantity bang $product['amount']
                                       echo '
-                                              <form method="post" action="cartproduct.php">
+                                              <form method="POST" action="cartproduct.php">
                                                 <input type="hidden" name="product_key" value="' . $key . '">
                                                 <button type="submit" class="btn btn-primary" style="width:70px;">Xóa</button>
                                               </form>
@@ -404,12 +369,12 @@ function updateCart(key, quantity) {
                             <td>' . $item["Color"] . '</td>
                             <td>' . $item["Cost"] . '</td>';
                       echo '<td>
-                                  <input type="number" class="quantityy" name="item-'.$i.'" value="'. $item["amount"].'
-                                  " placeholder="'.$item["amount"].'" >
+                                  <input type="number" class="quantityy" name="item-'.$i.'" value="'. $item["Quantity"].'
+                                  " placeholder="'.$item["Quantity"].'" >
                             </td>';
-                            $total= $item['amount']*$item['Cost'];
+                            $total= $item['Quantity']*$item['Cost'];
                             echo '<td>' . $total . '</td>';
-                      echo '<td style="border:1px solid #333333;">
+                      echo '<td style="">
                                 <a href = "cartproduct.php?product_key='.$key.'">
                                 <button type="button" class="btn btn-black btn-sm remove_item" name="remove_item" value="
                                 ' . $item["id_product"] . '">
@@ -431,7 +396,6 @@ function updateCart(key, quantity) {
       </div>
     </form>
       </div>
-    </div>
     </div>
     <!-- FooTer  -->
     <footer>

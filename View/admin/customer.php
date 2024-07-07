@@ -154,9 +154,9 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
         <div class="btn-add" >
             <form class="form-inline" style="width: 100%;" action="customer.php">
                 <div class="form-group" style="width: 40%;">
-                    <input type="text" name="search" id="" class="form-control"  style="margin-right:20px;">
+                    <input type="text" name="search" id="" class="form-control"  style="margin-right:10px;">
                     <button class="btn btn-outline-success my-5 my-sm-0" type="submit" style="width: 35%;">Tìm kiếm</button>
-                    <a href="Export_xlsx.php?us=1"><button class="btn btn-outline-success my-5 my-sm-0" type="button" style="width: 100%;">Xuất file</button></a>
+                    <a href="Export_xlsx.php?us=1" style="width: 35%; margin-left:5px;"><button class="btn btn-outline-success my-5 my-sm-0" type="button" style="width: 100%;">Xuất file</button></a>
               </form>
             </div>
         </div>
@@ -178,7 +178,7 @@ if (isset($_POST['deleted']) && isset($_POST['id_dele'])) {
                  if(isset($_GET['search'])&& ($_GET['search']!='')){
                     $search1 = $_GET['search'];
                     $search = mysqli_real_escape_string($data->connect(), $search1);
-                    $sql = "SELECT * FROM user WHERE user.Name LIKE '" . $search . "%'";
+                    $sql = "SELECT * FROM user WHERE user.Name LIKE '%" . $search . "%'";
                 }else{                    
                     $sql="SELECT * from user";
                 }

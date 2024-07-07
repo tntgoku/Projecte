@@ -3,10 +3,7 @@
 include '../../App/connect.php';
 $data=new Database();
 $data->connect();
-$sql="SELECT bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,bill.date,bill.status 
-FROM bill inner JOIN user ON bill.id_us=user.id_user order by bill.date DESC;";
 
-$result=$data->query($sql);
 session_start();
 ?>
 <!DOCTYPE html>
@@ -132,11 +129,15 @@ session_start();
             </div>
         </nav>
         <div class="container">
-            <form action="" method = "post">
+            <form action="bill.php" method = "POST">
                 <h2>Danh sách hóa đơn mua hàng</h2>
-                <a href="Export_xlsx.php?bill=-1" style = 'display: inline-block;'>
+                <div class="form-group" style="width: 40%;">
+                    <input type="text" name="search" id="" class="form-control"  style="margin-right:20px;">
+                    <button class="btn btn-outline-success my-5 my-sm-0" type="submit" style="width: 35%;">Tìm kiếm</button>
+                <a href="Export_xlsx.php?bill=-1"  style="width: 35%; margin-left:5px;">
                     <button class="btn btn-outline-success my-5 my-sm-0" type="button" style="width: 100%;">Xuất file</button>
                 </a>
+                </div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -152,6 +153,16 @@ session_start();
                     </thead>
                     <tbody>
                         <?php 
+                         if(isset($_POST['search'])&& ($_POST['search']!='')){
+                            $search1 = $_POST['search'];
+                            $search = mysqli_real_escape_string($data->connect(), $search1);
+                            $sql = "SELECT bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,bill.date,bill.status 
+                            FROM bill inner JOIN user ON bill.id_us=user.id_user WHERE bill.id_Bill=$search order by bill.date DESC;";
+                        }else{
+                            $sql="SELECT bill.id_Bill,bill.id_us,user.Name,bill.count,bill.Total,bill.date,bill.status 
+                            FROM bill inner JOIN user ON bill.id_us=user.id_user order by bill.date DESC;";
+                        }
+                        $result=$data->query($sql);
                         while($row =mysqli_fetch_assoc($result)){
                             ?>
                         <tr style="margin-left: 10px;">

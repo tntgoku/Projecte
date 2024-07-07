@@ -10,7 +10,6 @@ $user_data=array();
     while($row =$result->fetch_assoc() ){
         $user_data[]=$row;
     }
-    print_r($user_data);
 //echo $currentDate ;
 //Phần này hiển thị sản phẩm theo loại nhá
 if(isset($_REQUEST['id_type']))
@@ -126,8 +125,6 @@ else{
         $_SESSION['cart'][$key]['Quantity'] = $quantity;
     }
 }
-echo "<br><br>";
-print_r($_SESSION['cart']);
 if (isset($_POST['product_key'])) {
   $key = $_POST['product_key'];
   unset($_SESSION['cart'][$key]);
